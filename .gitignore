@@ -1,0 +1,16 @@
+# emacs Back Up files
+*~
+\#*#
+*#
+
+# LaTeX Aux files
+*.log
+*.aux
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+*.toc
+*.out
+*.nav
+*.snm

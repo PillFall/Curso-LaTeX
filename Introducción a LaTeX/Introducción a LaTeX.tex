@@ -1,0 +1,130 @@
+\documentclass[12pt]{beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Paquetes de configuración basica del %
+%               texto                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [listings] Configuración de vizualizacion %
+% de código                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{
+	basicstyle=\ttfamily,
+	extendedchars=true,
+	showspaces=false,
+	showstringspaces=false,
+	captionpos=b,
+	keywordstyle=\bfseries\color{cyan},
+	commentstyle=\color{gray},
+	stringstyle=\color{orange},
+	escapeinside={!>}{<!} }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Paquetes de configuración graficos  %
+%            del documento             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\usepackage{xcolor}
+\usepackage{pdfpages}
+
+\usepackage{ifxetex}
+\ifxetex
+	\usepackage[no-math]{fontspec}
+	\setmainfont{AncizarSans}[
+		Path = ../Fuentes/,
+		Extension = .otf,
+		BoldFont = *-B,
+		ItalicFont = *-I,
+		BoldItalicFont = *-BI ]
+	\setmonofont{UbuntuMono}[
+		Path = ../Fuentes/,
+		Extension = .ttf,
+		BoldFont = *-B,
+		ItalicFont = *-I,
+		BoldItalicFont = *-BI ]
+	\newcommand{\lmr}{\fontfamily{lmr}\selectfont}
+	\newcommand{\lmss}{\fontfamily{lmss}\selectfont}
+	\newcommand{\lmtt}{\fontfamily{lmtt}\selectfont}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      Configuraciones de Beamer       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{Igreen}{RGB}{148,180,59}
+\definecolor{Ired}{RGB}{166,24,49}
+\setbeamertemplate{navigation symbols}{}
+
+\usefonttheme{professionalfonts}
+\usefonttheme{serif}
+\setbeamercolor{frametitle}{fg=Ired,bg=Igreen!50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    Información de la presentación    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Introducción a {\lmr\LaTeX}}
+\author{Joar Esteban Buitrago Carrillo}
+\institute{Universidad Nacional de Colombia}
+\date{}
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+	\vfill
+	\begin{center}
+		%\includegraphics[width=0.6\linewidth]{Billar}\\[10pt]
+		{\Huge\inserttitle}\\
+		\bigskip
+		\insertauthor\\[10pt]
+	\end{center}
+	\vfill
+	\includegraphics[height=1cm]{../Escudo_UN}\hspace{0.25cm}
+}
+
+\begin{document}
+\maketitle
+
+{
+	\setbeamercolor{background canvas}{bg=}
+	\includepdf{../Licencia_Diapositiva.pdf}
+}
+
+\begin{frame}{¿Que es {\lmr\LaTeX}?}
+	
+{\lmr\LaTeX} es un sistema de composición de textos de calidad artística y tipográfica. Es usado muy habitualmente en el mundo científico debido a todas sus características y facilidad de trabajo.\pause\\[2em]
+	
+{\lmr\LaTeX} es un conjunto de macros de {\lmr\TeX}, licenciado bajo la licencia {\it{\lmr L}PPL}, {\it{\lmr\LaTeX} Project Public License}. Por lo cual es {\em Software Libre} y gratuito.
+\end{frame}
+
+\begin{frame}[fragile]{Inicio de un documento}
+
+Cuando comenzamos a escribir con {\lmr\LaTeX} es necesario tener en cuenta que hay ordenes que solo se pueden escribir en una parte del documento.
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\documentclass{<clase del documento>}!>\pause<!
+
+... Preambulo ...
+
+\begin{document}!>\pause<!
+
+... Documento ...
+
+\end{document}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Clases del documento}
+
+{\lmr\LaTeX} posee muchas clases que nos ayudan a estilizar mejor nuestro documento. Las principales son:
+\begin{itemize}
+	\item article
+	\item report
+	\item book
+	\item letter
+	\item \only<1>{slides}\only<2>{beamer}
+\end{itemize}
+\end{frame}
+\end{document}

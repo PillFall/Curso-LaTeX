@@ -76,7 +76,6 @@
 {
 	\vfill
 	\begin{center}
-		%\includegraphics[width=0.6\linewidth]{Billar}\\[10pt]
 		{\Huge\inserttitle}\\
 		\bigskip
 		\insertauthor\\[10pt]
@@ -93,15 +92,13 @@
 	\includepdf{../Licencia_Diapositiva.pdf}
 }
 
-\begin{frame}{¿Que es {\lmr\LaTeX}?}
-	
+\begin{frame}{¿Que es {\lmr\LaTeX}?}{}
 {\lmr\LaTeX} es un sistema de composición de textos de calidad artística y tipográfica. Es usado muy habitualmente en el mundo científico debido a todas sus características y facilidad de trabajo.\pause\\[2em]
 	
 {\lmr\LaTeX} es un conjunto de macros de {\lmr\TeX}, licenciado bajo la licencia {\it{\lmr L}PPL}, {\it{\lmr\LaTeX} Project Public License}. Por lo cual es {\em Software Libre} y gratuito.
 \end{frame}
 
-\begin{frame}[fragile]{Inicio de un documento}
-
+\begin{frame}[fragile]{Inicio de un documento}{}
 Cuando comenzamos a escribir con {\lmr\LaTeX} es necesario tener en cuenta que hay ordenes que solo se pueden escribir en una parte del documento.
 \begin{lstlisting}[language={[LaTeX]TeX}]
 \documentclass{<clase del documento>}!>\pause<!
@@ -116,15 +113,14 @@ Cuando comenzamos a escribir con {\lmr\LaTeX} es necesario tener en cuenta que h
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Clases del documento}
-
+\begin{frame}{Clases del documento}{}
 {\lmr\LaTeX} posee muchas clases que nos ayudan a estilizar mejor nuestro documento. Las principales son:
 \begin{itemize}
 	\item article
 	\item report
 	\item book
 	\item letter
-	\item \only<1>{slides}\only<2>{beamer}
+	\item \alt<2>{beamer}{slides}
 \end{itemize}
 \end{frame}
 \end{document}

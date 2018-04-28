@@ -99,7 +99,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Inicio de un documento}{}
-Cuando comenzamos a escribir con {\lmr\LaTeX} es necesario tener en cuenta que hay ordenes que solo se pueden escribir en una parte del documento.
+Cuando comenzamos a escribir con {\lmr\LaTeX} es necesario tener en cuenta que hay ordenes que solo se pueden escribir en una sección del código.
 \begin{lstlisting}[language={[LaTeX]TeX}]
 \documentclass{<clase del documento>}!>\pause<!
 
@@ -122,5 +122,22 @@ Cuando comenzamos a escribir con {\lmr\LaTeX} es necesario tener en cuenta que h
 	\item letter
 	\item \alt<2>{beamer}{slides}
 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Creación de un articulo}{Muy básico}
+Al crear un documento empezamos por el titulo.
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\documentclass{article}
+
+\title{Titulo}
+\author{Joar Buitrago}
+\date{Fecha}
+
+\begin{document}
+
+\maketitle
+
+\end{document}
+\end{lstlisting}
 \end{frame}
 \end{document}

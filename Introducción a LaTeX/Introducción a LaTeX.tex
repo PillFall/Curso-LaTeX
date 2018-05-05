@@ -1,4 +1,4 @@
-\documentclass[12pt]{beamer}
+\documentclass[12pt,aspectratio=43]{beamer}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Paquetes de configuración basica del %
@@ -7,6 +7,7 @@
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
+\usepackage{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % [listings] Configuración de vizualizacion %
@@ -78,6 +79,8 @@
 	\begin{center}
 		{\Huge\inserttitle}\\
 		\bigskip
+		{\Large Curso Libre de {\lmr\LaTeX}}\\
+		\bigskip
 		\insertauthor\\[10pt]
 	\end{center}
 	\vfill
@@ -98,46 +101,25 @@
 {\lmr\LaTeX} es un conjunto de macros de {\lmr\TeX}, licenciado bajo la licencia {\it{\lmr L}PPL}, {\it{\lmr\LaTeX} Project Public License}. Por lo cual es {\em Software Libre} y gratuito.
 \end{frame}
 
-\begin{frame}[fragile]{Inicio de un documento}{}
-Cuando comenzamos a escribir con {\lmr\LaTeX} es necesario tener en cuenta que hay ordenes que solo se pueden escribir en una sección del código.
-\begin{lstlisting}[language={[LaTeX]TeX}]
-\documentclass{<clase del documento>}!>\pause<!
+\section{Clases}
 
-... Preambulo ...
+\section{Estructura del código}
 
-\begin{document}!>\pause<!
+\section{Títulos}
 
-... Documento ...
+\section{Capitulos-Partes, Secciones, etc.}
 
-\end{document}
-\end{lstlisting}
-\end{frame}
+\section{El resumen}
 
-\begin{frame}{Clases del documento}{}
-{\lmr\LaTeX} posee muchas clases que nos ayudan a estilizar mejor nuestro documento. Las principales son:
-\begin{itemize}
-	\item article
-	\item report
-	\item book
-	\item letter
-	\item \alt<2>{beamer}{slides}
-\end{itemize}
-\end{frame}
+\section{Estilos, Familias y Formas}
 
-\begin{frame}[fragile]{Creación de un articulo}{Muy básico}
-Al crear un documento empezamos por el titulo.
-\begin{lstlisting}[language={[LaTeX]TeX}]
-\documentclass{article}
+\section{Tamaño de fuente}
 
-\title{Titulo}
-\author{Joar Buitrago}
-\date{Fecha}
+\section{Paquetes \lstinline[language=[LaTeX]TeX]|fontenc| e \lstinline[language=[LaTeX]TeX]|inputenc|}
 
-\begin{document}
+\section {{\lmr\LaTeX} en español}
 
-\maketitle
+\section{Separación del texto}
 
-\end{document}
-\end{lstlisting}
-\end{frame}
+\section{Opciones del Documento}
 \end{document}

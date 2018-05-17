@@ -8,6 +8,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{ifthen}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % [listings] Configuración de vizualizacion %
@@ -59,11 +60,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{Igreen}{RGB}{148,180,59}
 \definecolor{Ired}{RGB}{166,24,49}
+
 \setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{itemize items}{\color{Igreen}$\bullet$}
 
 \usefonttheme{professionalfonts}
 \usefonttheme{serif}
 \setbeamercolor{frametitle}{fg=Ired,bg=Igreen!50}
+
+\makeatletter
+\newcommand{\ifratio}[2]{
+	\ifthenelse
+	 	{\lengthtest{\beamer@paperwidth=16cm}}
+		{#1}
+		{#2} }
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    Información de la presentación    %
@@ -91,8 +103,12 @@
 \maketitle
 
 {
-	\setbeamercolor{background canvas}{bg=}
-	\includepdf{../Licencia_Diapositiva.pdf}
+\setbeamercolor{background canvas}{bg=}
+\begin{frame}
+\ifratio
+	{\includepdf[pages=2]{../Licencia_Diapositiva.pdf}}
+	{\includepdf[pages=1]{../Licencia_Diapositiva.pdf}}
+\end{frame}
 }
 
 \begin{frame}{¿Que es {\lmr\LaTeX}?}{}
@@ -102,6 +118,27 @@
 \end{frame}
 
 \section{Clases}
+\begin{frame}{Clases del documento}{}
+Al trabajar en un documento escrito con {\lmr\LaTeX} debemos tener en cuenta la clase del documento en el cual queremos trabajar, la clase mas usada generalmente es \texttt{\textbf{article}}.\pause\\[2em]
+
+Las clases «estándar» de {\lmr\LaTeX} son:
+\begin{itemize}
+	\item {\color{Ired}\texttt{article}}: para artículos.
+	\item {\color{Ired}\texttt{report}}: para reportes.
+	\item {\color{Ired}\texttt{book}}: para libros.
+	\item {\color{Ired}\texttt{letter}}: para las cartas.
+	\item {\color{Ired}\texttt{\alt<3>{beamer}{slides}}}: para las presentaciones.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Clases del documento}{}
+Para indicar la clase del documento a {\lmr\LaTeX} solo debemos de escribir en nuestro código:
+\begin{center}
+	\lstinline[language={[LaTeX]TeX}]|\documentclass{<clase>}|
+\end{center}
+\pause
+Donde \texttt{<clase>} es cualquiera de las clases ya mencionadas, o otras personalizadas o descargadas.
+\end{frame}
 
 \section{Estructura del código}
 
@@ -115,7 +152,7 @@
 
 \section{Tamaño de fuente}
 
-\section{Paquetes \lstinline[language=[LaTeX]TeX]|fontenc| e \lstinline[language=[LaTeX]TeX]|inputenc|}
+\section{Paquetes {\tt fontenc} e {\tt inputenc}}
 
 \section {{\lmr\LaTeX} en español}
 

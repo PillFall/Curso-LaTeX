@@ -72,7 +72,7 @@
 \makeatletter
 \newcommand{\ifratio}[2]{
 	\ifthenelse
-	 	{\lengthtest{\beamer@paperwidth=16cm}}
+		{\lengthtest{\beamer@paperwidth=16cm} \AND \lengthtest{\beamer@paperheight=9cm}}
 		{#1}
 		{#2} }
 \makeatother
@@ -81,26 +81,31 @@
 %    Información de la presentación    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Introducción a {\lmr\LaTeX}}
+\subtitle{Curso Libre de {\lmr\LaTeX}}
 \author{Joar Esteban Buitrago Carrillo}
 \institute{Universidad Nacional de Colombia}
 \date{}
+\logo{\includegraphics[height=0.75cm]{../Escudo_UN}}
 
-\defbeamertemplate*{title page}{customized}[1][]
-{
+\setbeamertemplate{title page}{
+	\begin{tikzpicture}[overlay,remember picture]
+	\path (current page.north west) ++(0.5cm,-0.5cm) node[below right] {\includegraphics[height=1.25cm]{../Escudo_UN}};
+	\path (current page.north east) ++(-0.5cm,-0.5cm) node[below left] {\parbox[c][1.25cm][c]{\widthof{\Large \insertsubtitle}}{\Large \insertsubtitle}};
+	\end{tikzpicture}
+
 	\vfill
 	\begin{center}
 		{\Huge\inserttitle}\\
 		\bigskip
-		{\Large Curso Libre de {\lmr\LaTeX}}\\
-		\bigskip
-		\insertauthor\\[10pt]
+		\insertauthor
 	\end{center}
 	\vfill
-	\includegraphics[height=1cm]{../Escudo_UN}\hspace{0.25cm}
 }
 
 \begin{document}
-\maketitle
+\begin{frame}[plain]
+\titlepage
+\end{frame}
 
 {
 \setbeamercolor{background canvas}{bg=}
@@ -127,7 +132,7 @@ Las clases «estándar» de {\lmr\LaTeX} son:
 	\item {\color{Ired}\texttt{report}}: para reportes.
 	\item {\color{Ired}\texttt{book}}: para libros.
 	\item {\color{Ired}\texttt{letter}}: para las cartas.
-	\item {\color{Ired}\texttt{\alt<3>{beamer}{slides}}}: para las presentaciones.
+	\item {\color{Ired}\texttt{\alt<3>{\color{black!30!Igreen}\bf beamer}{slides}}}: para las presentaciones.
 \end{itemize}
 \end{frame}
 

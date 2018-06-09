@@ -34,6 +34,7 @@
 \usetikzlibrary{babel}
 \usepackage{xcolor}
 \usepackage{pdfpages}
+\usepackage{animate}
 
 \usepackage{ifxetex}
 \ifxetex
@@ -63,7 +64,7 @@
 
 \setbeamertemplate{navigation symbols}{}
 
-\setbeamertemplate{itemize items}{\color{Igreen}$\bullet$}
+\setbeamertemplate{itemize items}{\color{Igreen}\raisebox{.45ex}{\rule{.6ex}{.6ex}}}
 
 \usefonttheme{professionalfonts}
 \usefonttheme{serif}
@@ -118,21 +119,42 @@
 
 \begin{frame}{¿Que es {\lmr\LaTeX}?}{}
 {\lmr\LaTeX} es un sistema de composición de textos de calidad artística y tipográfica. Es usado muy habitualmente en el mundo científico debido a todas sus características y facilidad de trabajo.\pause\\[2em]
-	
+
 {\lmr\LaTeX} es un conjunto de macros de {\lmr\TeX}, licenciado bajo la licencia {\it{\lmr L}PPL}, {\it{\lmr\LaTeX} Project Public License}. Por lo cual es {\em Software Libre} y gratuito.
+\end{frame}
+
+\begin{frame}[fragile]{Funciones Seno y Coseno}
+\begin{center}
+%	\begin{animateinline}[autoplay,loop,nomouse,poster=first]{24}
+%		\multiframe{359}{nAngle=0+1}{
+%			\begin{tikzpicture}
+%			\draw[thick,-latex,blue] (-3,0) -- (3,0) node[right] {$x$};
+%			\draw[thick,-latex,blue] (0,-3) -- (0,3) node[above] {$y$};
+%			\draw[red,thick] (0,0) circle (2.5);
+%			\draw[ultra thick,cyan] (0,0) -- (0,0 |- \nAngle:2.5) node[midway,left] {$\sin(\alpha)$};
+%			\draw[ultra thick,orange] (0,0) -- (\nAngle:2.5 |- 0,0) node[midway,below] {$\cos(\alpha)$};
+%			\draw[densely dotted,orange] (\nAngle:2.5) -- (\nAngle:2.5 |- 0,0);
+%			\draw[densely dotted,cyan] (\nAngle:2.5) -- (0,0 |- \nAngle:2.5);
+%			\draw[thick,green] (0.5,0) arc (0:\nAngle:0.5);
+%			\draw[thick,green,opacity=0] (0.7,0) arc (0:\nAngle:0.7) node[midway,opacity=1] {$\alpha$};
+%			\draw[ultra thick,red,-latex] (0,0) -- (\nAngle:2.5);
+%			\end{tikzpicture}
+%		}
+%	\end{animateinline}
+\end{center}
 \end{frame}
 
 \section{Clases}
 \begin{frame}{Clases del documento}{}
-Al trabajar en un documento escrito con {\lmr\LaTeX} debemos tener en cuenta la clase del documento en el cual queremos trabajar, la clase mas usada generalmente es \texttt{\textbf{article}}.\pause\\[2em]
+Al trabajar en un documento escrito con {\lmr\LaTeX} debemos tener en cuenta la clase del documento en el cual queremos trabajar, la clase más usada generalmente es \texttt{\textbf{article}}.\pause\\[2em]
 
-Las clases «estándar» de {\lmr\LaTeX} son:
+Las clases «estándares» de {\lmr\LaTeX} son:
 \begin{itemize}
 	\item {\color{Ired}\texttt{article}}: para artículos.
 	\item {\color{Ired}\texttt{report}}: para reportes.
 	\item {\color{Ired}\texttt{book}}: para libros.
 	\item {\color{Ired}\texttt{letter}}: para las cartas.
-	\item {\color{Ired}\texttt{\alt<3>{\color{black!30!Igreen}\bf beamer}{slides}}}: para las presentaciones.
+	\item {\alt<3>{\color{black!30!Igreen}\textbf{\texttt{beamer}}}{\color{Ired} \texttt{slides}}}: para las presentaciones.
 \end{itemize}
 \end{frame}
 
@@ -142,10 +164,15 @@ Para indicar la clase del documento a {\lmr\LaTeX} solo debemos de escribir en n
 	\lstinline[language={[LaTeX]TeX}]|\documentclass{<clase>}|
 \end{center}
 \pause
-Donde \texttt{<clase>} es cualquiera de las clases ya mencionadas, o otras personalizadas o descargadas.
+Donde \texttt{<clase>} es cualquiera de las clases ya mencionadas, u otras personalizadas o descargadas.
 \end{frame}
 
 \section{Estructura del código}
+\begin{frame}{Estructura del código}{}
+La estructura básica del código de cualquier documento es muy sencilla, siempre es la misma.\\[2em]
+
+Se debe tener cuidado al escribir, ya que existen comandos que solo funcionan en una sección del código.
+\end{frame}
 
 \section{Títulos}
 

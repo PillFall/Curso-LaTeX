@@ -69,6 +69,7 @@
 \usefonttheme{professionalfonts}
 \usefonttheme{serif}
 \setbeamercolor{frametitle}{fg=Ired,bg=Igreen!50}
+\setbeamercolor{alerted text}{fg=Ired}
 
 \makeatletter
 \newcommand{\ifratio}[2]{
@@ -168,15 +169,39 @@ Donde \texttt{<clase>} es cualquiera de las clases ya mencionadas, u otras perso
 \end{frame}
 
 \section{Estructura del código}
-\begin{frame}{Estructura del código}{}
-La estructura básica del código de cualquier documento es muy sencilla, siempre es la misma.\\[2em]
+\begin{frame}[fragile]{Estructura del código}{}
+La estructura básica del código de cualquier documento es muy sencilla, siempre es la misma.
+
+\begin{enumerate}
+	\item Primero se coloca el comando \lstinline[language={[LaTeX]TeX}]|\documentclass{<clase>}| con la clase escogida.
+	\item Desde aquí encontramos el \alert{\bf preámbulo} hasta que se encuentra la orden \lstinline[language={[LaTeX]TeX}]|\begin{document}|.
+	\item Después tenemos el \alert{\bf cuerpo del documento} hasta encontrar la orden \lstinline[language={[LaTeX]TeX}]|\end{document}|, todo lo que se encuentra después de esto es ignorado por {\lmr\LaTeX}.
+\end{enumerate}
 
 Se debe tener cuidado al escribir, ya que existen comandos que solo funcionan en una sección del código.
 \end{frame}
 
+\begin{frame}[fragile]{Estructura del código}{Código}
+De manera más visual esto seria:
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\documentclass{<clase>}
+
+Preámbulo ...
+
+\begin{document}
+
+Documento ...
+
+\end{document}
+
+Esto puede servir como comentario
+Ya que es ignorado ...
+\end{lstlisting}
+\end{frame}
+
 \section{Títulos}
 
-\section{Capitulos-Partes, Secciones, etc.}
+\section{Capítulos-Partes, Secciones, etc.}
 
 \section{El resumen}
 
@@ -186,7 +211,7 @@ Se debe tener cuidado al escribir, ya que existen comandos que solo funcionan en
 
 \section{Paquetes {\tt fontenc} e {\tt inputenc}}
 
-\section {{\lmr\LaTeX} en español}
+\section{{\lmr\LaTeX} en español}
 
 \section{Separación del texto}
 

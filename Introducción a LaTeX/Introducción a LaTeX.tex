@@ -1,20 +1,20 @@
 \documentclass[12pt,aspectratio=43]{beamer}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Paquetes de configuración basica del %
-%               texto                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Paquetes de configuración basica del texto   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{ifthen}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% [listings] Configuración de vizualizacion %
-% de código                                 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   [listings]                   %
+%   Configuración de vizualizacion del código    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{
+	backgroundcolor = \color{lightgray!10},
 	basicstyle=\ttfamily,
 	extendedchars=true,
 	showspaces=false,
@@ -25,13 +25,13 @@
 	stringstyle=\color{orange},
 	escapeinside={!>}{<!} }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Paquetes de configuración graficos  %
-%            del documento             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Paquetes de configuración graficos del     %
+%                   documento                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{babel}
+\usetikzlibrary{babel,shadows}
 \usepackage{xcolor}
 \usepackage{pdfpages}
 \usepackage{animate}
@@ -56,9 +56,9 @@
 	\newcommand{\lmtt}{\fontfamily{lmtt}\selectfont}
 \fi
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%      Configuraciones de Beamer       %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%           Configuraciones de Beamer            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{Igreen}{RGB}{148,180,59}
 \definecolor{Ired}{RGB}{166,24,49}
 
@@ -70,31 +70,23 @@
 \usefonttheme{serif}
 \setbeamercolor{frametitle}{fg=Ired,bg=Igreen!50}
 \setbeamercolor{alerted text}{fg=Ired}
+\setbeamertemplate{enumerate item}{\color{Igreen}\bfseries\arabic{enumi}.}
+\setbeamertemplate{enumerate subitem}{\color{Igreen}\bfseries\arabic{enumi}.\arabic{enumii}.}
 
 \makeatletter
 \newcommand{\ifratio}[2]{
 	\ifthenelse
-		{\lengthtest{\beamer@paperwidth=16cm} \AND \lengthtest{\beamer@paperheight=9cm}}
-		{#1}
-		{#2} }
+	{\lengthtest{\beamer@paperwidth=16cm} \AND \lengthtest{\beamer@paperheight=9cm}}
+	{#1}
+	{#2} }
 \makeatother
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%    Información de la presentación    %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Introducción a {\lmr\LaTeX}}
-\subtitle{Curso Libre de {\lmr\LaTeX}}
-\author{Joar Esteban Buitrago Carrillo}
-\institute{Universidad Nacional de Colombia}
-\date{}
-\logo{\includegraphics[height=0.75cm]{../Escudo_UN}}
 
 \setbeamertemplate{title page}{
 	\begin{tikzpicture}[overlay,remember picture]
 	\path (current page.north west) ++(0.5cm,-0.5cm) node[below right] {\includegraphics[height=1.25cm]{../Escudo_UN}};
 	\path (current page.north east) ++(-0.5cm,-0.5cm) node[below left] {\parbox[c][1.25cm][c]{\widthof{\Large \insertsubtitle}}{\Large \insertsubtitle}};
 	\end{tikzpicture}
-
+	
 	\vfill
 	\begin{center}
 		{\Huge\inserttitle}\\
@@ -103,6 +95,17 @@
 	\end{center}
 	\vfill
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         Información de la presentación         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Introducción a {\lmr\LaTeX}}
+\subtitle{Curso Libre de {\lmr\LaTeX}}
+\author{Joar Esteban Buitrago Carrillo}
+\institute{Universidad Nacional de Colombia}
+\date{}
+\logo{\includegraphics[height=0.75cm]{../Escudo_UN}}
 
 \begin{document}
 \begin{frame}[plain]
@@ -178,7 +181,7 @@ La estructura básica del código de cualquier documento es muy sencilla, siempr
 	\item Después tenemos el \alert{\bf cuerpo del documento} hasta encontrar la orden \lstinline[language={[LaTeX]TeX}]|\end{document}|, todo lo que se encuentra después de esto es ignorado por {\lmr\LaTeX}.
 \end{enumerate}
 
-Se debe tener cuidado al escribir, ya que existen comandos que solo funcionan en una sección del código.
+Se debe tener cuidado al escribir, ya que existen comandos los cuales solo funcionan en una sección del código.
 \end{frame}
 
 \begin{frame}[fragile]{Estructura del código}{Código}
@@ -193,19 +196,66 @@ Preámbulo ...
 Documento ...
 
 \end{document}
-
-Esto puede servir como comentario
-Ya que es ignorado ...
 \end{lstlisting}
 \end{frame}
 
 \section{Títulos}
+\begin{frame}[fragile]{Títulos}{}
+Al empezar a escribir, con cualquiera de las clases, necesitamos colocar el titulo de nuestro documento.\pause\\[2em]
+
+Esto lo logramos mediante las ordenes:
+\begin{itemize}
+	\item \lstinline[language={[LaTeX]TeX}]|\title{<título>}|
+	\item \lstinline[language={[LaTeX]TeX}]|\author{<autor o autores>}|
+	\item \lstinline[language={[LaTeX]TeX}]|\date{<fecha>}|
+\end{itemize}\pause\vspace{2em}
+
+Y para colocarlos en el documento de forma general, podemos hacerlo mediante la orden \lstinline[language={[LaTeX]TeX}]|\maketitle|
+\end{frame}
+
+\begin{frame}[fragile]{Títulos}{}
+Al escribir esto ya en un documento, de manera normal, podemos obtener esto.\\[1em]
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\documentclass{article}
+
+\title{Título}
+\author{John Doe}
+\date{\today}
+
+\begin{document}
+  \maketitle
+\end{document}
+\end{lstlisting}}
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr\centering
+		{\LARGE Título \par}
+		\vspace{3em}
+		{\large\vspace{.75em}
+		\begin{tabular}[t]{c}
+		John Doe
+		\end{tabular}\par}
+		\vskip 1.5em
+		{\large \today \par}}
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \section{Capítulos-Partes, Secciones, etc.}
+\begin{frame}{Capítulos-Partes, Secciones, etc.}{}
+Al escribir cualquier tipo de documento siempre es bueno llevar una estructura e intentar no romperla a lo largo de este.
+\end{frame}
 
 \section{El resumen}
 
-\section{Estilos, Familias y Formas}
+\section{Familias, Estilos y Formas}
 
 \section{Tamaño de fuente}
 

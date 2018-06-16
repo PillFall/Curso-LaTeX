@@ -7,6 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{hyperxmp}
 \usepackage{ifthen}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,7 +15,7 @@
 %   Configuración de vizualizacion del código    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{
-	backgroundcolor = \color{lightgray!10},
+	backgroundcolor=\color{lightgray!10},
 	basicstyle=\ttfamily,
 	extendedchars=true,
 	showspaces=false,
@@ -23,7 +24,8 @@
 	keywordstyle=\bfseries\color{cyan},
 	commentstyle=\color{gray},
 	stringstyle=\color{orange},
-	escapeinside={!>}{<!} }
+	escapeinside={!>}{<!},
+	language=[LaTeX]TeX }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Paquetes de configuración graficos del     %
@@ -106,6 +108,10 @@
 \institute{Universidad Nacional de Colombia}
 \date{}
 \logo{\includegraphics[height=0.75cm]{../Escudo_UN}}
+\hypersetup{
+	pdfcopyright={Esta obra está bajo una licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional.},
+	pdflicenseurl={https://creativecommons.org/licenses/by-sa/4.0/deed.es}
+}
 
 \begin{document}
 \begin{frame}[plain]
@@ -165,7 +171,7 @@ Las clases «estándares» de {\lmr\LaTeX} son:
 \begin{frame}[fragile]{Clases del documento}{}
 Para indicar la clase del documento a {\lmr\LaTeX} solo debemos de escribir en nuestro código:
 \begin{center}
-	\lstinline[language={[LaTeX]TeX}]|\documentclass{<clase>}|
+	\lstinline|\documentclass{<clase>}|
 \end{center}
 \pause
 Donde \texttt{<clase>} es cualquiera de las clases ya mencionadas, u otras personalizadas o descargadas.
@@ -173,12 +179,12 @@ Donde \texttt{<clase>} es cualquiera de las clases ya mencionadas, u otras perso
 
 \section{Estructura del código}
 \begin{frame}[fragile]{Estructura del código}{}
-La estructura básica del código de cualquier documento es muy sencilla, siempre es la misma.
+La estructura básica del código de cualquier documento es muy sencilla, siempre es la misma.\pause
 
 \begin{enumerate}
-	\item Primero se coloca el comando \lstinline[language={[LaTeX]TeX}]|\documentclass{<clase>}| con la clase escogida.
-	\item Desde aquí encontramos el \alert{\bf preámbulo} hasta que se encuentra la orden \lstinline[language={[LaTeX]TeX}]|\begin{document}|.
-	\item Después tenemos el \alert{\bf cuerpo del documento} hasta encontrar la orden \lstinline[language={[LaTeX]TeX}]|\end{document}|, todo lo que se encuentra después de esto es ignorado por {\lmr\LaTeX}.
+	\item Primero se coloca el comando \lstinline|\documentclass{<clase>}| con la clase escogida.\pause
+	\item Desde aquí encontramos el \alert{\bf preámbulo} hasta que se encuentra la orden \lstinline|\begin{document}|.\pause
+	\item Después tenemos el \alert{\bf cuerpo del documento} hasta encontrar la orden \lstinline|\end{document}|, todo lo que se encuentra después de esto es ignorado por {\lmr\LaTeX}.\pause
 \end{enumerate}
 
 Se debe tener cuidado al escribir, ya que existen comandos los cuales solo funcionan en una sección del código.
@@ -186,7 +192,7 @@ Se debe tener cuidado al escribir, ya que existen comandos los cuales solo funci
 
 \begin{frame}[fragile]{Estructura del código}{Código}
 De manera más visual esto seria:
-\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{lstlisting}
 \documentclass{<clase>}
 
 Preámbulo ...
@@ -205,21 +211,21 @@ Al empezar a escribir, con cualquiera de las clases, necesitamos colocar el titu
 
 Esto lo logramos mediante las ordenes:
 \begin{itemize}
-	\item \lstinline[language={[LaTeX]TeX}]|\title{<título>}|
-	\item \lstinline[language={[LaTeX]TeX}]|\author{<autor o autores>}|
-	\item \lstinline[language={[LaTeX]TeX}]|\date{<fecha>}|
+	\item \lstinline|\title{<título>}|
+	\item \lstinline|\author{<autor o autores>}|
+	\item \lstinline|\date{<fecha>}|
 \end{itemize}\pause\vspace{2em}
 
-Y para colocarlos en el documento de forma general, podemos hacerlo mediante la orden \lstinline[language={[LaTeX]TeX}]|\maketitle|
+Y para colocarlos en el documento de forma general, podemos hacerlo mediante la orden \lstinline|\maketitle|
 \end{frame}
 
-\begin{frame}[fragile]{Títulos}{}
-Al escribir esto ya en un documento, de manera normal, podemos obtener esto.\\[1em]
+\begin{frame}[fragile]{Títulos}
+Al escribir esto ya en un documento con la clase \alert{\bf articulo}, de manera normal, podemos obtener esto.\\[1em]
 
 \begin{columns}
 	\begin{column}{0.5\linewidth}
 		{\small
-\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{lstlisting}
 \documentclass{article}
 
 \title{Título}
@@ -250,7 +256,40 @@ Al escribir esto ya en un documento, de manera normal, podemos obtener esto.\\[1
 
 \section{Capítulos-Partes, Secciones, etc.}
 \begin{frame}{Capítulos-Partes, Secciones, etc.}{}
-Al escribir cualquier tipo de documento siempre es bueno llevar una estructura e intentar no romperla a lo largo de este.
+Al escribir cualquier tipo de documento siempre es bueno llevar una estructura e intentar no romperla a lo largo de este.\pause\\[2em]
+
+En {\lmr\LaTeX} esto se logra mediante los comandos:
+\begin{itemize}
+	\item \texttt{\textbackslash{}chapter\{<título>\}} para las clases \alert{\bf libro} y \alert{\bf reporte} \\
+	\texttt{\textbackslash{}part\{<título>\}} para la clase \alert{\bf articulo}.
+	\item \texttt{\textbackslash{}section\{<título>\}}
+	\item \texttt{\textbackslash{}subsection\{<título>\}}
+	\item Etc.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Capítulos-Partes, Secciones, etc.}{}
+Siempre que utilizamos estas ordenes {\lmr\LaTeX} las numera de forma automática, teniendo en cuenta que siguen un orden estructural.\pause
+
+\begin{center}
+	\begin{tikzpicture}
+	\coordinate (zero) at (0,0);
+	\node[red,above] (part) at (zero.north) {Parte};
+	\node[red,below] (chapter) at (zero.south) {Capítulo};
+	
+	\node[blue] (sec) at (2,-1.5) {Sección};
+	
+	\node[cyan] (subsec) at (4,0) {Sub-Sección};
+	
+	\node[orange] (subsubsec) at (6,-1.5) {Sub-Sub-Sección};
+	
+	\draw[-latex,shorten <= 1cm,very thick] (zero) -- (sec);
+	\draw[-latex,very thick] (sec) -- (subsec);
+	\draw[-latex,very thick] (subsec) -- (subsubsec);
+	\end{tikzpicture}
+\end{center}\pause
+
+Generalmente se suelen utilizar hasta las \alert{\bf sub-secciones}, pero es posible llegar, hasta los \alert{\bf sub-párrafos}.
 \end{frame}
 
 \section{El resumen}

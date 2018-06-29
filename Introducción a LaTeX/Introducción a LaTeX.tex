@@ -6,6 +6,7 @@
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
+\usepackage{multirow}
 \usepackage{hyperref}
 \usepackage{hyperxmp}
 \usepackage{ifthen}
@@ -130,7 +131,7 @@
 \begin{frame}{¿Que es {\lmr\LaTeX}?}{}
 {\lmr\LaTeX} es un sistema de composición de textos de calidad artística y tipográfica. Es usado muy habitualmente en el mundo científico debido a todas sus características y facilidad de trabajo.\pause\\[2em]
 
-{\lmr\LaTeX} es un conjunto de macros de {\lmr\TeX}, licenciado bajo la licencia {\it{\lmr L}PPL}, {\it{\lmr\LaTeX} Project Public License}. Por lo cual es {\em Software Libre} y gratuito.
+{\lmr\LaTeX} es un conjunto de macros de {\lmr\TeX}, publicado bajo la licencia {\it{\lmr L}PPL}, {\it{\lmr\LaTeX} Project Public License}. Por lo cual es {\em Software Libre} y gratuito.
 \end{frame}
 
 \begin{frame}[fragile]{Funciones Seno y Coseno}
@@ -219,7 +220,7 @@ Esto lo logramos mediante las ordenes:
 Y para colocarlos en el documento de forma general, podemos hacerlo mediante la orden \lstinline|\maketitle|
 \end{frame}
 
-\begin{frame}[fragile]{Títulos}
+\begin{frame}[fragile]{Títulos}{}
 Al escribir esto ya en un documento con la clase \alert{\bf articulo}, de manera normal, podemos obtener esto.\\[1em]
 
 \begin{columns}
@@ -235,7 +236,7 @@ Al escribir esto ya en un documento con la clase \alert{\bf articulo}, de manera
 \begin{document}
   \maketitle
 \end{document}
-\end{lstlisting}}
+\end{lstlisting} }
 		{\color{Ired} Código}
 	\end{column}
 	\vline
@@ -299,7 +300,143 @@ El resumen es una parte importante de cualquier trabajo escrito.\\[2em]
 En {\lmr\LaTeX} existe el entorno \texttt{abstract} para las clases \texttt{article} y \texttt{report}. En este entorno podremos escribir el resumen de nuestro documento, con un margen más pequeño, y con el título que lo identifica.
 \end{frame}
 
+\begin{frame}[fragile]{El Resumen}
+Al escribir esto ya en un documento con la clase \alert{\bf articulo}, de manera normal, podemos obtener esto.\\[1em]
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\documentclass{article}
+\begin{document}
+  \begin{abstract}
+    Este es un pequeño
+    resumen de este
+    documento.
+  \end{abstract}
+  Texto normal de
+  nuevo...
+\end{document}
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+		\begin{center}
+			{\bfseries \abstractname\vspace{-.5em}}
+		\end{center}
+		\begin{quotation}
+			\textup{Este es un pequeño
+				resumen de este
+				documento.}
+		\end{quotation} }
+		\hspace{2ex}Texto normal de nuevo... }\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
+
 \section{Familias, Estilos y Formas}
+\begin{frame}{Familias, Estilos y Formas}{Familias}
+{\lmr\LaTeX} ofrece una gran variedad de familias tipográficas donde se encuentran:
+
+\begin{itemize}
+	\item \alert{\bf\lmr Serif}, \alert{\bf\lmr Romana} o \alert{\bf\lmr Con Serifa}.\\
+	\hspace*{2ex}Es la fuente por defecto de casi todo documento.
+	\item \alert{\bf\lmss Sans Serif}, \alert{\bf\lmss Paloseco} o \alert{\bf\lmss Sin Serifa}.
+	\item \alert{\lmtt Typewriter} o \alert{\lmtt mono-espaciada}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Familias, Estilos y Formas}{Familias}
+Para indicar a {\lmr\LaTeX} por cual de las familias debe cambiar, se pueden utilizar las ordenes siguientes:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\multirow{3}{*}{\lmr Serif} & \lstinline|\textrm{texto}| \\
+		& \lstinline|{\rm texto}| \\
+		& \lstinline|{\rmfamily texto}| \\ \hline
+		%
+		\multirow{3}{*}{\lmss Sans Serif} & \lstinline|\textsf{texto}| \\
+		& \lstinline|{\sf texto}| \\
+		& \lstinline|{\sffamily texto}| \\ \hline
+		%
+		\multirow{3}{*}{\lmtt Typewriter} & \lstinline|\texttt{texto}| \\
+		& \lstinline|{\tt texto}| \\
+		& \lstinline|{\ttfamily texto}|
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Familias, Estilos y Formas}{Estilos y Formas}
+{\lmr\LaTeX} tambien ofrece una gran variedad de formas y estilos tipográficos donde se encuentran:
+
+\begin{itemize}
+	\item \alert{\lmr Upright} o \alert{\lmr Derecha}.
+	\item \alert{\bf\lmr Bold} o \alert{\bf\lmr Negrita}.
+	\item \alert{\it\lmr Italic} o \alert{\it\lmr Italica}.
+	\item \alert{\sl\lmr Slanted} o \alert{\sl\lmr Inclinada}.
+	\item \alert{\sc\lmr Small Caps} o \alert{\sc\lmr Versalitas}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Familias, Estilos y Formas}{Estilos y Formas}
+Para indicar a {\lmr\LaTeX} por cual de las familias debe cambiar, se pueden utilizar las ordenes siguientes:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\multirow{2}{*}{\lmr Upright} & \lstinline|\textup{texto}| \\
+		& \lstinline|{\upshape texto}| \\ \hline
+		%
+		\multirow{3}{*}{\bf\lmr Bold} & \lstinline|\textrm{texto}| \\
+		& \lstinline|{\bf texto}| \\
+		& \lstinline|{\bfseries texto}| \\ \hline
+		%
+		\multirow{3}{*}{\it\lmr Italic} & \lstinline|\textit{texto}| \\
+		& \lstinline|{\it texto}| \\
+		& \lstinline|{\itshape texto}|
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Familias, Estilos y Formas}{Estilos y Formas}
+Para indicar a {\lmr\LaTeX} por cual de los estilos o las formas debe cambiar, se pueden utilizar las ordenes siguientes:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\multirow{3}{*}{\sl\lmr Slanted} & \lstinline|\textsl{texto}| \\
+		& \lstinline|{\sl texto}| \\
+		& \lstinline|{\slshape texto}| \\ \hline
+		%
+		\multirow{3}{*}{\sc\lmr Small Caps} & \lstinline|\textsc{texto}| \\
+		& \lstinline|{\sc texto}| \\
+		& \lstinline|{\scshape texto}|
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Familias, Estilos y Formas}{Estilos y Formas}
+Para indicar a {\lmr\LaTeX} por cual de los estilos o las formas debe cambiar, se pueden utilizar las ordenes siguientes:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\multirow{3}{*}{\sl\lmr Slanted} & \lstinline|\textsl{texto}| \\
+		& \lstinline|{\sl texto}| \\
+		& \lstinline|{\slshape texto}| \\ \hline
+		%
+		\multirow{3}{*}{\sc\lmr Small Caps} & \lstinline|\textsc{texto}| \\
+		& \lstinline|{\sc texto}| \\
+		& \lstinline|{\scshape texto}|
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Familias, Estilos y Formas}{Énfasis}
+Se puede aclarar que las combinaciones de familias, estilos y formas son validas, y en la mayoría de los casos, conmutativas, pero no todas son posibles.\pause\\[2em]
+
+Si necesitamos enfatizar una parte del texto, lo más apropiado es utilizar las ordenes \lstinline|{\em texto}| o \lstinline|\emph{texto}|, ya que estas dependen de cada familia, estilo o forma. Por lo que en cada caso escogerá la mejor opción.
+\end{frame}
 
 \section{Tamaño de fuente}
 

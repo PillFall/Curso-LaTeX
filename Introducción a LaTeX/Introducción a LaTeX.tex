@@ -439,6 +439,32 @@ Si necesitamos enfatizar una parte del texto, lo más apropiado es utilizar las 
 \end{frame}
 
 \section{Tamaño de fuente}
+\begin{frame}[fragile]{Tamaño de la fuente}{}
+En {\lmr\LaTeX} existen varias formas de cambiar el tamaño de la fuente.\pause\\[2em]
+Los más básicos son los siguientes comandos:
+\begin{center}
+	\begin{tabular}{cc}
+		\lstinline|\tiny| & {\tiny\lmr Muestra} \\
+		\lstinline|\scriptsize| & {\scriptsize\lmr Muestra} \\
+		\lstinline|\footnotesize| & {\footnotesize\lmr Muestra} \\
+		\lstinline|\small| & {\small\lmr Muestra} \\
+		\lstinline|\normalsize| & {\normalsize\lmr Muestra} \\
+	\end{tabular}\vline
+	\begin{tabular}{cc}
+		\lstinline|\large| & {\large\lmr Muestra} \\
+		\lstinline|\Large| & {\Large\lmr Muestra} \\
+		\lstinline|\LARGE| & {\LARGE\lmr Muestra} \\
+		\lstinline|\huge| & {\huge\lmr Muestra} \\
+		\lstinline|\Huge| & {\Huge\lmr Muestra} \\
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Tamaño de la fuente}{}
+Otra forma para cambiar el tamaño de la fuente del documento es mediante las opciones de \lstinline|\documentclass|.\\[2em]\pause
+
+Estas opciones pueden ser \verb|10pt|, \verb|11pt| o \verb|12pt|, con el significado habitual de todo editor. Estas opciones son aplicadas de manera general al documento.
+\end{frame}
 
 \section{Paquetes {\tt fontenc} e {\tt inputenc}}
 

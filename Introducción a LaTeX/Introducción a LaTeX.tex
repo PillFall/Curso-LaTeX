@@ -182,11 +182,11 @@ Donde \texttt{<clase>} es cualquiera de las clases ya mencionadas, u otras perso
 \begin{frame}[fragile]{Estructura del código}{}
 La estructura básica del código de cualquier documento es muy sencilla, siempre es la misma.\pause
 
-\begin{enumerate}
-	\item Primero se coloca el comando \lstinline|\documentclass{<clase>}| con la clase escogida.\pause
-	\item Desde aquí encontramos el \alert{\bf preámbulo} hasta que se encuentra la orden \lstinline|\begin{document}|.\pause
-	\item Después tenemos el \alert{\bf cuerpo del documento} hasta encontrar la orden \lstinline|\end{document}|, todo lo que se encuentra después de esto es ignorado por {\lmr\LaTeX}.\pause
-\end{enumerate}
+\begin{enumerate}[<+->]
+	\item Primero se coloca el comando \lstinline|\documentclass{<clase>}| con la clase escogida.
+	\item Desde aquí encontramos el \alert{\bf preámbulo} hasta que se encuentra la orden \lstinline|\begin{document}|.
+	\item Después tenemos el \alert{\bf cuerpo del documento} hasta encontrar la orden \lstinline|\end{document}|, todo lo que se encuentra después de esto es ignorado por {\lmr\LaTeX}.
+\end{enumerate}\pause
 
 Se debe tener cuidado al escribir, ya que existen comandos los cuales solo funcionan en una sección del código.
 \end{frame}
@@ -260,7 +260,7 @@ Al escribir esto ya en un documento con la clase \alert{\bf articulo}, de manera
 Al escribir cualquier tipo de documento siempre es bueno llevar una estructura e intentar no romperla a lo largo de este.\pause\\[2em]
 
 En {\lmr\LaTeX} esto se logra mediante los comandos:
-\begin{itemize}
+\begin{itemize}[<+->]
 	\item \texttt{\textbackslash{}chapter\{<título>\}} para las clases \alert{\bf libro} y \alert{\bf reporte} \\
 	\texttt{\textbackslash{}part\{<título>\}} para la clase \alert{\bf articulo}.
 	\item \texttt{\textbackslash{}section\{<título>\}}
@@ -339,9 +339,9 @@ Al escribir esto ya en un documento con la clase \alert{\bf articulo}, de manera
 
 \section{Familias, Estilos y Formas}
 \begin{frame}{Familias, Estilos y Formas}{Familias}
-{\lmr\LaTeX} ofrece una gran variedad de familias tipográficas donde se encuentran:
+{\lmr\LaTeX} ofrece una gran variedad de familias tipográficas donde se encuentran:\pause
 
-\begin{itemize}
+\begin{itemize}[<+->]
 	\item \alert{\bf\lmr Serif}, \alert{\bf\lmr Romana} o \alert{\bf\lmr Con Serifa}.\\
 	\hspace*{2ex}Es la fuente por defecto de casi todo documento.
 	\item \alert{\bf\lmss Sans Serif}, \alert{\bf\lmss Paloseco} o \alert{\bf\lmss Sin Serifa}.
@@ -372,7 +372,7 @@ Para indicar a {\lmr\LaTeX} por cual de las familias debe cambiar, se pueden uti
 \begin{frame}{Familias, Estilos y Formas}{Estilos y Formas}
 {\lmr\LaTeX} tambien ofrece una gran variedad de formas y estilos tipográficos donde se encuentran:
 
-\begin{itemize}
+\begin{itemize}[<+->]
 	\item \alert{\lmr Upright} o \alert{\lmr Derecha}.
 	\item \alert{\bf\lmr Bold} o \alert{\bf\lmr Negrita}.
 	\item \alert{\it\lmr Italic} o \alert{\it\lmr Italica}.
@@ -396,22 +396,6 @@ Para indicar a {\lmr\LaTeX} por cual de las familias debe cambiar, se pueden uti
 		\multirow{3}{*}{\it\lmr Italic} & \lstinline|\textit{texto}| \\
 		& \lstinline|{\it texto}| \\
 		& \lstinline|{\itshape texto}|
-	\end{tabular}
-\end{center}
-\end{frame}
-
-\begin{frame}[fragile]{Familias, Estilos y Formas}{Estilos y Formas}
-Para indicar a {\lmr\LaTeX} por cual de los estilos o las formas debe cambiar, se pueden utilizar las ordenes siguientes:
-
-\begin{center}
-	\begin{tabular}{cc}
-		\multirow{3}{*}{\sl\lmr Slanted} & \lstinline|\textsl{texto}| \\
-		& \lstinline|{\sl texto}| \\
-		& \lstinline|{\slshape texto}| \\ \hline
-		%
-		\multirow{3}{*}{\sc\lmr Small Caps} & \lstinline|\textsc{texto}| \\
-		& \lstinline|{\sc texto}| \\
-		& \lstinline|{\scshape texto}|
 	\end{tabular}
 \end{center}
 \end{frame}
@@ -498,6 +482,21 @@ Para cambiar el rotulo de \alert{Cuadro} por \alert{Tabla} debemos colocar la op
 \end{frame}
 
 \section{Separación del texto}
+\begin{frame}[fragile]{Separación del texto}{}
+Para generar estructura en cualquier texto es necesario dividirlo en párrafos.\pause\\[1em]
+
+En {\lmr\LaTeX} existen varias formas de generar párrafos.\pause\\[1em]
+
+Los más básicos y útiles son:
+\begin{itemize}[<+->]
+	\item \verb|\par|
+	\item \verb|\\|
+	\item \verb|\newline|
+	\item \verb|\linebreak|
+\end{itemize}\pause\vspace{1em}
+
+Aunque existen muchos más comandos que realizan esta tarea, como dejar una línea en blanco entre dos textos.
+\end{frame}
 
 \section{Opciones del Documento}
 \end{document}

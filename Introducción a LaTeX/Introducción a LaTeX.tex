@@ -467,6 +467,22 @@ Estas opciones pueden ser \verb|10pt|, \verb|11pt| o \verb|12pt|, con el signifi
 \end{frame}
 
 \section{Paquetes {\tt fontenc} e {\tt inputenc}}
+\begin{frame}[fragile]{Paquetes {\tt fontenc} e {\tt inputenc}}{}
+Debido a algunas condiciones al momento de crear {\lmr\TeX} y {\lmr\LaTeX} no es posible insertar de manera regular los caracteres especiales como \alert{ñ} o \alert{á}.\pause\\[2em]
+
+Para colocarlas se debe utilizar las ordenes \verb|\~n| para \alert{ñ} y \verb|\'a| para \alert{á}. Lo cual es muy lento al momento de escribir, y de utilizar algún programa de corrección ortográfica.
+\end{frame}
+
+\begin{frame}[fragile]{Paquetes {\tt fontenc} e {\tt inputenc}}{}
+Para poder utilizar estos símbolos de manera natural en el documento, vamos a incluir los paquetes {\tt fontenc} e {\tt inputenc} en el preámbulo del documento.\pause\\[2em]
+
+\begin{lstlisting}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\end{lstlisting}\vspace{2em}
+
+De esta forma podremos escribir la mayoría de caracteres especiales sin problemas y de manera nativa.
+\end{frame}
 
 \section{{\lmr\LaTeX} en español}
 

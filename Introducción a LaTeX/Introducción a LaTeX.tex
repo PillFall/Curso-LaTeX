@@ -489,13 +489,29 @@ En {\lmr\LaTeX} existen varias formas de generar párrafos.\pause\\[1em]
 
 Los más básicos y útiles son:
 \begin{itemize}[<+->]
-	\item \verb|\par|
-	\item \verb|\\|
-	\item \verb|\newline|
-	\item \verb|\linebreak|
+	\item \lstinline|\par|
+	\item \lstinline|\\|
+	\item \lstinline|\newline|
+	\item \lstinline|\linebreak|
 \end{itemize}\pause\vspace{1em}
 
 Aunque existen muchos más comandos que realizan esta tarea, como dejar una línea en blanco entre dos textos.
+\end{frame}
+
+\begin{frame}[fragile]{Separación del texto}{}
+Cada uno de los comandos anteriores funciona de manera diferente. Por ejemplo, el comando \lstinline|\linebreak| estira proporcionalmente los espacios entre las palabras hasta tocar el margen derecho.\pause\\[2em]
+
+\begin{center}
+	\fbox{\begin{minipage}{0.7\linewidth}
+		\lmr Esta línea será estirada.\linebreak
+		Mientras esta no.
+	\end{minipage}}\\[1ex]
+
+\begin{lstlisting}
+Esta línea será estirada.\linebreak
+Mientras esta no.
+\end{lstlisting}
+\end{center}
 \end{frame}
 
 \section{Opciones del Documento}

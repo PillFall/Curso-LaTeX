@@ -161,12 +161,12 @@
 Al trabajar en un documento escrito con {\lmr\LaTeX} debemos tener en cuenta la clase del documento en el cual queremos trabajar, la clase más usada generalmente es \texttt{\textbf{article}}.\pause\\[2em]
 
 Las clases «estándares» de {\lmr\LaTeX} son:
-\begin{itemize}
+\begin{itemize}[<+->]
 	\item {\color{Ired}\texttt{article}}: para artículos.
 	\item {\color{Ired}\texttt{report}}: para reportes.
 	\item {\color{Ired}\texttt{book}}: para libros.
 	\item {\color{Ired}\texttt{letter}}: para las cartas.
-	\item {\alt<3>{\color{black!30!Igreen}\textbf{\texttt{beamer}}}{\color{Ired} \texttt{slides}}}: para las presentaciones.
+	\item {\alt<+->{\color{black!30!Igreen}\textbf{\texttt{beamer}}}{\color{Ired} \texttt{slides}}}: para las presentaciones.
 \end{itemize}
 \end{frame}
 
@@ -187,7 +187,7 @@ La estructura básica del código de cualquier documento es muy sencilla, siempr
 	\item Primero se coloca el comando \lstinline|\documentclass{<clase>}| con la clase escogida.
 	\item Desde aquí encontramos el \alert{\bf preámbulo} hasta que se encuentra la orden \lstinline|\begin{document}|.
 	\item Después tenemos el \alert{\bf cuerpo del documento} hasta encontrar la orden \lstinline|\end{document}|, todo lo que se encuentra después de esto es ignorado por {\lmr\LaTeX}.
-\end{enumerate}\pause
+\end{enumerate}\pause[5]
 
 Se debe tener cuidado al escribir, ya que existen comandos los cuales solo funcionan en una sección del código.
 \end{frame}
@@ -494,7 +494,7 @@ Los más básicos y útiles son:
 	\item \lstinline|\\|
 	\item \lstinline|\newline|
 	\item \lstinline|\linebreak|
-\end{itemize}\pause\vspace{1em}
+\end{itemize}\pause[7]\vspace{1em}
 
 Aunque existen muchos más comandos que realizan esta tarea, como dejar una línea en blanco entre dos textos.
 \end{frame}
@@ -584,7 +584,7 @@ En el número de columnas, de manera normal, solamente hay 2 opciones.\pause\\[2
 \begin{itemize}[<+->]
 	\item {\tt onecolumn}: para una columna.
 	\item {\tt twocolumn}: para dos columnas iguales.
-\end{itemize}\pause\vspace{2em}
+\end{itemize}\pause[4]\vspace{2em}
 
 Puedes también incluir el paquete {\tt multicol}, el cual te permite tener más control sobre las columnas.
 \end{frame}

@@ -4,11 +4,13 @@
 %   Paquetes de configuración basica del texto   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{babelbib}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{multirow}
 \usepackage{hyperref}
 \usepackage{hyperxmp}
+\usepackage{calc}
 \usepackage{ifthen}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -502,10 +504,14 @@ Aunque existen muchos más comandos que realizan esta tarea, como dejar una lín
 Cada uno de los comandos anteriores funciona de manera diferente. Por ejemplo, el comando \lstinline|\linebreak| estira proporcionalmente los espacios entre las palabras hasta tocar el margen derecho.\pause\\[2em]
 
 \begin{center}
-	\fbox{\begin{minipage}{0.7\linewidth}
-		\lmr Esta línea será estirada.\linebreak
-		Mientras esta no.
-	\end{minipage}}\\[1ex]
+	\fbox{
+		\begin{minipage}{0.7\linewidth}\lmr
+			% Se puede obtener el mismo resultado con
+			% Esta línea será estirada.\linebreak
+			% pero enviara un mensaje de advertencia.
+			Esta\hfill{}línea\hfill{}será\hfill{}estirada.\\
+			Mientras esta no.
+		\end{minipage} }\\[1ex]
 
 \begin{lstlisting}
 Esta línea será estirada.\linebreak
@@ -514,5 +520,115 @@ Mientras esta no.
 \end{center}
 \end{frame}
 
-\section{Opciones del Documento}
+\section{Opciones del documento}
+\begin{frame}[fragile]{Opciones del documento}{}
+Podemos modificar muchas cosas de nuestro documento mediante las opciones de la orden \lstinline|\documentclass[]{}|.\pause\\[1em]
+
+Lo más general suele ser:
+\begin{itemize}[<+->]
+	\item El \alert{\bf Tamaño de la fuente}.
+	\item El \alert{\bf tamaño del papel}.
+	\item La \alert{\bf orientación del papel}.
+	\item El \alert{\bf número de columnas}.
+	\item La \alert{\bf forma del título}.
+	\item Impresión a \alert{\bf una} o \alert{\bf dos} caras.
+	\item El \alert{\bf tipo de impresión}.
+	\item Ubicación de la \alert{\bf página de título}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Opciones del documento}{Tamaño de la fuente}
+Originalmente solo podemos escoger entre 3 tamaños para nuestro documento.\pause\\[2em]
+
+\begin{center}
+	{\setlength{\tabcolsep}{5mm}
+	\begin{tabular}{ccc}
+		{\tt 10pt} & {\tt 11pt} & {\tt 12pt} \\
+		{\fontsize{10}{12}\lmr Muestra} & {\fontsize{11}{13.2}\lmr Muestra} & {\fontsize{12}{14.4}\lmr Muestra}
+	\end{tabular} }
+\end{center}\pause\vspace{1em}
+
+Aunque es posible que alguna clase o paquete que utilices te habiliten nuevos tamaños.
+\end{frame}
+
+\begin{frame}{Opciones del documento}{Tamaño del papel}
+Al escoger el tamaño del papel, solo tendremos 6 tipos.\pause\\[2em]
+
+\begin{center}
+	\begin{tabular}{c|cc}
+		\hline
+		Orden & Ancho & Alto \\
+		\hline
+		{\tt letterpaper} & 8.5 pulgadas & 11 pulgadas \\
+		{\tt legalpaper} & 8.5 pulgadas & 14 pulgadas \\
+		{\tt executivepaper} & 7.25 pulgadas & 10.5 pulgadas \\
+		{\tt a4paper} & 21 centímetros & 30 centímetros \\
+		{\tt a5paper} & 15 centímetros & 21 centímetros \\
+		{\tt b5paper} & 18 centímetros & 25 centímetros \\
+		\hline
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Opciones del documento}{Orientación del papel}
+Las orientaciones del papel son muy sencillas, solo existen 2.\pause\\[2em]
+
+\begin{itemize}[<+->]
+	\item {\tt portrait}: que refiere a \emph{retrato}, en \alert{\bf vertical}.
+	\item {\tt landscape}: que refiere a \emph{paisaje}, en \alert{\bf horizontal}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Opciones del documento}{Número de columnas}
+En el número de columnas, de manera normal, solamente hay 2 opciones.\pause\\[2em]
+
+\begin{itemize}[<+->]
+	\item {\tt onecolumn}: para una columna.
+	\item {\tt twocolumn}: para dos columnas iguales.
+\end{itemize}\pause\vspace{2em}
+
+Puedes también incluir el paquete {\tt multicol}, el cual te permite tener más control sobre las columnas.
+\end{frame}
+
+\begin{frame}{Opciones del Documento}{Página de título}
+También puedes escoger si prefieres o no una página separada para el título.\pause\\[2em]
+
+\begin{itemize}[<+->]
+	\item {\tt titlepage}: con lo cual el título se dispondrá en una página separada.
+	\item {\tt notitlepage}: con lo cual el título se dispondrá junto al texto.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Opciones del documento}{Impresión a una o dos caras}
+Podremos cambiar los margenes \emph{izquierdo} y \emph{derecho} de las páginas \emph{pares} e \emph{impares}.\pause\\[2em]
+
+\begin{itemize}[<+->]
+	\item {\tt oneside}: con lo cual los margenes son iguales tanto para páginas pares como impares.
+	\item {\tt twoside}: con lo cual se reflejan los margenes en páginas pares e impares.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Opciones del documento}{Tipo de impresión}
+Al hablar del tipo de impresión nos referimos a la versión del documento que estamos compilando.\pause\\[2em]
+
+\begin{itemize}[<+->]
+	\item {\tt draft}: que seria un borrador del documento, la compilación es rápida, pero el documento no se ve completo.
+	\item {\tt final}: es la versión final del documento. Donde se muestran todos los elementos del documento.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Opciones del documento}{Primera página de cada capítulo}
+Cuando se escribe una Parte, o un capítulo se puede elegir en que lado del documento aparezca.\pause\\[2em]
+
+\begin{itemize}[<+->]
+	\item {\tt openright}: los títulos de partes y capítulos aparecen siempre del lado derecho del documento.
+	\item {\tt openany}: los títulos de partes y capítulos pueden aparecer a cualquier lado del documento.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Bibliografía}
+\nocite{*}
+\bibliographystyle{babplain}
+\bibliography{biblio}
+\end{frame}
 \end{document}

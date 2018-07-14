@@ -25,7 +25,7 @@ Este repositorio está licenciado bajo [**Creative Commons Attribution Share Ali
 	 - LyX.
 	 - Emacs con AUCTeX.
 	 - Kile.
-	 - TeXworks.
+	 - TeXmacs.
    * Compiladores:
 	 - LaTeX.
 	 - PDFLaTeX.

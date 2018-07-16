@@ -314,7 +314,7 @@ Estudiaremos solamente 4 compiladores.
 \begin{frame}{\lmr\LaTeX}{}
 {\lmr\LaTeX} es el primer compilador, creado por Leslie Lamport.\pause\\[1em]
 
-Su salida por defecto es una archivo con formato {\tt .dvi}. Aunque es posible convertir este a PDF mediante el comando {\tt dvipdfmx}.
+Su salida por defecto es una archivo con formato {\tt .dvi}. Aunque es posible convertir este a PDF mediante el comando {\tt xdvipdfmx}.
 \end{frame}
 
 \subsection{PDF\LaTeX}
@@ -322,6 +322,12 @@ Su salida por defecto es una archivo con formato {\tt .dvi}. Aunque es posible c
 \begin{center}
 	\Huge\lmr PDF\LaTeX
 \end{center}
+\end{frame}
+
+\begin{frame}{\lmr PDF\LaTeX}{}
+{\lmr PDF\LaTeX} es un compilador cuya salida por defecto es un archivo {\tt .pdf}.\pause\\[1em]
+
+Fue creado por Hàn Th$\tilde{\text{e}}$ Thành. Permite la creación de indices y enlaces PDF debido a su funcionamiento.
 \end{frame}
 
 \newcommand{\XeTeX}{\lmr X\hspace{-0.3ex}\raisebox{-0.5ex}{\reflectbox{E}}\hspace{-0.4ex}{\TeX}}
@@ -333,6 +339,12 @@ Su salida por defecto es una archivo con formato {\tt .dvi}. Aunque es posible c
 \end{center}
 \end{frame}
 
+\begin{frame}{{\XeTeX} y {\XeLaTeX}}{}
+{\XeLaTeX} es un compilador cuya salida por defecto es un archivo {\tt .pdf}, al que se llega por medio de un archivo {\tt .dvi} usando {\tt xdvipdfmx}.\pause\\[1em]
+
+Fue creado por Jonathan Kew. Permite la creación de documentos con fuentes personalizadas y soporte con Unicode.
+\end{frame}
+
 \newcommand{\LuaTeX}{\lmr Lua\hspace{-0.4ex}{\TeX}}
 \newcommand{\LuaLaTeX}{\lmr Lua\hspace{-0.1ex}{\LaTeX}\relax}
 \subsection{LuaLaTeX}
@@ -342,7 +354,13 @@ Su salida por defecto es una archivo con formato {\tt .dvi}. Aunque es posible c
 \end{center}
 \end{frame}
 
-\begin{frame}{Bibliografía}
+\begin{frame}{{\LuaTeX} y {\LuaLaTeX}}{}
+{\LuaLaTeX} es un compilador cuya salida por defecto es un archivo {\tt .pdf}, es el considerado el remplazo de {\lmr PDF\LaTeX}.\pause\\[1em]
+
+Fue creado por Taco Hoekwater, Hartmut Henkel y Hans Hagen. Al igual que {\XeLaTeX} permite la creación de documentos con fuentes personalizadas y soporte de Unicode.
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Bibliografía}
 \nocite{*}
 \bibliographystyle{babplain}
 \bibliography{biblio}

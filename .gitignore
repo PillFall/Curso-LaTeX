@@ -17,3 +17,7 @@
 *.vrb
 *.bbl
 *.blg
+
+# Final LaTeX files
+Introducción a LaTeX.pdf
+Editores y Compiladores.pdf

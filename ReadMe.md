@@ -37,7 +37,7 @@ Este repositorio está licenciado bajo [**Creative Commons Attribution Share Ali
 	 - Normal.
 	 - Izquierda-Derecha.
 	 - Matemático.
-   * Listas numeradas y no numeradas.
+   * Listas numeradas, no numeradas y descripciones.
    * Cajas:
 	 - `mbox` y `fbox`.
 	 - `makebox` y `framebox`.

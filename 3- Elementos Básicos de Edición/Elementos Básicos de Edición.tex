@@ -185,10 +185,106 @@ En este caso {\lmr\LaTeX} también indicara que hace falta espacio para acomodar
 \end{frame}
 
 \section{Listas}
+\begin{frame}{Listas}{}
+Uno de los elementos de edición más importantes de cualquier trabajo escrito son las listas.\pause\\[1em]
+
+Como cualquier otro editor de texto {\lmr\LaTeX} también posee varias formas de incluir listas en el documento.\pause\\[1em]
+
+En {\lmr\LaTeX} existen 3 tipos básicos de listas, las listas \alert{numeradas}, las \alert{no numeradas} y las \alert{descripciones}.
+\end{frame}
 
 \subsection{Listas Numeradas}
+\begin{frame}[fragile]{Listas Numeradas}{Listas}
+Para escribir una lista \alert{\bf enumerada} utilizamos el entorno {\tt enumerate}, y para cada uno de los elementos de la lista utilizamos el comando {\tt item}.\pause\\[1em]
+
+Así:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\begin{enumerate}
+  \item Elemento 1.
+  \item Elemento 2.
+  \item ...
+\end{enumerate}
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				% Por el comportamiento de Beamer no puedo poner el entorno normal
+				\hspace{2ex}
+				\parbox{3cm}{
+					1. Elemento 1.\\
+					2. Elemento 2.\\
+					3. ... } }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \subsection{Listas no Numeradas}
+\begin{frame}[fragile]{Listas no Numeradas}{Listas}
+Para escribir una lista \alert{\bf no enumerada}, o por viñetas, utilizamos el entorno {\tt itemize}, y para cada uno de los elementos de la lista utilizamos el comando {\tt item}.\pause\\[1em]
+
+Así:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\begin{itemize}
+  \item Elemento 1.
+  \item Elemento 2.
+  \item ...
+\end{itemize}
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				% Por el comportamiento de Beamer no puedo poner el entorno normal
+				\hspace{2ex}
+				\parbox{3cm}{
+					\raisebox{.45ex}{\rule{.6ex}{.6ex}} Elemento 1.\\
+					\raisebox{.45ex}{\rule{.6ex}{.6ex}} Elemento 2.\\
+					\raisebox{.45ex}{\rule{.6ex}{.6ex}} ... } }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Descripciones}
+\begin{frame}[fragile]{Descripciones}{Listas}
+Para escribir una \alert{\bf descripción} utilizamos el entorno {\tt description}, y para cada uno de los elementos de la lista utilizamos el comando {\tt item} con un argumento opcional.\pause\\[1em]
+
+Así:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+			\begin{lstlisting}
+\begin{itemize}
+  \item[Desc 1:] Texto.
+  \item[Desc 2:] Texto.
+  \item[Desc 3:] ...
+\end{itemize}
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				% Por el comportamiento de Beamer no puedo poner el entorno normal
+				\hspace{2ex}
+				\parbox{4cm}{
+					\textbf{Desc 1:} Texto.\\
+					\textbf{Desc 2:} Texto.\\
+					\textbf{Desc 3:} ... } }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \section{Cajas}
 

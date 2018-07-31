@@ -263,7 +263,7 @@ Así:
 \begin{columns}
 	\begin{column}{0.5\linewidth}
 		{\small
-			\begin{lstlisting}
+\begin{lstlisting}
 \begin{itemize}
   \item[Desc 1:] Texto.
   \item[Desc 2:] Texto.
@@ -281,6 +281,37 @@ Así:
 					\textbf{Desc 1:} Texto.\\
 					\textbf{Desc 2:} Texto.\\
 					\textbf{Desc 3:} ... } }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Anidación de Listas}
+\begin{frame}[fragile]{Anidación de Listas}{Listas}
+Para anidar listas es muy simple, ya que solamente se requiere de abrir y cerrar entornos.\pause\\[1em]
+
+Así:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\begin{enumerate}
+  \item Texto.
+  \begin{enumerate}
+    \item Anidado.
+  \end{enumerate}
+\end{enumerate}
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				% Por el comportamiento de Beamer no puedo poner el entorno normal
+				\hspace{2ex}
+				\parbox{4cm}{
+					1. Texto.\\
+					\hspace*{2em}a) Anidado.} }}\\
 		\hfill{\color{Ired} Vista}
 	\end{column}
 \end{columns}

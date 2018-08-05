@@ -318,12 +318,67 @@ Así:
 \end{frame}
 
 \section{Cajas}
+\begin{frame}{Cajas}{}
+Las cajas son un elemento que {\lmr\LaTeX} trata como si fuera una sola letra. Por lo cual, sin importar su tamaño este nunca la dividirá.\pause\\[1em]
+
+Las cajas son muy útiles al momento de estilizar una parte del documento debido a todas sus propiedades.\pause\\[1em]
+
+Al trabajar con estas se debe tener mucho cuidado ya que estas hacen que {\lmr\LaTeX} entre en el modo I-D.
+\end{frame}
 
 \subsection{mbox y fbox}
+\begin{frame}{\texttt{mbox} y \texttt{fbox}}{Cajas}
+Las cajas más básicas son \alert{\texttt{mbox}} y \alert{\texttt{fbox}}, cajas de anchura y altura automáticas que contienen un texto.\pause\\[1em]
+
+\begin{itemize}[<+->]
+	\item La caja \texttt{mbox} tiene bordes invisibles.
+	\item La caja \texttt{fbox} tiene bordes visibles.
+\end{itemize}
+\end{frame}
 
 \subsubsection{mbox}
+\begin{frame}[fragile]{\texttt{mbox}}{Cajas}
+Como mencionamos la caja \texttt{mbox} crea una caja sin bordes, invisible.\pause\\[1em]
+
+Obteniendo lo siguiente:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\mbox{Texto.} Normal
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small\hspace{1em}
+				\mbox{Texto.} Normal }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \subsubsection{fbox}
+\begin{frame}[fragile]{\texttt{fbox}}{Cajas}
+Ahora, una caja \texttt{fbox} crea una caja con bordes.\pause\\[1em]
+
+Obteniendo lo siguiente:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\fbox{Texto.} Normal
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small\hspace{1em}
+				\fbox{Texto.} Normal }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \subsection{makebox y framebox}
 

@@ -535,7 +535,7 @@ Estas se crean mediante el comando \alert{\texttt{\bfseries footnote}}, con un a
 También es posible forzar la numeración mediante un argumento opcional con el número que queremos.
 \end{frame}
 
-\begin{frame}[fragile]{mini-páginas}{Cajas}
+\begin{frame}[fragile]{mini-páginas}{}
 Por ejemplo:\\[1em]
 
 \begin{columns}
@@ -569,7 +569,7 @@ Al igual que con las notas al pie, también es posible crear notas al margen con
 Para colocar una nota al margen se debe escribir el comando \alert{\texttt{\bfseries marginpar}}, con un argumento obligatorio que contiene el texto de la nota.
 \end{frame}
 
-\begin{frame}[fragile]{mini-páginas}{Cajas}
+\begin{frame}[fragile]{Notas al Margen}{}
 Por ejemplo:\\[1em]
 
 \begin{columns}
@@ -580,7 +580,7 @@ Esto es un texto muy
 normal \marginpar{\tiny
 Al menos para la
 mayoría de la gente.}
-escritoen una pequeña
+escrito en una pequeña
 página.
 \end{lstlisting} }
 		{\color{Ired} Código}
@@ -598,4 +598,53 @@ página.
 \end{frame}
 
 \section{El entorno {\tt verbatim} y su paquete}
+\begin{frame}{El entorno {\tt verbatim} y su paquete}{}
+El entorno \alert{\texttt{\bfseries verbatim}} y la orden \alert{\texttt{\bfseries verb}} son muy utilizadas para escribir código, o texto que tiene que aparecer literal. Eso es lo que significa la palabra \emph{verbatim}.\pause\\[1em]
+
+El mayor problema de estas ordenes es la cantidad de memoria que utilizan, por lo tanto es necesario incluir el paquete \alert{\texttt{\bfseries verbatim}} que optimiza su funcionamiento y nos añade nuevas características.
+\end{frame}
+
+\begin{frame}[fragile]{El entorno {\tt verbatim} y su paquete}{}
+El entorno \texttt{verbatim} genera que el texto sea escrito en la fuente \emph{mono espaciada} o \emph{typewriter}.\pause\\[1em]
+
+Así:\\[1em]
+
+\begin{columns}
+\begin{column}{0.5\linewidth}
+	{\small
+\begin{lstlisting}
+Esto es un texto normal
+\begin{verbatim}
+Texto mono espaciado
+\end{verbatim}
+Texto normal
+\verb|mono|
+\end{lstlisting} }
+	{\color{Ired} Código}
+\end{column}
+\vline
+\hspace{1em}
+\begin{column}{0.5\linewidth}
+	{\lmr{\small
+			Esto es un texto normal\\[1em]
+			{\lmtt Texto mono espaciado}\\[1em]
+			Texto normal {\lmtt mono}}}\\
+	\hfill{\color{Ired} Vista}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{El entorno {\tt verbatim} y su paquete}{}
+El paquete \texttt{verbatim} además de optimizar estos comandos, nos añade:
+\begin{itemize}[<+->]
+	\item El entorno \alert{\texttt{comment}} para escribir comentarios extensos, de varios párrafos.
+	\item La inclusión de archivos en el documento para su impresión en un entorno \texttt{verbatim}, mediante la orden \alert{\texttt{verbatiminput}}.
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{Bibliografía}
+\nocite{*}
+\bibliographystyle{babplain}
+\bibliography{biblio}
+\end{frame}
 \end{document}

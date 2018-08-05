@@ -208,20 +208,18 @@ Así:
   \item ...
 \end{enumerate}
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
 		{\lmr{\small
 				% Por el comportamiento de Beamer no puedo poner el entorno normal
-				\hspace{2ex}
-				\parbox{3cm}{
-					1. Elemento 1.\\
-					2. Elemento 2.\\
-					3. ... } }}\\
-		\hfill{\color{Ired} Vista}
+				1. Elemento 1.\\
+				2. Elemento 2.\\
+				3. ... }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \subsection{Listas no Numeradas}
@@ -239,20 +237,18 @@ Así:
   \item ...
 \end{itemize}
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
 		{\lmr{\small
 				% Por el comportamiento de Beamer no puedo poner el entorno normal
-				\hspace{2ex}
-				\parbox{3cm}{
-					\raisebox{.45ex}{\rule{.6ex}{.6ex}} Elemento 1.\\
-					\raisebox{.45ex}{\rule{.6ex}{.6ex}} Elemento 2.\\
-					\raisebox{.45ex}{\rule{.6ex}{.6ex}} ... } }}\\
-		\hfill{\color{Ired} Vista}
+				\raisebox{.45ex}{\rule{.6ex}{.6ex}} Elemento 1.\\
+				\raisebox{.45ex}{\rule{.6ex}{.6ex}} Elemento 2.\\
+				\raisebox{.45ex}{\rule{.6ex}{.6ex}} ... }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \subsection{Descripciones}
@@ -270,20 +266,18 @@ Así:
   \item[Desc 3:] ...
 \end{itemize}
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
 		{\lmr{\small
 				% Por el comportamiento de Beamer no puedo poner el entorno normal
-				\hspace{2ex}
-				\parbox{4cm}{
-					\textbf{Desc 1:} Texto.\\
-					\textbf{Desc 2:} Texto.\\
-					\textbf{Desc 3:} ... } }}\\
-		\hfill{\color{Ired} Vista}
+				\textbf{Desc 1:} Texto.\\
+				\textbf{Desc 2:} Texto.\\
+				\textbf{Desc 3:} ... }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \subsection{Anidación de Listas}
@@ -302,19 +296,17 @@ Así:
   \end{enumerate}
 \end{enumerate}
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
 		{\lmr{\small
 				% Por el comportamiento de Beamer no puedo poner el entorno normal
-				\hspace{2ex}
-				\parbox{4cm}{
-					1. Texto.\\
-					\hspace*{2em}a) Anidado.} }}\\
-		\hfill{\color{Ired} Vista}
+				1. Texto.\\
+				\hspace*{2em}a) Anidado. }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \section{Cajas}
@@ -350,15 +342,15 @@ Obteniendo lo siguiente:
 \begin{lstlisting}
 \mbox{Texto.} Normal
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
-		{\lmr{\small\hspace{1em}
-				\mbox{Texto.} Normal }}\\
-		\hfill{\color{Ired} Vista}
+		{\lmr{\small
+				\mbox{Texto.} Normal }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \subsubsection{fbox}
@@ -372,15 +364,15 @@ Obteniendo lo siguiente:
 \begin{lstlisting}
 \fbox{Texto.} Normal
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
-		{\lmr{\small\hspace{1em}
-				\fbox{Texto.} Normal }}\\
-		\hfill{\color{Ired} Vista}
+		{\lmr{\small
+				\fbox{Texto.} Normal }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \subsection{makebox y framebox}
@@ -394,7 +386,7 @@ Obteniendo lo siguiente:
 \end{frame}
 
 \subsubsection{makebox}
-\begin{frame}[fragile]{\texttt{mbox}}{Cajas}
+\begin{frame}[fragile]{\texttt{makebox}}{Cajas}
 Para la caja \texttt{makebox} se debe definir el ancho y justificación de la caja.\pause\\[1em]
 
 Obteniendo lo siguiente:
@@ -405,19 +397,19 @@ Obteniendo lo siguiente:
 \makebox[2cm][c]{Texto}
 Normal
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
-		{\lmr{\small\hspace{1em}
-				\makebox[2cm][c]{Texto} Normal }}\\
-		\hfill{\color{Ired} Vista}
+		{\lmr{\small
+				\makebox[2cm][c]{Texto} Normal }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \subsubsection{framebox}
-\begin{frame}[fragile]{\texttt{mbox}}{Cajas}
+\begin{frame}[fragile]{\texttt{framebox}}{Cajas}
 Con la caja \texttt{framebox} se genera también una caja con bordes con su ancho y justificación definida.\pause\\[1em]
 
 Obteniendo lo siguiente:
@@ -425,19 +417,19 @@ Obteniendo lo siguiente:
 	\begin{column}{0.5\linewidth}
 		{\small
 \begin{lstlisting}
-\framebox[2cm]
-     [c]{Texto}
+\framebox[2cm][c]
+  {Texto}
 Normal
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
-		{\lmr{\small\hspace{1em}
-				\framebox[2cm][c]{Texto} Normal }}\\
-		\hfill{\color{Ired} Vista}
+		{\lmr{\small
+				\framebox[2cm][c]{Texto} Normal }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \subsection{parbox}
@@ -470,16 +462,16 @@ A manera visual se ve así, teniendo en cuenta que el borde lo genera una caja \
 }
 Texto
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
-		{\lmr{\small\hspace{1em}
+		{\lmr{\small
 				\fbox{
-					\parbox[c][3cm][c]{3cm}{Este es un texto muy largo dentro de una caja parbox} } Texto }}\\
-		\hfill{\color{Ired} Vista}
+					\parbox[c][3cm][c]{3cm}{Este es un texto muy largo dentro de una caja parbox} } Texto }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \section{mini-páginas}
@@ -510,20 +502,20 @@ Por ejemplo:\\[1em]
 \end{minipage}
 Texto
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
+	\hspace{1em}
 	\begin{column}{0.5\linewidth}
-		{\lmr{\small\hspace{1em}
+		{\lmr{\small
 				\begin{minipage}[c][3cm][c]{3.5cm}
 					Este es un texto
 					muy largo dentro
 					de una mini-página.
 				\end{minipage}
-				Texto }}\\
-		\hfill{\color{Ired} Vista}
+				Texto }}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \section{Notas al pie}
@@ -548,7 +540,6 @@ menos para la mayoría
 de la gente.} escrito
 en una pequeña página.
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
 	\hspace{1em}
@@ -556,10 +547,10 @@ en una pequeña página.
 		{\lmr{\small
 				Esto es un texto muy normal escrito\raisebox{1ex}{\tiny a} en una pequeña página.
 				\rule{\linewidth}{1pt}
-				\hspace*{1em} \raisebox{1ex}{\tiny a}Al menos para la mayoría de la gente}}\\
-		\hfill{\color{Ired} Vista}
+				\hspace*{1em} \raisebox{1ex}{\tiny a}Al menos para la mayoría de la gente}}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \section{Notas al Margen}
@@ -583,7 +574,6 @@ mayoría de la gente.}
 escrito en una pequeña
 página.
 \end{lstlisting} }
-		{\color{Ired} Código}
 	\end{column}
 	\vline
 	\hspace{1em}
@@ -591,10 +581,10 @@ página.
 		{\lmr{\small
 				\parbox{3cm}{Esto es un texto muy normal escrito en una pequeña página.}
 				\hspace*{0.1em}
-				\parbox{1.5cm}{\tiny Al menos para la mayoría de la gente}}}\\
-		\hfill{\color{Ired} Vista}
+				\parbox{1.5cm}{\tiny Al menos para la mayoría de la gente}}}
 	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \section{El entorno {\tt verbatim} y su paquete}
@@ -610,8 +600,8 @@ El entorno \texttt{verbatim} genera que el texto sea escrito en la fuente \emph{
 Así:\\[1em]
 
 \begin{columns}
-\begin{column}{0.5\linewidth}
-	{\small
+	\begin{column}{0.5\linewidth}
+		{\small
 \begin{lstlisting}
 Esto es un texto normal
 \begin{verbatim}
@@ -620,18 +610,17 @@ Texto mono espaciado
 Texto normal
 \verb|mono|
 \end{lstlisting} }
-	{\color{Ired} Código}
-\end{column}
-\vline
-\hspace{1em}
-\begin{column}{0.5\linewidth}
-	{\lmr{\small
-			Esto es un texto normal\\[1em]
-			{\lmtt Texto mono espaciado}\\[1em]
-			Texto normal {\lmtt mono}}}\\
-	\hfill{\color{Ired} Vista}
-\end{column}
+	\end{column}
+	\vline
+	\hspace{1em}
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				Esto es un texto normal\\[1em]
+				{\lmtt Texto mono espaciado}\\[1em]
+				Texto normal {\lmtt mono}}}
+	\end{column}
 \end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
 \end{frame}
 
 \begin{frame}{El entorno {\tt verbatim} y su paquete}{}

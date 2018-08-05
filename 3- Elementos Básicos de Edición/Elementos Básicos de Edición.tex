@@ -441,6 +441,46 @@ Normal
 \end{frame}
 
 \subsection{parbox}
+\begin{frame}{\texttt{parbox}}{cajas}
+En ocasiones es necesario escribir varios párrafos en un caja, para lo cual se utiliza la caja \texttt{parbox}.\pause\\[1em]
+
+Estas cajas reciben 5 argumentos:
+\begin{itemize}[<+->]
+	\item El \alert{\bf Texto} que estará dentro de la caja.
+	\item La \alert{\bf Anchura} de la caja.
+	\item La \alert{\bf Posición Exterior} de la caja respecto a lo que la rodea.
+	\item La \alert{\bf Altura} de la caja.
+	\item La \alert{\bf Posición Interior} del texto que contiene la caja con respecto a esta.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{mbox}}{Cajas}
+A manera visual se ve así, teniendo en cuenta que el borde lo genera una caja \texttt{fbox}.\\[1em]
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\fbox{
+  \parbox[c][3cm][c]
+    {3cm}
+    {Este es un texto
+    muy largo dentro
+    de una caja parbox}
+}
+Texto
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small\hspace{1em}
+				\fbox{
+					\parbox[c][3cm][c]{3cm}{Este es un texto muy largo dentro de una caja parbox} } Texto }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \section{mini-páginas}
 

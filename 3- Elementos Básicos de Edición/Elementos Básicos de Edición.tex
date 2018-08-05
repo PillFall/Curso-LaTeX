@@ -527,6 +527,40 @@ Texto
 \end{frame}
 
 \section{Notas al pie}
+\begin{frame}{Notas al pie}{}
+Como en todo procesador de textos {\lmr\LaTeX} posee una orden para crear notas al pie de la página.\pause\\[1em]
+
+Estas se crean mediante el comando \alert{\texttt{\bfseries footnote}}, con un argumento obligatorio el cual se refiere al texto de la nota.\pause\\[1em]
+
+También es posible forzar la numeración mediante un argumento opcional con el número que queremos.
+\end{frame}
+
+\begin{frame}[fragile]{mini-páginas}{Cajas}
+Por ejemplo:\\[1em]
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+Esto es un texto muy
+normal\footnote{Al
+menos para la mayoría
+de la gente.} escrito
+en una pequeña página.
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\hspace{1em}
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				Esto es un texto muy normal escrito\raisebox{1ex}{\tiny a} en una pequeña página.
+				\rule{\linewidth}{1pt}
+				\hspace*{1em} \raisebox{1ex}{\tiny a}Al menos para la mayoría de la gente}}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \section{Notas al Margen}
 

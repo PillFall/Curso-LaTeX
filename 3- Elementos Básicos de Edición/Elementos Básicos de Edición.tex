@@ -563,6 +563,39 @@ en una pequeña página.
 \end{frame}
 
 \section{Notas al Margen}
+\begin{frame}{Notas al Margen}{}
+Al igual que con las notas al pie, también es posible crear notas al margen con {\lmr\LaTeX} de una manera muy sencilla.\pause\\[1em]
+
+Para colocar una nota al margen se debe escribir el comando \alert{\texttt{\bfseries marginpar}}, con un argumento obligatorio que contiene el texto de la nota.
+\end{frame}
+
+\begin{frame}[fragile]{mini-páginas}{Cajas}
+Por ejemplo:\\[1em]
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+Esto es un texto muy
+normal \marginpar{\tiny
+Al menos para la
+mayoría de la gente.}
+escritoen una pequeña
+página.
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\hspace{1em}
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				\parbox{3cm}{Esto es un texto muy normal escrito en una pequeña página.}
+				\hspace*{0.1em}
+				\parbox{1.5cm}{\tiny Al menos para la mayoría de la gente}}}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \section{El entorno {\tt verbatim} y su paquete}
 \end{document}

@@ -334,6 +334,9 @@ Las cajas más básicas son \alert{\texttt{mbox}} y \alert{\texttt{fbox}}, cajas
 	\item La caja \texttt{mbox} tiene bordes invisibles.
 	\item La caja \texttt{fbox} tiene bordes visibles.
 \end{itemize}
+\pause[4]\vspace{1em}
+
+Estas cajas soportan solo una línea de texto, por lo tanto, no pueden tener caracteres de salto.
 \end{frame}
 
 \subsubsection{mbox}
@@ -381,10 +384,61 @@ Obteniendo lo siguiente:
 \end{frame}
 
 \subsection{makebox y framebox}
+\begin{frame}{\texttt{makebox} y \texttt{framebox}}{Cajas}
+\alert{\texttt{makebox}} y \alert{\texttt{framebox}} son cajas que funcionan de manera similar a \texttt{mbox} y \texttt{fbox} respectivamente, con excepcion de que a estas les podemos definir anchura y justificación de manera opcional, la altura sigue siendo automática.\pause\\[1em]
+
+\begin{itemize}[<+->]
+	\item La caja \texttt{makebox} tiene bordes invisibles.
+	\item La caja \texttt{framebox} tiene bordes visibles.
+\end{itemize}
+\end{frame}
 
 \subsubsection{makebox}
+\begin{frame}[fragile]{\texttt{mbox}}{Cajas}
+Para la caja \texttt{makebox} se debe definir el ancho y justificación de la caja.\pause\\[1em]
+
+Obteniendo lo siguiente:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\makebox[2cm][c]{Texto}
+Normal
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small\hspace{1em}
+				\makebox[2cm][c]{Texto} Normal }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \subsubsection{framebox}
+\begin{frame}[fragile]{\texttt{mbox}}{Cajas}
+Con la caja \texttt{framebox} se genera también una caja con bordes con su ancho y justificación definida.\pause\\[1em]
+
+Obteniendo lo siguiente:
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\framebox[2cm]
+     [c]{Texto}
+Normal
+\end{lstlisting} }
+		{\color{Ired} Código}
+	\end{column}
+	\vline
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small\hspace{1em}
+				\framebox[2cm][c]{Texto} Normal }}\\
+		\hfill{\color{Ired} Vista}
+	\end{column}
+\end{columns}
+\end{frame}
 
 \subsection{parbox}
 

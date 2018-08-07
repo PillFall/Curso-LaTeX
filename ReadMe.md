@@ -1,99 +1,47 @@
-# Curso de LaTeX [Universidad Nacional de Colombia]
+# Curso Libre de LaTeX [Universidad Nacional de Colombia]
 
-En este repositorio albergan todas las presentaciones para el curso de LaTeX de la Universidad Nacional de Colombia.
+Este es un curso de 10 clases para la introducción al manejo de LaTeX en la Universidad Nacional de Colombia.
 
-Este repositorio está licenciado bajo [**Creative Commons Attribution Share Alike 4.0** ![Imagen Licencia](https://mirrors.creativecommons.org/presskit/buttons/80x15/svg/by-sa.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.es)
+Se intentará siempre mantener una forma muy sencilla de explicar los temas aquí mostrados y dar diversos ejemplos en la carpetas de las presentaciones.
 
-## Clases
 
-1. **Introducción a LaTeX**, durante esta clase se mostrara una breve explicación sobre LaTeX y su historia. Se explicara:
-   * La estructura básica del código.
-   * La colación títulos con `\maketitle`.
-   * La estructura del documento por medio de Capítulos, Partes, Secciones, etc.
-   * La colocación del resumen por medio del entorno `abstract`.
-   * El cambio de la familia, estilo y forma de la fuente.
-   * El cambio del tamaño de la fuente.
-   * La inclusión de caracteres espaciales con los paquetes `fontenc` e `inputenc`.
-   * Rótulos y etiquetas en Español con `babel`.
-   * Separación de párrafos y líneas.
-   * Opciones del documento con la orden `\documentclass`.
+## Para Empezar
 
-2. **Editores y Compiladores**, durante esta clase se mostraran los editores más populares de LaTeX. Se explicara:
-   * Editores:
-	 - TeXstudio.
-	 - TeXmaker.
-	 - LyX.
-	 - Emacs con AUCTeX.
-	 - Kile.
-	 - TeXmacs.
-   * Compiladores:
-	 - LaTeX.
-	 - PDFLaTeX.
-	 - XeLaTeX.
-	 - LuaLaTeX.
+Para poder compilar las presentaciones de este repositorio es necesario tener:
 
-3. **Elementos Básicos de Edición**, durante esta clase se mostraran la mayoría de elementos básicos de edición. Se explicara:
-   * Modos de procesamiento de LaTeX:
-	 - Normal.
-	 - Izquierda-Derecha.
-	 - Matemático.
-   * Listas numeradas, no numeradas y descripciones.
-   * Cajas:
-	 - `mbox` y `fbox`.
-	 - `makebox` y `framebox`.
-	 - `parbox`.
-   * Mini-páginas.
-   * Notas al pie.
-   * Notas al margen.
-   * El entorno `verbatim` y su paquete.
+- **MiKTeX** o **TeX Live** en Windows o Linux, y **MacTeX** o **TeX Live** en MacOS.
+- Instalar, desde el administrador de paquetes, todos los paquetes necesarios para compilar el documento:
+  * Beamer
+  * Fontspec
+  * etc.
 
-4. **LaTeX Online y Colaborativo**, durante esta clase se mostraran algunas paginas Web para trabajar con LaTeX en línea, y colaborar en vivo. Se explicara:
-   * Overleaf.
-   * ShareLaTeX.
-   * Overleaf V2 (Union de Overleaf y ShareLaTeX).
-   * Papeeria.
-   * LaTeX base.
-   * GitHub y git.
 
-5. **LaTeX en móviles**, durante esta clase manejaremos el telefono movil para compilar con LaTeX. Se explicara:
-   * Termux.
-   * Instalación de LaTeX.
-   * instalación de Emacs y AUCTeX.
-   * Instalación de paquetes nuevos.
-   * Actualización.
-   * Compilación.
+### Compilación
 
-6. **Más Herramientas de Edición**, durante esta clase se enseñaran más herramientas de edición. Se explicara:
-   * Referencias Cruzadas.
-   * Texto Cargado.
-   * Contadores.
-   * Creación de comandos y entornos personalizados.
-   * El paquete `showkeys`
+Para compilar estas presentaciones es recomendabme utilizar `XeLaTeX` o `LuaLaTeX` así:
 
-7. **Elementos Flotantes**, durante esta clase se enseñaran el manejo de tablas, gráficas y demás elementos flotantes. Se explicara:
-   * Los entornos `tabular` y `table`
-   * El paquete `graphicx`
-   * El entorno `figure`
-   * El paquete `float`
-   * El comando `caption`
+```
+xelatex <Nombre de la presentación>.tex
+```
+o
+```
+lualatex <Nombre de ma presentación>.tex
+```
 
-8. **LaTeX matemático**, durante esta clase se explicaran la mayoría de temas relacionados con los entornos matemáticos. Se explicara:
-   * Escritura basica de escritura matematica.
-	 - En línea con el texto.
-	 - En su propia línea.
-   * Símbolos matemáticos.
-   * Los paquetes de la *AMS*.
-   * Fuentes matemáticas.
-   * Entornos especiales de los paquetes *AMS*.
+También es posible encontrar versiones pre-compiladas de las presentaciones en la sección de **Releases**.
 
-9. **Gráficas en LaTeX con TikZ**, durante esta clase se explicara la creación de gráficas con LaTeX con el paquete TikZ. Se explicara:
-   * Comandos básicos de dibujo.
-   * Nodos y Coordenadas.
-   * Recortes.
-   * Ciclos.
 
-10. **Referencias Bibliográficas**, durante esta clase se enseñara como incluir referencias bibliográficas. Se explicara:
-	* Creación del archivo `.bib`
-	* Formatos de bibliografías.
-	* Citas.
-	* Creación de la bibliografía.
+### Estructura
+
+Puede encontrar una estructura del manejo de las clases en el archivo [Clases.md](Clases.md).
+
+
+## Licencia
+
+Las presentaciones en este repositorio, y por ende sus códigos fuente están licenciados bajo [**Creative Commons Attribution Share Alike 4.0** ![Imagen Licencia](https://mirrors.creativecommons.org/presskit/buttons/80x15/svg/by-sa.svg)](License.md)
+
+La fuente institucional *Ancízar* sólo puede ser usada por miembros de la comunidad universitaria, **NO ESTA PERMITIDA SU ALTERACIÓN, DISTRIBUCIÓN O USO PARA CUALQUIER FIN**. © 2013 Universidad Nacional de Colombia. César Puerta Céspedes y Viviana Monsalve. Todos los derechos reservados.
+
+Todas las imágenes (fotos e ilustraciones) son propiedad de sus respectivos autores y se reproducen con su consentimiento mediante las licencias correspondientes que autorizan a ello. *NO* está permitido reproducir las imágenes sin obtener la licencia correspondiente de sus titulares.
+
+Respecto a las marcas, nombres comerciales o cualquier otro signo distintivo de terceros que se utilizan en estas presentaciones, son propiedad de sus respectivos titulares.

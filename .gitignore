@@ -19,9 +19,11 @@
 *.blg
 *.run.xml
 *.bcf
+*blx.bib
 
 # Final LaTeX files
 Introducción a LaTeX.pdf
 Editores y Compiladores.pdf
 Elementos Básicos de Edición.pdf
 LaTeX Online y Colaborativo.pdf
+LaTeX en móviles.pdf

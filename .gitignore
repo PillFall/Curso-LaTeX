@@ -17,6 +17,8 @@
 *.vrb
 *.bbl
 *.blg
+*.run.xml
+*.bcf
 
 # Final LaTeX files
 Introducción a LaTeX.pdf

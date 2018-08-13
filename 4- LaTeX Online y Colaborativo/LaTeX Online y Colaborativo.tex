@@ -1,16 +1,17 @@
-\documentclass[12pt,aspectratio=43]{beamer}
+\documentclass[12pt,aspectratio=169]{beamer}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Paquetes de configuración basica del texto   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[spanish,es-nodecimaldot]{babel}
-\usepackage{babelbib}
+\usepackage{biblatex}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{multirow}
 \usepackage{hyperref}
 \usepackage{hyperxmp}
 \usepackage{ifthen}
+\usepackage{csquotes}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                   [listings]                   %
@@ -69,13 +70,35 @@
 \setbeamertemplate{navigation symbols}{}
 
 \setbeamertemplate{itemize items}{\color{Igreen}\raisebox{.45ex}{\rule{.6ex}{.6ex}}}
+\setbeamertemplate{enumerate item}{\color{Igreen}\bfseries\arabic{enumi}.}
+\setbeamertemplate{enumerate subitem}{\color{Igreen}\bfseries\arabic{enumi}.\arabic{enumii}.}
 
 \usefonttheme{professionalfonts}
 \usefonttheme{serif}
+
 \setbeamercolor{frametitle}{fg=Ired,bg=Igreen!50}
 \setbeamercolor{alerted text}{fg=Ired}
-\setbeamertemplate{enumerate item}{\color{Igreen}\bfseries\arabic{enumi}.}
-\setbeamertemplate{enumerate subitem}{\color{Igreen}\bfseries\arabic{enumi}.\arabic{enumii}.}
+
+\setbeamertemplate{bibliography item}{
+	\ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+		or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+		or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+	{\setbeamertemplate{bibliography item}[book]}
+	{\ifentrytype{online}
+		{\setbeamertemplate{bibliography item}[online]}
+		{\setbeamertemplate{bibliography item}[article]}}
+	\usebeamertemplate{bibliography item}}
+
+\defbibenvironment{bibliography}
+	{\list{}
+		{\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+			\setlength{\leftmargin}{\labelwidth}%
+			\setlength{\labelsep}{\biblabelsep}%
+			\addtolength{\leftmargin}{\labelsep}%
+			\setlength{\itemsep}{\bibitemsep}%
+			\setlength{\parsep}{\bibparsep}}}
+	{\endlist}
+	{\item}
 
 \makeatletter
 \newcommand{\ifratio}[2]{
@@ -114,6 +137,7 @@
 	pdfcopyright={Esta obra está bajo una licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional.},
 	pdflicenseurl={https://creativecommons.org/licenses/by-sa/4.0/deed.es}
 }
+\addbibresource{biblio.bib}
 
 \begin{document}
 \begin{frame}[plain]
@@ -251,5 +275,10 @@ Otra forma de colaborar es utilizando un Sistema de Control de Versiones como {\
 Este sistema tiene un solo inconveniente y es que la edición ya no se hace en tiempo real. Por lo tanto, se puede hacer tedioso el hecho de colaborar.\pause\\[1em]
 
 Trabajar con git puede resultar muy útil si las personas con las que colaboramos solo lo podemos hacer en ciertos momentos, y necesitas cosas que se encuentran en tu computador.
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Bibliografía}
+\nocite{*}
+\printbibliography
 \end{frame}
 \end{document}

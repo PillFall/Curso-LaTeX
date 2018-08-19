@@ -243,4 +243,46 @@ Para actualizar los paquetes de {\lmr\LaTeX}.
 \end{frame}
 
 \section{Compilación}
+\newcommand{\XeLaTeX}{\lmr X\hspace{-0.3ex}\raisebox{-0.5ex}{\reflectbox{E}}\hspace{-0.25ex}{\LaTeX}}
+\begin{frame}{Compilación}{}
+Cuando compilas un documento desde la \alert{\bf consola} solo debes de escribir el nombre de tu compilador favorito seguido del archivo \texttt{.tex} de {\lmr\LaTeX}.\pause\\[1em]
+
+De esta forma entonces para compilar estas presentaciones utilizando {\XeLaTeX} será:\\[1em]
+
+\texttt{xelatex "LaTeX en móviles.tex"}\pause\\[1em]
+
+Aunque es bueno compilar el documento más de una vez, para que {\lmr\LaTeX} acomode bien todo en el texto.
+\end{frame}
+
+\begin{frame}[plain]
+\begin{center}
+	\includegraphics[height=0.9\textheight]{Screen_Compile_1}
+\end{center}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{center}
+	\includegraphics[height=0.9\textheight]{Screen_Compile_2}
+\end{center}
+\end{frame}
+
+\begin{frame}{Compilación}{}
+Para compilar con AUC{\TeX} debes oprimir dos veces \texttt{Ctrl} + \texttt{C} y escribir \texttt{LaTeX}, tras lo cual empezara la compilación en segundo plano.\pause\\[1em]
+
+En caso de querer ver el trabajo de compilación puedes oprimir \texttt{Ctrl} + \texttt{C} y \texttt{Ctrl} + \texttt{L}.\pause\\[1em]
+
+Una vez la compilación termine AUC{\TeX} te dira si es necesario compilar de nuevo, recordando que es mejor si el documento se compila más de una vez.
+\end{frame}
+
+\begin{frame}[plain]
+\begin{center}
+	\includegraphics[height=0.9\textheight]{Screen_AUCTeX_Compile_1}
+\end{center}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{center}
+	\includegraphics[height=0.9\textheight]{Screen_AUCTeX_Compile_2}
+\end{center}
+\end{frame}
 \end{document}

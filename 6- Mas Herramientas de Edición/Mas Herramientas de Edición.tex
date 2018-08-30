@@ -154,6 +154,46 @@
 }
 
 \section{Referencias Cruzadas}
+\begin{frame}{Referencias Cruzadas}{}
+Como en la mayoría de editores de texto es necesario el uso de referencias cruzadas para citar una gráfica, sección o cualquier parte del texto.\pause\\[1em]
+
+En {\lmr\LaTeX} esto funciona por medio de etiquetas que se incluyen en el código fuente. De esta forma se vuelve algo muy sencillo aprenderse una etiqueta y no un número.
+\end{frame}
+
+\begin{frame}[fragile]{Referencias Cruzadas}{}
+\begin{itemize}[<+->]
+	\item Para colocar una etiqueta se utiliza el comando \lstinline|\label{<etiqueta>}|
+	\item Para citar el número asociado a una etiqueta se utiliza el comando \lstinline|\ref{<etiqueta>}|
+	\item Para citar la página donde se encuentra una etiqueta se utiliza el comando \lstinline|\pageref{<etiqueta>}|
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Referencias Cruzadas}{}
+Así, por ejemplo:
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\section{Sección a}
+\label{sec:a}
+Texto de la sección...
+
+Podemos ver en la
+seccion \ref{sec:a}
+\end{lstlisting} }
+	\end{column}
+	\vline
+	\hspace{1em}
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				{\large\bfseries 5. Sección A}\\[2.3ex]
+				Texto de la sección...\\[2em]
+				Podemos ver en la sección 5 }}
+	\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
 
 \section{Texto Cargado}
 

@@ -196,6 +196,195 @@ seccion \ref{sec:a}
 \end{frame}
 
 \section{Texto Cargado}
+\begin{frame}{Texto Cargado}{}
+{\lmr\LaTeX} es capaz de elegir la justificación de un texto, para ello, podemos hacer uso de comandos globales, así como de entornos para cambiar la justificación de un texto.\pause\\[1em]
+
+Para hacer este proceso mas facil vamos a utilizar el paquete \alert{\texttt{ragged2e}}.
+\end{frame}
+
+\subsection{Cargado a izquierda}
+\begin{frame}{Cargado a izquierda}{Texto Cargado}
+Lo más normal es cargar un texto a la izquierda, es lo que solemos hacer al escribir en un papel.\pause\\[1em]
+
+Para hacer esto en {\lmr\LaTeX} se utiliza el comando \texttt{\textbackslash raggedright} («Roto a derecha») o el entorno \texttt{flushleft}.
+\end{frame}
+
+\begin{frame}[fragile]{Cargado a izquierda}{Texto Cargado}
+Así, por ejemplo:
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+Este texto está
+justificado como se
+puede ver en el margen
+derecho
+
+\raggedright
+Este texto está cargado
+a izquierda
+\end{lstlisting} }
+	\end{column}
+	\vline
+	\hspace{1em}
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				\parbox{\linewidth}{Este texto está justificado como se puede ver en el margen derecho}\\[2em]
+				Este texto está cargado a izquierda }}
+	\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
+
+\begin{frame}[fragile]{Cargado a izquierda}{Texto Cargado}
+\begin{columns}
+\begin{column}{0.5\linewidth}
+	{\small
+\begin{lstlisting}
+Este texto está
+justificado como se
+puede ver en el margen
+derecho
+
+\begin{flushleft}
+  Este texto está
+  cargado a izquierda
+\end{flushleft}
+\end{lstlisting} }
+\end{column}
+\vline
+\hspace{1em}
+\begin{column}{0.5\linewidth}
+	{\lmr{\small
+			\parbox{\linewidth}{Este texto está justificado como se puede ver en el margen derecho}\\[2em]
+			Este texto está cargado a izquierda }}
+\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
+
+\subsection{Cargado a derecha}
+\begin{frame}{Cargado a derecha}{Texto Cargado}
+Ahora, para cargar un texto a derecha en {\lmr\LaTeX} se utiliza el comando \texttt{\textbackslash raggedleft} («Roto a izquierda») o el entorno \texttt{flushright}.
+\end{frame}
+
+\begin{frame}[fragile]{Cargado a derecha}{Texto Cargado}
+Así, por ejemplo:
+
+\begin{columns}
+\begin{column}{0.5\linewidth}
+	{\small
+\begin{lstlisting}
+Este texto está
+justificado como se
+puede ver en el margen
+derecho
+
+\raggedleft
+Este texto está cargado
+a derecha
+\end{lstlisting} }
+\end{column}
+\vline
+\hspace{1em}
+\begin{column}{0.5\linewidth}
+	{\lmr{\small
+			\parbox{\linewidth}{Este texto está justificado como se puede ver en el margen derecho}\\[2em]
+			\null\hfill Este texto está cargado a\\\vspace*{-3ex}
+			\null\hfill derecha\null }}
+\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
+
+\begin{frame}[fragile]{Cargado a derecha}{Texto Cargado}
+\begin{columns}
+\begin{column}{0.5\linewidth}
+	{\small
+\begin{lstlisting}
+Este texto está
+justificado como se
+puede ver en el margen
+derecho
+
+\begin{flushright}
+  Este texto está cargado
+  a derecha
+\end{flushright}
+\end{lstlisting} }
+\end{column}
+\vline
+\hspace{1em}
+\begin{column}{0.5\linewidth}
+	{\lmr{\small
+			\parbox{\linewidth}{Este texto está justificado como se puede ver en el margen derecho}\\[2em]
+			\null\hfill Este texto está cargado a\\\vspace*{-3ex}
+			\null\hfill derecha\null }}
+\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
+
+\subsection{Texto centrado}
+\begin{frame}{Texto centrado}{Texto Cargado}
+Para centrar un texto no es muy diferente, se utiliza el comando \texttt{\textbackslash centering} o el entorno \texttt{center}.
+\end{frame}
+
+\begin{frame}[fragile]{Texto centrado}{Texto Cargado}
+Así, por ejemplo:
+
+\begin{columns}
+\begin{column}{0.5\linewidth}
+	{\small
+\begin{lstlisting}
+Este texto está
+justificado como se
+puede ver en el margen
+derecho
+
+\centering
+Este texto está
+centrado
+\end{lstlisting} }
+\end{column}
+\vline
+\hspace{1em}
+\begin{column}{0.5\linewidth}
+	{\lmr{\small
+			\parbox{\linewidth}{Este texto está justificado como se puede ver en el margen derecho}\\[2em]
+			\null\hfill Este texto está centrado\hfill\null}}
+\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
+
+\begin{frame}[fragile]{Cargado a izquierda}{Texto Cargado}
+\begin{columns}
+\begin{column}{0.5\linewidth}
+	{\small
+\begin{lstlisting}
+Este texto está
+justificado como se
+puede ver en el margen
+derecho
+
+\begin{center}
+  Este texto está
+  centrado
+\end{center}
+\end{lstlisting} }
+\end{column}
+\vline
+\hspace{1em}
+\begin{column}{0.5\linewidth}
+{\lmr{\small
+		\parbox{\linewidth}{Este texto está justificado como se puede ver en el margen derecho}\\[2em]
+		\null\hfill Este texto está centrado\hfill\null }}
+\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
 
 \section{Contadores}
 

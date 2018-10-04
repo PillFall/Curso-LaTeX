@@ -309,8 +309,8 @@ puede ver en el margen
 derecho
 
 \begin{flushright}
-  Este texto está cargado
-  a derecha
+  Este texto está
+  cargado a derecha
 \end{flushright}
 \end{lstlisting} }
 \end{column}
@@ -387,6 +387,65 @@ derecho
 \end{frame}
 
 \section{Contadores}
+\begin{frame}{Contadores}{}
+Los contadores son uno de los elementos más importantes de {\lmr\LaTeX}, estos controlan el número de la página, sección, el capitulo, etc. de lo que estés trabajando.\pause\\[1em]
+
+Los contadores pueden ser modificados y creados.
+\end{frame}
+
+\begin{frame}{Contadores}{}
+Para acceder a el valor de un contador, se utiliza la orden \texttt{\textbackslash the\textit{contador}}.\pause\\[1em]
+
+Entonces, por ejemplo, para acceder al número de la página utilizamos el comando \texttt{\textbackslash thepage}, dando como resultado \thepage.\pause\\[1em]
+
+Cada uno de los elementos de {\lmr\LaTeX} suele tener un contador asociado con el mismo nombre.
+\end{frame}
+
+\begin{frame}[fragile]{Contadores}{}
+Para la modificación y creación de contadores existen 4 comandos básicos.
+
+\begin{itemize}[<+->]
+	\item \lstinline|\setcounter{<contador>}{<número>}| Con lo que el contador toma el valor del número, que es un entero positivo o negativo.
+	\item \lstinline|\addtocounter{<contador>}{<número>}| Con lo que el contador incrementa en la cantidad indicada por el número.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Contadores}{}
+Para la modificación y creación de contadores existen 4 comandos básicos.
+
+\begin{itemize}[<+->]
+	\item \lstinline|\stepcounter{<contador>}{<número>}| o \lstinline|\refstepcounter{<contador>}{<número>}| Con lo cual el contador incrementa en uno. Con la versión \texttt{ref} es posible usar referencias cruzadas.
+	\item \lstinline|\newcounter{<contador>}[<suborden>]| Con lo cual se crea el contador, y se le asigna, de ser necesario, una subordinación a otro contador.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Contadores}{}
+Los contadores que {\lmr\LaTeX} define por defecto son
+
+\begin{center}
+	\begin{tabular}{llll}
+		part & paragraph & figure & enumi \\
+		chapter & subparagraph & table & enumii \\
+		section & page & footnote & enumiii \\
+		subsection & equation & mpfootnote & enumiv \\
+		subsubsection &  &  &  \\
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Contadores}
+Para cambiar el tipo de numeración que maneja un contador, {\lmr\LaTeX} posee las ordenes
+
+\begin{itemize}
+	\item \lstinline|\arabic{<contador>}|
+	\item \lstinline|\roman{<contador>}|
+	\item \lstinline|\Roman{<contador>}|
+	\item \lstinline|\alph{<contador>}|
+	\item \lstinline|\Alph{<contador>}|
+\end{itemize}\pause
+
+Entonces, para cambiar el tipo de numeración de un contador escribimos en el código por ejemplo \lstinline|\renewcommand{\the<contador>}{\Roman{<contador>}}|
+\end{frame}
 
 \section{Comandos y Entornos Personalizados}
 

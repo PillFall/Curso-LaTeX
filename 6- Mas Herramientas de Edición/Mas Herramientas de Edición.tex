@@ -507,4 +507,49 @@ Con lo cual solo necesitamos utilizar el entorno \texttt{miTabla} para crear una
 \end{frame}
 
 \section{El paquete \texttt{showkeys}}
+\begin{frame}{El paquete \texttt{showkeys}}{}
+Muchas veces nos es muy difícil ubicar o conocer una etiqueta de una referencia cruzada.\pause\\[1em]
+
+Para ello, el paquete \texttt{showkeys} marca en el documento todas las etiquetas con sus nombres y el valor que le fue asignado. Haciendo más fácil esta tarea.
+\end{frame}
+
+\begin{frame}[fragile]{El paquete \texttt{showkeys}}{}
+Por ejemplo:
+
+\begin{columns}
+	\begin{column}{0.5\linewidth}
+		{\small
+\begin{lstlisting}
+\begin{equation}
+F = -k x
+\label{eq:resorte}
+\end{equation}
+
+La ecuación
+(\ref{eq:resorte})
+nos ayuda a entender
+como funcionan los
+resortes.
+\end{lstlisting} }
+	\end{column}
+	\vline
+	\hspace{1em}
+	\begin{column}{0.5\linewidth}
+		{\lmr{\small
+				\hfill$F = -k x$\hfill(1) \\[1em]
+				
+				La ecuación (\tikz[remember picture]{\coordinate (showkey);}1) nos ayuda a entender como funcionan los resortes.}}
+			\newlength{\resorteW}
+			\setlength{\resorteW}{\widthof{\lmtt\footnotesize eq:resorte}}
+			\newlength{\resorteH}
+			\setlength{\resorteH}{\heightof{\lmtt\footnotesize eq:resorte}}
+			\begin{tikzpicture}[remember picture,overlay]
+			\draw (showkey) -- ++(0,2.4ex);
+			\draw (showkey) ++(0,1.2ex) -- ++(\resorteW,0);
+			\draw (showkey) ++(0,1.2ex) ++(\resorteW/2,\resorteH/2) node {\lmtt\footnotesize eq:resorte};
+			\end{tikzpicture}
+	\end{column}
+\end{columns}
+{\color{Ired} Código}\hfill{\color{Ired} Vista}
+\end{frame}
 \end{document}

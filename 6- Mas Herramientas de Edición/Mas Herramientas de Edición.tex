@@ -468,7 +468,43 @@ Para crear un comando personalizado utilizamos las ordenes
 \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]{Comandos Personalizados}{Comandos y Entornos Personalizados}
+Por ejemplo:\\[1em]
+
+\lstinline|$\mathbb{R}^n$| produce $\mathbb{R}^n$ y si utilizamos este comando muchas veces en el documento lo mejor seria crear un nuevo comando que simplifique esto, así:\\[1em]
+
+\begin{lstlisting}
+\newcommand{\R}[1][2]{\mathbb{R}^#1}
+\end{lstlisting}\vspace{1em}
+
+Con lo cual solo necesitamos escribir \lstinline|$\R[2]$| para obtener  $\mathbb{R}^2$
+\end{frame}
+
 \subsection{Entornos Personalizados}
+\begin{frame}[fragile]{Entornos Personalizados}{Comandos y Entornos Personalizados}
+Para crear un entorno personalizado utilizamos las ordenes
+
+\begin{itemize}[<+->]
+	\item \lstinline|\newenvironment{<nombre>}|\\
+	\texttt{[<\# Argumentos>][<Argumento por defecto>]\{<Parte inicial>\}\{Parte final\}}
+	\item \lstinline|\renewenvironment{<nombre>}|\\
+	\texttt{[<\# Argumentos>][<Argumento por defecto>]\{<Parte inicial>\}\{Parte final\}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Entornos Personalizados}{Comandos y Entornos Personalizados}
+Por ejemplo:\\[1em]
+
+\begin{lstlisting}
+\newenvironment{miTabla}[][]{
+  \begin{tabular}{|c|c|c|}
+}{
+  \end{tabular}
+}
+\end{lstlisting}\vspace{1em}
+
+Con lo cual solo necesitamos utilizar el entorno \texttt{miTabla} para crear una tabla con 3 columnas centradas.
+\end{frame}
 
 \section{El paquete \texttt{showkeys}}
 \end{document}

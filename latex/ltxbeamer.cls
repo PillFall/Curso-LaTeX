@@ -505,7 +505,7 @@
     \vfill%
     \begingroup%
         \raggedleft\sffamily%
-        {\bfseries\Huge\inserttitle}\par\vspace{0.2em plus 0.2em minus 0.2em}
+        {\bfseries\Huge\inserttitle}\par\vspace{0.5em plus 0.5em minus 0.5em}
         {\bfseries\Large\insertsubtitle}\par\vspace{1em plus 1em minus 0.5em}
         {\large\insertauthor}\par\vspace{0.5em plus 0.5em minus 0.25em}
         {\insertdate}\par

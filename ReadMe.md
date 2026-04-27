@@ -6,13 +6,11 @@
 
 ## Acerca del Curso
 
-Este curso se divide en tres niveles de maestría, cubriendo un total de 42 sesiones diseñadas para una progresión lógica y sólida:
+Este curso se divide en dos niveles de maestría, con varias sesiones diseñadas para una progresión lógica y sólida:
 
-- **Nivel I: Fundamentos y Estructura:** Alfabetización digital, jerarquía de documentos y tipografía esencial.
+- **Nivel I Principiante: Fundamentos y Estructura:** Alfabetización digital, jerarquía de documentos, tipografía esencial, gestión bibliográfica.
 
-- **Nivel II: Precisión Académica y Gráficos:** Dominio de `amsmath`, gestión bibliográfica y visualización de datos con **PGFPlots**.
-
-- **Nivel III: Programación y Diseño:** Gráficos 3D de alta gama con **Asymptote**, creación de macros y diseño editorial avanzado.
+- **Nivel II Avanzado: Diseño y Programación:** Visualización de datos con **PGFPlots**, gráficos de alta gama con **TikZ** y **Asymptote**, creación de macros y diseño editorial avanzado.
 
 
 
@@ -20,11 +18,9 @@ Este curso se divide en tres niveles de maestría, cubriendo un total de 42 sesi
 
 El material está organizado por carpetas para facilitar la navegación:
 
-- `1.basic`: Presentaciones, ejemplos y ejercicios de las sesiones de fundamentación.
+- `1.beginner`: Presentaciones, ejemplos y ejercicios de las sesiones de fundamentación.
 
-- `2.intermediate`: Material sobre matemáticas avanzadas, bibliografía y gráficas vectoriales.
-
-- `3.advanced`: Contenido sobre Asymptote, Beamer avanzado y automatización.
+- `2.advanced`: Contenido sobre TikZ, Asymptote, Beamer avanzado y automatización.
 
 - `templates`: Modelos listos para usar (Artículos, Tesis, Posters y CVs).
 
@@ -38,9 +34,9 @@ Para sacar el máximo provecho a este código, te recomendamos:
 
 - Una distribución de LaTeX actualizada (TeX Live, MiKTeX o MacTeX).
 
-- Un editor de confianza (Texmaker, TeXstudio, VS Code + LaTeX Workshop) o cuenta de Overleaf.
+- Un editor de confianza (Texmaker, TeXstudio, VS Code + TeXLab) o cuenta en Overleaf.
 
-- Para el Nivel III: Tener instalado **Asymptote** en tu sistema.
+- Para el Nivel II: Tener instalado **Asymptote** en tu sistema.
 
 
 

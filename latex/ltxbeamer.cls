@@ -16,14 +16,14 @@
 
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
-\usetikzlibrary{babel,calc}
-\RequirePackage[shortlabels]{enumitem}
+\usetikzlibrary{babel,calc,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes}
 \RequirePackage{ragged2e}
 \RequirePackage{array}
 \RequirePackage{xcolor}
 \RequirePackage{minted}
 \RequirePackage[per-mode=fraction]{siunitx}
 \RequirePackage{biblatex}
+\RequirePackage{booktabs}
 \RequirePackage{csquotes}
 
 \newcommand{\lmr}{\fontfamily{lmr}\selectfont}
@@ -32,11 +32,21 @@
 
 \usefonttheme{professionalfonts}
 
+\setlength{\parskip}{\bigskipamount}
+
+\usemintedstyle{native}
+
 \setbeamercolor{background canvas}{bg=black}
 \setbeamercolor{normal text}{fg=white}
 \setbeamercolor{titlelike}{fg=white}
 
+\setbeamercolor{description item}{fg=black!40}
+\setbeamercolor{alerted text}{fg=green}
 \setbeamercolor{caption name}{fg=black!20}
+\setbeamercolor{block title}{fg=black!40}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamercolor{block title example}{fg=black!40}
+\setbeamercolor{block title alerted}{fg=black!40}
 
 \setbeamercolor{bibliography entry author}{fg=black!20}
 \setbeamercolor{bibliography entry title}{fg=white}
@@ -504,10 +514,10 @@
     \end{tikzpicture}%
     \vfill%
     \begingroup%
+        \vspace*{\stretch{5}}
         \raggedleft\sffamily%
-        {\bfseries\Huge\inserttitle}\par\vspace{0.5em plus 0.5em minus 0.5em}
-        {\bfseries\Large\insertsubtitle}\par\vspace{1em plus 1em minus 0.5em}
-        {\large\insertauthor}\par\vspace{0.5em plus 0.5em minus 0.25em}
-        {\insertdate}\par
+        \parbox{0.55\linewidth}{\raggedleft\bfseries\Huge\inserttitle}\par
+        \vspace{\stretch{2}}
+        {\bfseries\Large\insertsubtitle}\par
     \endgroup%
 }

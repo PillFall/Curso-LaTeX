@@ -1,0 +1,974 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+
+\title{Introducción a {\lmr\TikZ}}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+
+\newcommand{\TikZ}{Ti\textit{k}Z}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+\section{¿Qué es {\lmr\TikZ}?}
+
+\begin{frame}
+\frametitle{¿Qué es {\lmr\TikZ}?}
+
+\pause
+
+\begin{itemize}[<+->]
+    \item {\lmr\TikZ} es una capa de macros de {\lmr PGF}.
+    \item Nos permite realizar dibujos directamente en {\lmr\LaTeX}.
+    \item {\lmr\TikZ} genera dibujos en vectoriales, que se acomodan perfectamente al texto circundante.
+\end{itemize}
+
+\pause
+\bigskip
+
+\begin{block}{Dato curioso}
+    \lmr
+    \TikZ{} ist \textit{kein} Zeichenprogramm
+
+    \TikZ{} no es un programa de dibujo
+\end{block}
+\end{frame}
+
+
+
+
+
+\section{Fundamentos}
+
+\begin{frame}[fragile]
+\begin{center}
+    \resizebox{0.8\linewidth}{!}{\mintinline{latex}{\usepackage{tikz}}}
+\end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{minted}{latex}
+\begin{tikzpicture}
+    <Dibujo...>
+\end{tikzpicture}
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{minted}{latex}
+\tikz{<Dibujo ...>}
+\end{minted}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sistema de Coordenadas y Unidades}
+
+\begin{itemize}
+\item \textbf{Sistema Cartesiano Estándar}: El punto \texttt{(0,0)} es el origen.
+\item \textbf{Unidades}: Por defecto, la unidad es \texttt{cm}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sistema de Coordenadas y Unidades}
+\framesubtitle{Coordenadas Absolutas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) -- (4,0);
+    \draw (0,0) -- (0,3);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) -- (4,0);
+                \draw (0,0) -- (0,3);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Sistema de Coordenadas y Unidades}
+\framesubtitle{Coordenadas Relativas}
+
+Definen puntos en relación con el punto anterior, ideal para secuencias.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) -- ++(4,0)
+        -- +(0,2) -- ++(-2,0);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) -- ++(4,0) -- +(0,2) -- ++(-2,0);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\pause
+
+\begin{description}
+    \item[+] Ir y volver
+    \item[++] Ir y quedarse
+\end{description}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Sistema de Coordenadas y Unidades}
+\framesubtitle{cycle}
+
+La palabra clave \texttt{cycle} cierra la ruta hasta el punto inicial.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) -- ++(4,0)
+        -- +(0,2) -- cycle;
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) -- ++(4,0) -- +(0,2) -- cycle;
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Sistema de Coordenadas y Unidades}
+\framesubtitle{Unidades}
+
+Podemos usar cualquier dimensión de {\lmr\TeX} para dibujar.
+
+\begin{center}
+\scriptsize
+\begin{tabular}{>{\ttfamily}lll}
+    \toprule
+    Símbolo & Unidad & Definición \\
+    \midrule
+    in & Pulgada & \\
+    cm & Centímetro & 2.54 cm = 1 in \\
+    mm & Milimetro & 10 mm = 1 cm \\
+    pt & Punto & 72.27 pt = 1 in \\
+    pc & Pica & 1 pc = 12 pt \\
+    bp & Punto Grande & 72 bp = 1 in \\
+    dd & Punto Didot & 1157 dd = 1238 pt \\
+    cc & Cicero & 1 cc = 12 dd \\
+    sp & Punto Escalado & 65536 sp = 1 pt \\
+    ex & Equis & El alto de la \texttt{x} en la fuente actual \\
+    em & Eme & El ancho de la \texttt{M} en la fuente actual \\
+    fil & Infinito de Primer Orden & \(\aleph_0\) \\
+    fill & Infinito de Segundo Orden & \(\aleph_1\) \\
+    filll & Infinito de Tercer Orden & \(\aleph_2\) \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sistema de Coordenadas y Unidades}
+\framesubtitle{Unidades}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) -- (0,4ex);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) -- (0,4ex);
+                \node at (1.0ex,0ex) [inner sep=0,anchor=base] {x};
+                \node at (1.3ex,1ex) [inner sep=0,anchor=base] {x};
+                \node at (1.0ex,2ex) [inner sep=0,anchor=base] {x};
+                \node at (1.3ex,3ex) [inner sep=0,anchor=base] {x};
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Sistema de Coordenadas y Unidades}
+\framesubtitle{Coordenadas Polares}
+
+Para TikZ, el primer argumento es el \alert{ángulo} y el segundo el \alert{radio}.
+Por defecto usa grados, pero con el sufijo \texttt{r} usamos radianes.
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) -- (15:20ex);
+    \draw (0,0) -- (1r:4em);
+    \draw (0,0) -- (pi r:1in);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) -- (15:20ex);
+                \draw (0,0) -- (1r:4em);
+                \draw (0,0) -- (pi r:1in);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\section{Primitivas de Dibujo}
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de Dibujo}
+\framesubtitle{Líneas}
+El operador \texttt{--} define una línea recta.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) -- (1,1)
+        -- (2,0) -- (3,1);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) -- (1,1) -- (2,0) -- (3,1);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de Dibujo}
+\framesubtitle{Curvas de Bézier}
+El operador \texttt{..} define una curva de Bézier, junto con sus puntos de control.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0)
+        .. controls
+            (0,2) and (2,2)
+        .. (2,0);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{onlyenv}<1>
+                \begin{tikzpicture}
+                    \draw (0,0) .. controls (0,2) and (2,2) .. (2,0);
+                    \draw (0,0) node {};
+                    \draw (2,0) node {};
+                    \draw (0,2) node [circle] {};
+                    \draw (2,2) node [circle] {};
+                \end{tikzpicture}
+            \end{onlyenv}
+            \begin{onlyenv}<2->
+                \begin{tikzpicture}
+                    \draw (0,0) .. controls (0,2) and (2,2) .. (2,0);
+
+                    \draw[dashed, help lines] (0,0) node [fill] {} -- (0,2) node [fill, circle] {};
+                    \draw[dashed, help lines] (2,0) node [fill] {} -- (2,2) node [fill, circle] {};
+                \end{tikzpicture}
+            \end{onlyenv}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de Dibujo}
+\framesubtitle{Rectángulo}
+El operador \texttt{rectangle} define un rectángulo.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) rectangle (3,1);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) rectangle (3,1);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de Dibujo}
+\framesubtitle{Círculo}
+El operador \texttt{circle} define un círculo, cuyo argumento es el radio.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0) circle (2);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) circle (2);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de Dibujo}
+\framesubtitle{Elipse}
+El operador \texttt{ellipse} define una elipse, cuyo argumentos son los radios.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0)
+        ellipse (2 and 1);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \draw (0,0) ellipse (2 and 1);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de Dibujo}
+\framesubtitle{Arco}
+El operador \texttt{arc} define un arco, cuyo argumentos son el ángulo inicial, el ángulo final y los radios.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw (0,0)
+        arc (10:130:2 and 1);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{onlyenv}<1>
+                \begin{tikzpicture}
+                    \useasboundingbox (0,0) circle (2 and 1);
+                    \draw (10:2 and 1) arc (10:130:2 and 1);
+                \end{tikzpicture}
+            \end{onlyenv}
+            \begin{onlyenv}<2->
+                \begin{tikzpicture}
+                    \useasboundingbox (0,0) circle (2 and 1);
+                    \draw[dashed,help lines] (0,0) circle (2 and 1);
+                    \draw (10:2 and 1) arc (10:130:2 and 1);
+                \end{tikzpicture}
+            \end{onlyenv}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\section{Estilo y Color}
+
+\begin{frame}[fragile]
+\frametitle{Opciones de Estilo y Color}
+
+Las opciones se pasan entre corchetes \mintinline{latex}{\draw [opciones]}
+
+\begin{itemize}
+    \item \textbf{Grosor}:
+    \begin{itemize}
+        \item \texttt{thick}
+        \item \texttt{ultra thick}
+        \item \texttt{thin}
+    \end{itemize}
+    \item \textbf{Punteado}:
+    \begin{itemize}
+        \item \texttt{dashed}
+        \item \texttt{dotted}
+        \item \texttt{loosely dashed}
+    \end{itemize}
+    \item \textbf{Color}:
+    \begin{itemize}
+        \item \texttt{red} \only<2->{--- Rojo -- Blanco \tikz{\node [fill,red] {};}}
+        \item \texttt{blue!50} \only<3->{--- Azul -- 50\% -- Blanco \tikz{\node [fill,blue!50] {};}}
+        \item \texttt{blue!20!green} \only<4->{--- Azul -- 20\% -- Verde -- Blanco \tikz{\node [fill,blue!20!green] {};}}
+        \item \texttt{blue!20!green!50} \only<5->{--- Azul -- 20\% -- Verde -- 50\% -- Blanco \tikz{\node [fill,blue!20!green!50] {};}}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\section{Nodos y Conexiones}
+
+\begin{frame}[fragile]
+\frametitle{Nodos}
+
+Los Nodos se usan para posicionar texto o bloques.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \node {Texto};
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \node {Texto};
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Nodos}
+
+Podemos ubicarlos, y desfasarlos.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \node at (1,2)
+        [below] {Debajo};
+    \draw (1,2) node
+        [above] {Encima};
+    \draw (1,2) node
+        [right] {Derecha};
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \node at (1,2) [below] {Debajo};
+                \draw (1,2) node [above] {Encima};
+                \draw (1,2) node [right] {Derecha};
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Nodos}
+
+Podemos darles un borde o rellenarlos.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \node at (1,4)
+        [draw] {Texto};
+    \draw (1,2) node
+        [fill] {Texto};
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \node at (1,4) [draw] {Texto};
+                \draw (1,2) node [fill, white] {\color{black} Texto};
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Nodos}
+
+Podemos nombrar nodos, y referenciarlos.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \node (first) {1};
+    \node (second)
+        [below of=first] {2};
+    \node (third)
+        [right of=second] {3};
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \node (first) {1};
+                \node (second) [below of=first] {2};
+                \node (third) [right of=second] {3};
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Nodos}
+
+También podemos unirlos, por medio de líneas, u otras primitivas de {\lmr\TikZ}.
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tikzpicture}
+    \node (first) {1};
+    \node (second)
+        [below of=first] {2};
+    \node (third)
+        [right of=second] {3};
+
+    \draw[->] (first.south)
+        -- (second.north);
+    \draw[->] (second.east)
+        -- (third.west);
+\end{tikzpicture}
+            \end{minted}
+        \end{block}
+    \end{column}
+
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{tikzpicture}
+                \node (first) {1};
+                \node (second) [below of=first] {2};
+                \node (third) [right of=second] {3};
+
+                \draw[->] (first.south) -- (second.north);
+                \draw[->] (second.east) -- (third.west);
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\section{Diagramación}
+
+\begin{frame}[fragile]
+\frametitle{Diagramas de Flujo}
+\begin{onlyenv}<1>
+    \begin{minted}{latex}
+\begin{tikzpicture}[draw,node distance=1cm]
+    \node (start) {Inicio};
+    \node (get) [below of=start] {Obtener};
+    \node (check) [below of=get] {¿Válido?};
+    \node (process)
+        [below right of=check,node distance=2cm] {Procesar};
+
+    \draw [->] (start) -- (get);
+    \draw [->] (get) -- (check);
+    \draw [->] (check) -| (process) node [midway,above right] {Sí};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+\begin{onlyenv}<2->
+    \begin{center}
+        \begin{tikzpicture}[draw,node distance=1cm]
+            \node (start) {Inicio};
+            \node (get) [below of=start] {Obtener};
+            \node (check) [below of=get] {¿Válido?};
+            \node (process) [below right of=check,node distance=2cm] {Procesar};
+
+            \draw [->] (start) -- (get);
+            \draw [->] (get) -- (check);
+            \draw [->] (check) -| (process) node [midway,above right] {Sí};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Óptica}
+\begin{onlyenv}<1>
+    \footnotesize
+    \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw [cyan,<->,very thick] (1,-2) -- (1,2);
+    \draw [cyan,>-<,very thick] (-1,-2) -- (-1,2);
+
+    \draw [red, very thick] (-3.5,1) -- (-1,1)
+        -- (1,1.5) -- (3.4,0);
+    \draw [help lines,dashed] (-1,1) -- (1.8,1);
+
+    \draw (1.8,1.5) -- (1.8,0)
+        node [below left] {\(P^\prime\)} -- (1.8,-1.5);
+    \fill (3.4,0) circle (2pt) node [below] {\(F^\prime\)};
+
+    \draw [|<->|] (1.8,-1.7) -- (3.4,-1.7)
+        node [midway,fill] {\(f^\prime\)};
+
+    \draw [<->] (-4,0) -- (4,0) node [right] {Eje óptico};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+\begin{onlyenv}<2->
+    \begin{center}
+        \begin{tikzpicture}
+            \draw [cyan,<->,very thick] (1,-2) -- (1,2);
+            \draw [cyan,>-<,very thick] (-1,-2) -- (-1,2);
+
+            \draw [red, very thick] (-3.5,1) -- (-1,1) -- (1,1.5) -- (3.4,0);
+            \draw [help lines,dashed] (-1,1) -- (1.8,1);
+
+            \draw (1.8,1.5) -- (1.8,0) node [below left] {\(P^\prime\)} -- (1.8,-1.5);
+            \fill (3.4,0) circle (2pt) node [below] {\(F^\prime\)};
+
+            \draw [|<->|] (1.8,-1.7) -- (3.4,-1.7) node [midway,fill=black] {\(f^\prime\)};
+
+            \draw [<->] (-4,0) -- (4,0) node [right] {Eje óptico};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Diagrama de Cuerpo Libre}
+\begin{onlyenv}<1>
+    \footnotesize
+    \begin{minted}{latex}
+\begin{tikzpicture}
+    \draw [rotate=30,thick] (-4,-0.5) -- (4,-0.5);
+    \pattern [rotate=30, pattern=dots] (-4,-0.5)
+        rectangle ++(8,-0.2);
+
+    \draw [->,very thick,green] (0,0) -- (0,-2) node [below] {\(mg\)};
+    \draw [rotate=30,->,very thick,orange] (0,0) -- (1,0)
+        node [right] {\(F_r\)};
+    \draw [rotate=30,->,very thick,red] (0,0) -- (0,1.8)
+        node [above] {\(N\)};
+
+    \filldraw [rotate=30,thick,fill=white] (-0.5,-0.5) rectangle ++(1,1);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+\begin{onlyenv}<2->
+    \begin{center}
+        \begin{tikzpicture}
+            \draw [rotate=30,thick] (-4,-0.5) -- (4,-0.5);
+            \pattern [rotate=30, pattern color=white, pattern=dots] (-4,-0.5) rectangle ++(8,-0.2);
+
+            \draw [->,very thick,green] (0,0) -- (0,-2) node [below] {\(mg\)};
+            \draw [rotate=30,->,very thick,orange] (0,0) -- (1,0) node [right] {\(F_r\)};
+            \draw [rotate=30,->,very thick,red] (0,0) -- (0,1.8) node [above] {\(N\)};
+
+            \filldraw [rotate=30,thick,fill=black] (-0.5,-0.5) rectangle ++(1,1);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Logo}
+
+
+\begin{center}
+    \lmr
+    \resizebox{0.58\linewidth}{!}{
+        \begin{tikzpicture}[
+            star/.pic={
+            \fill
+                (0,-1)
+                -- (0.3,-0.3)
+                -- (1,0)
+                -- (0.3,0.3)
+                -- (0,1)
+                -- (-0.3,0.3)
+                -- (-1,0)
+                -- (-0.3,-0.3)
+                -- cycle;
+            },
+        ]
+            \useasboundingbox (-1.5,-1.5) rectangle (1.5,1.5);
+
+            %% Help lines
+            % \begin{scope}[help lines, opacity=0.1]
+            %     \draw[step=0.1] (-1.45,-1.45) grid (1.45,1.45);
+            %     \draw[thin] (-1.5,0) -- (1.5,0) (0,-1.5) -- (0,1.5);
+            %     \draw circle (1.5);
+            % \end{scope}
+
+            %% Planet
+            \begin{scope}[rotate=30]
+                %% Basic construction
+                % \begin{scope}[help lines]
+                %     \draw (0,0) circle [radius=0.5];
+                %     \draw (0:0.025) circle [radius=0.475];
+                %     \draw (0,0) circle [radius=0.45];
+                %     \draw (0,0) ellipse [x radius=1, y radius=0.25];
+                %     \draw (0,0) ellipse [x radius=0.95, y radius=0.20];
+
+                %     \draw[red]
+                %         (0:0.5) circle (0.5pt)
+                %         arc (0:330:0.5) circle (0.5pt)
+                %         to [out=60, in=5.2] (110:1 and 0.25) circle (0.5pt)
+                %         arc (110:220:1 and 0.25) circle (0.5pt)
+                %         to [out=-16.6, in=210] (-30:.15) circle (0.5pt);
+                % \end{scope}
+
+                \fill
+                    (0:0.5)
+                    arc (0:330:0.5)
+                    to [out=60, in=5.2] (110:1 and 0.25)
+                    arc (110:220:1 and 0.25)
+                    to [out=-16.6, in=210] (-30:.15)
+                    coordinate (tip)
+                    to [out=207, in=-14.1] (220:0.95 and 0.20)
+                    arc (220:110:0.95 and 0.20)
+                    to [out=4.4, in=60] (330:0.45)
+                    arc (330:180:0.45)
+                    arc (180:0:0.475)
+                    -- cycle;
+            \end{scope}
+
+            %% Pen nib
+            \begin{scope}[shift={(tip)}, rotate=-30]
+                \fill
+                    (0.015,0.07)
+                    -- (0.02,0.14)
+                    arc (0:180:0.02)
+                    -- (-0.015,0.07)
+                    -- cycle;
+                \fill
+                    (0.003,0)
+                    to[out=70, in=-30, in looseness=1.5] (0.015,0.06)
+                    -- (-0.015,0.06)
+                    to[out=210, out looseness=1.5, in=110]
+                    (-0.003,0)
+                    -- (-0.003,0.03)
+                    arc (250:-70:{0.003/sin(20)})
+                    -- cycle;
+            \end{scope}
+
+            %% Moons and stars
+            \begin{scope}
+                \fill
+                    (-60:0.5) circle (0.1)
+                    (135:0.5) circle (0.05)
+                    (-0.8,0.2) circle (0.05)
+                    (0.9,0.3) circle (0.05)
+                    (0.2,0.7) circle (0.02)
+                    (-0.2,0.9) circle (0.1)
+                    (0.6,0.8) pic [rounded corners=0.25pt, scale=0.05] {star}
+                    (-1.1,0.6) pic [rounded corners=0.25pt, scale=0.05] {star}
+                    (0.8,-0.3) pic [rounded corners=0.25pt, scale=0.05] {star};
+            \end{scope}
+
+            %% Text
+            \begin{scope}
+                \draw (0,-0.75) node {Mundo \LaTeX{}};
+            \end{scope}
+        \end{tikzpicture}
+    }
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

@@ -16,7 +16,7 @@
 
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
-\usetikzlibrary{babel,calc,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes}
+\usetikzlibrary{babel,calc,decorations.pathmorphing,decorations.pathreplacing,decorations.shapes,patterns}
 \RequirePackage{ragged2e}
 \RequirePackage{array}
 \RequirePackage{xcolor}

@@ -33,10 +33,9 @@
     \item {\lmr\TikZ} genera dibujos en vectoriales, que se acomodan perfectamente al texto circundante.
 \end{itemize}
 
-\pause
 \bigskip
 
-\begin{block}{Dato curioso}
+\begin{block}<+->{Dato curioso}
     \lmr
     \TikZ{} ist \textit{kein} Zeichenprogramm
 
@@ -102,7 +101,7 @@
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) -- (4,0);
                 \draw (0,0) -- (0,3);
             \end{tikzpicture}
@@ -136,7 +135,7 @@ Definen puntos en relación con el punto anterior, ideal para secuencias.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) -- ++(4,0) -- +(0,2) -- ++(-2,0);
             \end{tikzpicture}
         \end{block}
@@ -176,7 +175,7 @@ La palabra clave \texttt{cycle} cierra la ruta hasta el punto inicial.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) -- ++(4,0) -- +(0,2) -- cycle;
             \end{tikzpicture}
         \end{block}
@@ -240,7 +239,7 @@ Podemos usar cualquier dimensión de {\lmr\TeX} para dibujar.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) -- (0,4ex);
                 \node at (1.0ex,0ex) [inner sep=0,anchor=base] {x};
                 \node at (1.3ex,1ex) [inner sep=0,anchor=base] {x};
@@ -257,7 +256,7 @@ Podemos usar cualquier dimensión de {\lmr\TeX} para dibujar.
 \frametitle{Sistema de Coordenadas y Unidades}
 \framesubtitle{Coordenadas Polares}
 
-Para TikZ, el primer argumento es el \alert{ángulo} y el segundo el \alert{radio}.
+Para {\lmr\TikZ}, el primer argumento es el \alert{ángulo} y el segundo el \alert{radio}.
 Por defecto usa grados, pero con el sufijo \texttt{r} usamos radianes.
 
 \pause
@@ -281,7 +280,7 @@ Por defecto usa grados, pero con el sufijo \texttt{r} usamos radianes.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) -- (15:20ex);
                 \draw (0,0) -- (1r:4em);
                 \draw (0,0) -- (pi r:1in);
@@ -318,7 +317,7 @@ El operador \texttt{--} define una línea recta.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) -- (1,1) -- (2,0) -- (3,1);
             \end{tikzpicture}
         \end{block}
@@ -353,20 +352,20 @@ El operador \texttt{..} define una curva de Bézier, junto con sus puntos de con
     \begin{column}{0.45\textwidth}
         \begin{block}{}
             \begin{onlyenv}<1>
-                \begin{tikzpicture}
+                \begin{tikzpicture}[very thick]
                     \draw (0,0) .. controls (0,2) and (2,2) .. (2,0);
-                    \draw (0,0) node {};
-                    \draw (2,0) node {};
-                    \draw (0,2) node [circle] {};
-                    \draw (2,2) node [circle] {};
+                    \draw (0,0) node [inner sep=2pt] {};
+                    \draw (2,0) node [inner sep=2pt] {};
+                    \draw (0,2) node [inner sep=2pt, circle] {};
+                    \draw (2,2) node [inner sep=2pt, circle] {};
                 \end{tikzpicture}
             \end{onlyenv}
             \begin{onlyenv}<2->
-                \begin{tikzpicture}
+                \begin{tikzpicture}[very thick]
                     \draw (0,0) .. controls (0,2) and (2,2) .. (2,0);
 
-                    \draw[dashed, help lines] (0,0) node [fill] {} -- (0,2) node [fill, circle] {};
-                    \draw[dashed, help lines] (2,0) node [fill] {} -- (2,2) node [fill, circle] {};
+                    \draw[dashed, help lines, thick] (0,0) node [inner sep=2pt, fill] {} -- (0,2) node [fill, inner sep=2pt, circle] {};
+                    \draw[dashed, help lines, thick] (2,0) node [inner sep=2pt, fill] {} -- (2,2) node [fill, inner sep=2pt, circle] {};
                 \end{tikzpicture}
             \end{onlyenv}
         \end{block}
@@ -398,7 +397,7 @@ El operador \texttt{rectangle} define un rectángulo.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) rectangle (3,1);
             \end{tikzpicture}
         \end{block}
@@ -430,7 +429,7 @@ El operador \texttt{circle} define un círculo, cuyo argumento es el radio.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) circle (2);
             \end{tikzpicture}
         \end{block}
@@ -463,7 +462,7 @@ El operador \texttt{ellipse} define una elipse, cuyo argumentos son los radios.
 
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[very thick]
                 \draw (0,0) ellipse (2 and 1);
             \end{tikzpicture}
         \end{block}
@@ -497,15 +496,15 @@ El operador \texttt{arc} define un arco, cuyo argumentos son el ángulo inicial,
     \begin{column}{0.45\textwidth}
         \begin{block}{}
             \begin{onlyenv}<1>
-                \begin{tikzpicture}
+                \begin{tikzpicture}[very thick]
                     \useasboundingbox (0,0) circle (2 and 1);
                     \draw (10:2 and 1) arc (10:130:2 and 1);
                 \end{tikzpicture}
             \end{onlyenv}
             \begin{onlyenv}<2->
-                \begin{tikzpicture}
+                \begin{tikzpicture}[very thick]
                     \useasboundingbox (0,0) circle (2 and 1);
-                    \draw[dashed,help lines] (0,0) circle (2 and 1);
+                    \draw[dashed,help lines,thick] (0,0) circle (2 and 1);
                     \draw (10:2 and 1) arc (10:130:2 and 1);
                 \end{tikzpicture}
             \end{onlyenv}
@@ -752,11 +751,13 @@ También podemos unirlos, por medio de líneas, u otras primitivas de {\lmr\TikZ
     \node (get) [below of=start] {Obtener};
     \node (check) [below of=get] {¿Válido?};
     \node (process)
-        [below right of=check,node distance=2cm] {Procesar};
+        [below right of=check,node distance=2cm]
+        {Procesar};
 
     \draw [->] (start) -- (get);
     \draw [->] (get) -- (check);
-    \draw [->] (check) -| (process) node [midway,above right] {Sí};
+    \draw [->] (check) -| (process)
+        node [midway,above right] {Sí};
 \end{tikzpicture}
     \end{minted}
 \end{onlyenv}

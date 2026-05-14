@@ -1,0 +1,1439 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+\title{Estructura}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\sisetup{
+    unit-mode=text,
+    text-font-command=\lmr,
+}
+
+\addbibresource{bibliography.bib}
+
+
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+\section{Estructura}
+
+\begin{frame}[fragile]
+\frametitle{Comandos}
+
+Todos los comandos en {\lmr\LaTeX} se escriben con una barra inversa (\texttt{\textbackslash}) seguidos de caracteres alfabéticos.
+
+\pause
+
+Todos los comandos pueden tener argumentos, los cuales son distinguidos entre opcionales (\mintinline{latex}{[...]}) y obligatorio (\mintinline{latex}{{...}}).
+
+\pause
+
+\begin{exampleblock}{}
+    \begin{minted}{latex}
+        \item
+        \raisebox{<distance>}[<height>][<depth>]{<text>}
+    \end{minted}
+\end{exampleblock}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tipos de Comandos}
+
+Existen varios tipos de comandos definidos en {\lmr\LaTeX}:
+
+\pause
+
+\begin{description}[<+->]
+    \item[Simples] Son comandos sin argumentos que se usan generalmente para producir símbolos o efectos.
+    \item[Básicos] Son comandos con uno o más argumentos.
+    \item[Globales] Son comandos, generalmente simples, que afectan el comportamiento de {\lmr\LaTeX}. Este comportamiento permanece vigente dentro del ámbito en el que se utilice.
+\end{description}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Ámbitos}
+
+En {\lmr\LaTeX} los comandos globales, o declaraciones globales, son válidos durante todo el ámbito en el que sean utilizados.
+
+\pause
+
+Un ámbito se delimita mediante:
+
+\begin{description}
+    \item[Corchetes] \mintinline{latex}{{ <ámbito> }}
+    \item[Grupos] \mintinline{latex}{\begingroup <ámbito> \endgroup}
+    \item[Entornos] \mintinline{latex}{\begin{environment} <ámbito> \end{environment}}
+\end{description}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos}
+
+Los entornos son usados para aplicar efectos de composición específicos a una sección del documento.
+
+\pause
+
+Están delimitados mediante las órdenes \mintinline{latex}{\begin{}} y \mintinline{latex}{\end{}}, cuyo argumento obligatorio es el nombre del entorno
+
+\pause
+
+\begin{exampleblock}{}
+    \begin{minted}{latex}
+\begin{document}
+Hello, \LaTeX!
+\end{document}
+    \end{minted}
+\end{exampleblock}
+\end{frame}
+
+
+
+
+
+\section{Tipografía}
+
+\begin{frame}
+\frametitle{Familias}
+\framesubtitle{Familias, Estilos y Formas}
+
+{\lmr\LaTeX} ofrece una gran variedad de familias tipográficas donde se encuentran:\pause
+
+\begin{itemize}[<+->]
+	\item \alert{\bf\lmr Serif}, \alert{\bf\lmr Romana} o \alert{\bf\lmr Con Serifa}.\\
+	\hspace*{2ex}Es la fuente por defecto de casi todo documento.
+	\item \alert{\bf\lmss Sans Serif}, \alert{\bf\lmss Paloseco} o \alert{\bf\lmss Sin Serifa}.
+	\item \alert{\lmtt Typewriter} o \alert{\lmtt mono-espaciada}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Familias}
+\framesubtitle{Familias, Estilos y Formas}
+
+Para indicar a {\lmr\LaTeX} por cuál de las familias debe cambiar, se pueden utilizar los comandos siguientes:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\multirow{3}{*}{\lmr Serif}
+        & \mintinline{latex}{\textrm{texto}} \\
+		& \mintinline{latex}{{\rm texto}} \\
+		& \mintinline{latex}{{\rmfamily texto}} \\ \hline
+		%
+		\multirow{3}{*}{\lmss Sans Serif}
+        & \mintinline{latex}{\textsf{texto}} \\
+		& \mintinline{latex}{{\sf texto}} \\
+		& \mintinline{latex}{{\sffamily texto}} \\ \hline
+		%
+		\multirow{3}{*}{\lmtt Typewriter}
+        & \mintinline{latex}{\texttt{texto}} \\
+		& \mintinline{latex}{{\tt texto}} \\
+		& \mintinline{latex}{{\ttfamily texto}} \\
+	\end{tabular}
+\end{center}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Estilos y Formas}
+\framesubtitle{Familias, Estilos y Formas}
+
+{\lmr\LaTeX} también ofrece una gran variedad de formas y estilos tipográficos donde se encuentran:
+
+\begin{itemize}[<+->]
+	\item \alert{\lmr Upright} o \alert{\lmr Derecha}.
+	\item \alert{\bf\lmr Bold} o \alert{\bf\lmr Negrita}.
+	\item \alert{\it\lmr Italic} o \alert{\it\lmr Itálica}.
+	\item \alert{\sl\lmr Slanted} o \alert{\sl\lmr Inclinada}.
+	\item \alert{\sc\lmr Small Caps} o \alert{\sc\lmr Versalitas}.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Estilos y Formas}{Familias, Estilos y Formas}
+Para indicar a {\lmr\LaTeX} por cuál de los estilos o las formas debe cambiar, se pueden utilizar los comandos siguientes:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\multirow{2}{*}{\lmr Upright}
+        & \mintinline{latex}{\textup{texto}} \\
+		& \mintinline{latex}{{\upshape texto}} \\ \hline
+		%
+		\multirow{3}{*}{\bf\lmr Bold}
+        & \mintinline{latex}{\textrm{texto}} \\
+		& \mintinline{latex}{{\bf texto}} \\
+		& \mintinline{latex}{{\bfseries texto}} \\ \hline
+		%
+		\multirow{3}{*}{\it\lmr Italic}
+        & \mintinline{latex}{\textit{texto}} \\
+		& \mintinline{latex}{{\it texto}} \\
+		& \mintinline{latex}{{\itshape texto}} \\
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Estilos y Formas}{Familias, Estilos y Formas}
+Para indicar a {\lmr\LaTeX} por cuál de los estilos o las formas debe cambiar, se pueden utilizar los comandos siguientes:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\multirow{3}{*}{\sl\lmr Slanted}
+        & \mintinline{latex}{\textsl{texto}} \\
+		& \mintinline{latex}{{\sl texto}} \\
+		& \mintinline{latex}{{\slshape texto}} \\ \hline
+		%
+		\multirow{3}{*}{\sc\lmr Small Caps}
+        & \mintinline{latex}{\textsc{texto}} \\
+		& \mintinline{latex}{{\sc texto}} \\
+		& \mintinline{latex}{{\scshape texto}} \\
+	\end{tabular}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Énfasis}
+\framesubtitle{Familias, Estilos y Formas}
+
+Se puede aclarar que las combinaciones de familias, estilos y formas son válidas, y en la mayoría de los casos, conmutativas, pero no todas son posibles.\pause
+
+Si necesitamos enfatizar una parte del texto, lo más apropiado es utilizar los comandos \mintinline{latex}{{\em texto}} o \mintinline{latex}{\emph{texto}}, ya que estas dependen de cada familia, estilo o forma. Por lo que en cada caso {\lmr\LaTeX} escogerá la mejor opción.
+\end{frame}
+
+\section{Tamaño de fuente}
+\begin{frame}[fragile]
+\frametitle{Tamaño de la fuente}
+
+En {\lmr\LaTeX} existen varias formas de cambiar el tamaño de la fuente.\pause
+
+Los más básicos son los siguientes comandos:
+\begin{center}
+	\begin{tabular}{cc}
+		\mintinline{latex}{\tiny} & {\tiny\lmr Muestra} \\
+		\mintinline{latex}{\scriptsize} & {\scriptsize\lmr Muestra} \\
+		\mintinline{latex}{\footnotesize} & {\footnotesize\lmr Muestra} \\
+		\mintinline{latex}{\small} & {\small\lmr Muestra} \\
+		\mintinline{latex}{\normalsize} & {\normalsize\lmr Muestra} \\
+	\end{tabular}\vline
+	\begin{tabular}{cc}
+		\mintinline{latex}{\large} & {\large\lmr Muestra} \\
+		\mintinline{latex}{\Large} & {\Large\lmr Muestra} \\
+		\mintinline{latex}{\LARGE} & {\LARGE\lmr Muestra} \\
+		\mintinline{latex}{\huge} & {\huge\lmr Muestra} \\
+		\mintinline{latex}{\Huge} & {\Huge\lmr Muestra} \\
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Tamaño de la fuente}
+Otra forma para cambiar el tamaño de la fuente del documento es mediante las opciones de \mintinline{latex}{\documentclass}.\pause
+
+Estas opciones pueden ser \texttt{10pt}, \texttt{11pt} o \texttt{12pt}, con el significado habitual de todo editor. Estas opciones son aplicadas de manera general al documento.
+\end{frame}
+
+
+
+\section{{\lmr\LaTeX} en español}
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeX} en español}
+Al escribir en un documento, colocar títulos y demás rótulos, estos tienen el formato e idioma inglés.\pause
+
+Para cambiarlo, y utilizar rótulos en español es necesario incluir el paquete \texttt{babel}.\pause
+
+\begin{minted}{latex}
+\usepackage[spanish]{babel}
+\end{minted}
+
+\pause
+
+Para seguir lo dicho por la RAE ASALE en Ortografía de la Lengua Española (2010), utilizaremos la opción \texttt{es-nodecimaldot}.
+
+
+\begin{minted}{latex}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\section{Listas}
+
+\subsection{Listas Desordenadas}
+
+
+\begin{frame}[fragile]
+\frametitle{Listas Desordenadas}
+
+Para crear listas desordenadas, o listas de viñetas, utilizamos el entorno \texttt{itemize}.
+
+\pause
+
+Utilizaremos el comando \mintinline{latex}{\item} para generar nuevos elementos en la lista.
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{itemize}
+    \item Pan
+    \item Jamón
+    \item Queso
+\end{itemize}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{cl}
+                $\bullet$ & Pan \\
+                $\bullet$ & Jamón \\
+                $\bullet$ & Queso \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{Listas Ordenadas}
+
+\begin{frame}[fragile]
+\frametitle{Listas Ordenadas}
+
+Para crear listas ordenadas, o listas numeradas, utilizamos el entorno \texttt{enumarate}.
+
+\pause
+
+Utilizaremos el comando \mintinline{latex}{\item} para generar nuevos elementos en la lista.
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{enumerate}
+    \item Colocar pan
+    \item Añadir jamón
+    \item Rayar queso
+\end{enumerate}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{cl}
+                1. & Colocar pan \\
+                2. & Añadir jamón \\
+                3. & Rayar queso \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{Anidación}
+
+\begin{frame}[fragile]
+\frametitle{Anidación}
+
+Anidar listas es bastante sencillo. Solamente debemos colocar un entorno dentro del otro.
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{itemize}
+    \item Pan
+    \item Jamón
+    \begin{enumerate}
+        \item Pietran
+        \item Vienna
+    \end{enumerate}
+    \item Queso
+\end{itemize}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{cl}
+                $\bullet$ & Pan \\
+                $\bullet$ & Jamón \\
+                & \begin{tabular}{cl}
+                    1. & Pietran \\
+                    2. & Vienna \\
+                \end{tabular} \\
+                $\bullet$ & Queso \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\section{Tablas}
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+
+{\lmr\LaTeX} tiene un entorno muy cómodo para la creación de tablas. \texttt{tabular}.
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}
+    [<posición>]
+    {<formato>}
+    ... & ... & ... \\
+    ... & ... & ... \\
+    ... & ... & ... \\
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \pause
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{ccc}
+                \ldots & \ldots & \ldots \\
+                \ldots & \ldots & \ldots \\
+                \ldots & \ldots & \ldots \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+
+Existe una versión estrella de este entorno que nos permite definir tablas con un ancho fijo predeterminado. \texttt{tabular*}.
+
+\pause
+
+\begin{block}{}
+    \begin{minted}{latex}
+\begin{tabular*}
+    {<ancho>}
+    {<formato>}
+    ... & ... & ... \\
+    ... & ... & ... \\
+    ... & ... & ... \\
+\end{tabular*}
+    \end{minted}
+\end{block}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Tablas}
+
+El argumento \texttt{<formato>} contiene la información sobre el número de columnas y su justificación.
+
+\begin{description}
+    \item[\texttt{l}] left --- Izquierda
+    \item[\texttt{c}] center --- Centrada
+    \item[\texttt{r}] right --- Derecha
+    \item[\texttt{p{<ancho>}}] paragraph --- Columna de ancho fijo predefinido con párrafos
+    \item[\texttt{|}] Línea Vertical
+\end{description}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}{lcr|p{2.3cm}}
+    a & b & c & lorem... \\
+    aa & bb & cc & lorem... \\
+    aaa & bbb & ccc & lorem.. \\
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{lcr|p{2.3cm}}
+                a & b & c & lorem ipsum dolor sit ame \\
+                aa & bb & cc & lorem ipsum dolor sit ame \\
+                aaa & bbb & ccc & lorem ipsum dolo sit amet \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}{lll}
+    \hline
+    a & b & c \\
+    \hline
+    aa & bb & cc \\
+    aaa & bbb & ccc \\
+    \hline
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{lll}
+                \hline
+                a & b & c \\
+                \hline
+                aa & bb & cc \\
+                aaa & bbb & ccc \\
+                \hline
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}{|l||ll|}
+    \hline
+    a & b & c \\
+    \hline
+    \hline
+    aa & bb & cc \\
+    aaa & bbb & ccc \\
+    \hline
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{|l||ll|}
+                \hline
+                a & b & c \\
+                \hline
+                \hline
+                aa & bb & cc \\
+                aaa & bbb & ccc \\
+                \hline
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+
+Todas las tablas en {\lmr\LaTeX} se comportan como \alert{cajas}
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+texto
+\begin{tabular}{|c|}
+    \hline
+    a \\
+    aa \\
+    \hline
+\end{tabular}
+texto
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            texto
+            \begin{tabular}{|c|}
+                \hline
+                a \\
+                aa \\
+                \hline
+            \end{tabular}
+            texto
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+
+Todas las tablas en {\lmr\LaTeX} se comportan como \alert{cajas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+texto
+\begin{tabular}[t]{|c|}
+    \hline
+    a \\
+    aa \\
+    \hline
+\end{tabular}
+texto
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            texto
+            \begin{tabular}[t]{|c|}
+                \hline
+                a \\
+                aa \\
+                \hline
+            \end{tabular}
+            texto
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas}
+
+Todas las tablas en {\lmr\LaTeX} se comportan como \alert{cajas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+texto
+\begin{tabular}[b]{|c|}
+    \hline
+    a \\
+    aa \\
+    \hline
+\end{tabular}
+texto
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            texto
+            \begin{tabular}[b]{|c|}
+                \hline
+                a \\
+                aa \\
+                \hline
+            \end{tabular}
+            texto
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{Celdas Complejas}
+
+\begin{frame}[fragile]
+\frametitle{Celdas Complejas}
+\framesubtitle{\texttt{multicolumn}}
+
+Para combinar celdas horizontalmente usamos el comando \mintinline{latex}{multicolumn}:
+
+\begin{minted}{latex}
+\multicolumn{<columnas>}{<formato>}{<texto>}
+\end{minted}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Celdas Complejas}
+\framesubtitle{\texttt{multicolumn}}
+
+\begin{onlyenv}<1>
+    \begin{minted}{latex}
+\begin{tabular}{lrr}
+    \hline
+    \multicolumn{3}{c}{Número de animales} \\
+    \hline
+    & Macho & Hembra \\
+    León & 1 & 12 \\
+    Tigre & 4 & 10 \\
+    Pingüino & 15 & 15 \\
+    \hline
+\end{tabular}
+    \end{minted}
+\end{onlyenv}
+
+
+\begin{onlyenv}<2->
+    \lmr
+    \begin{tabular}{lrr}
+        \hline
+        \multicolumn{3}{c}{Número de animales} \\
+        \hline
+        & Macho & Hembra \\
+        León & 1 & 12 \\
+        Tigre & 4 & 10 \\
+        Pingüino & 15 & 15 \\
+        \hline
+    \end{tabular}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Celdas Complejas}
+\framesubtitle{\texttt{multicolumn}}
+
+Para combinar celdas verticalmente usamos el comando \mintinline{latex}{multirow} del paquete hómonimo:
+
+\begin{minted}{latex}
+\multirow[<vpos>]{<filas>}{<ancho>}{<text>}
+\end{minted}
+
+\pause
+
+\begin{minted}{latex}
+\usepackage{multirow}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Celdas Complejas}
+\framesubtitle{\texttt{multicolumn}}
+
+\begin{onlyenv}<1>
+    \begin{minted}{latex}
+\begin{tabular}{clrr}
+    \hline
+    \multirow{4}{*}{Número de animales}
+    && Macho & Hembra \\
+    & Leon & 1 & 12 \\
+    & Tigre & 4 & 10 \\
+    & Pingüino & 15 & 15 \\
+    \hline
+\end{tabular}
+    \end{minted}
+\end{onlyenv}
+\begin{onlyenv}<2->
+    \lmr
+        \begin{tabular}{clrr}
+            \hline
+            \multirow{4}{*}{Número de animales}
+            && Macho & Hembra \\
+            & Leon & 1 & 12 \\
+            & Tigre & 4 & 10 \\
+            & Pingüino & 15 & 15 \\
+            \hline
+        \end{tabular}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Tablas}
+
+\begin{alertblock}{IMPORTANTE}
+    El entorno \texttt{tabular} hace que {\lmr\LaTeX} entre en el modo \alert{ID}
+\end{alertblock}
+\end{frame}
+
+
+
+
+
+\section{Cajas}
+
+\begin{frame}
+\frametitle{Cajas}
+
+Una de las herramientas de edición más básicas que existen en {\lmr\LaTeX} son las \alert{cajas}.
+
+\pause
+
+{\lmr\LaTeX} trata las cajas siempre como una sola unidad, como una letra. Por lo que su contenido nunca será dividido.
+
+\pause
+
+\begin{alertblock}{IMPORTANTE}
+    Todas las cajas hacen que {\lmr\LaTeX} entre en el modo \alert{ID}
+\end{alertblock}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Cajas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\mbox{Texto}
+
+\fbox{Texto}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \mbox{Texto}
+
+            \bigskip
+
+            \fbox{Texto}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Cajas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\makebox[2cm]{Texto}
+
+\framebox[2cm]{Texto}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \makebox[2cm]{Texto}
+
+            \bigskip
+
+            \framebox[2cm]{Texto}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Cajas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\makebox[2cm][l]{Texto}
+
+\framebox[2cm][l]{Texto}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \makebox[2cm][l]{Texto}
+
+            \bigskip
+
+            \framebox[2cm][l]{Texto}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Cajas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\makebox[2cm][r]{Texto}
+
+\framebox[2cm][r]{Texto}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \makebox[2cm][r]{Texto}
+
+            \bigskip
+
+            \framebox[2cm][r]{Texto}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Cajas}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\makebox[4cm][s]{Texto texto}
+
+\framebox[4cm][s]{Texto texto}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \hbadness=10000
+            \makebox[4cm][s]{Texto texto}
+
+            \bigskip
+
+            \framebox[4cm][s]{Texto texto}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Dimensiones}
+
+Podemos usar cualquier dimensión de {\lmr\TeX} para definir medidas.
+
+\begin{center}
+\scriptsize
+\begin{tabular}{>{\ttfamily}lll}
+    \toprule
+    Símbolo & Unidad & Definición \\
+    \midrule
+    in & Pulgada & \\
+    cm & Centímetro & 2.54 cm = 1 in \\
+    mm & Milimetro & 10 mm = 1 cm \\
+    pt & Punto & 72.27 pt = 1 in \\
+    pc & Pica & 1 pc = 12 pt \\
+    bp & Punto Grande & 72 bp = 1 in \\
+    dd & Punto Didot & 1157 dd = 1238 pt \\
+    cc & Cicero & 1 cc = 12 dd \\
+    sp & Punto Escalado & 65536 sp = 1 pt \\
+    ex & Equis & El alto de la \texttt{x} en la fuente actual \\
+    em & Eme & El ancho de la \texttt{M} en la fuente actual \\
+    fil & Infinito de Primer Orden & \(\aleph_0\) \\
+    fill & Infinito de Segundo Orden & \(\aleph_1\) \\
+    filll & Infinito de Tercer Orden & \(\aleph_2\) \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Dimensiones}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\framebox[20ex][c]{Texto texto}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tikzpicture}
+                \node [inner sep=0, anchor=west] {\framebox[20ex][c]{Texto texto}};
+
+                \draw (0ex, 1.2em) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex,-0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x}
+                    ++(1ex, 0.3ex) node [inner sep=0, anchor=south, rotate=-90] {x};
+            \end{tikzpicture}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\section{\texttt{booktabs}}
+
+\begin{frame}[fragile]
+\frametitle{Tablas Profesionales con \texttt{booktabs}}
+
+El paquete \texttt{booktabs} mejora significativamente la estética de las tablas.
+
+\pause
+
+Reemplaza \mintinline{latex}{\hline} con comandos con grosor específico
+
+\begin{description}
+    \item[\mintinline{latex}{\toprule}] Línea superior gruesa
+    \item[\mintinline{latex}{\midrule}] Línea intermedia delgada
+    \item[\mintinline{latex}{\bottomrule}] Línea inferior gruesa
+\end{description}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Tablas Profesionales con \texttt{booktabs}}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}{llc}
+    \toprule
+    Partícula &
+    Descubridor &
+    Año \\
+    \midrule
+    Electrón & Thompson & 1987 \\
+    Protón & Rutherford & 1919 \\
+    Neutrón & Chadwick & 1932 \\
+    \bottomrule
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{llc}
+                \toprule
+                    Partícula & Descubridor & Año \\
+                    \midrule
+                    Electrón & Thompson & 1987 \\
+                    Protón & Rutherford & 1919 \\
+                    Neutrón & Chadwick & 1932 \\
+                \bottomrule
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\section{\texttt{siunitx}}
+
+\begin{frame}[fragile]
+\frametitle{Manejo de Unidades y Números con \texttt{siunitx}}
+
+El paquete \texttt{siunitx} garantiza un formato consistente para números y unidades del Sistema Internacional (SI).
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\num{12523754.32}
+
+\unit{\metre\per\second\squared}
+
+\qty{735.43}{\mega\electronvolt}
+
+\qty{28.7 +- 0.5}{\kilo\newton}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \num{12523754.32}
+
+            \bigskip
+
+            \unit{\metre\per\second\squared}
+
+            \bigskip
+
+            \qty{735.43}{\mega\electronvolt}
+
+            \bigskip
+
+            \qty{28.7 +- 0.5}{\kilo\newton}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Manejo de Unidades y Números con \texttt{siunitx}}
+
+El paquete \texttt{siunitx} garantiza un formato consistente para números y unidades del Sistema Internacional (SI).
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\num{12523754.32}
+
+\unit{\metre\per\second\squared}
+
+\qty{735.43}{\mega\electronvolt}
+
+\sisetup{uncertainty-mode=separate}
+
+\qty{28.7 +- 0.5}{\kilo\newton}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \num{12523754.32}
+
+            \bigskip
+
+            \unit{\metre\per\second\squared}
+
+            \bigskip
+
+            \qty{735.43}{\mega\electronvolt}
+
+            \bigskip
+            \sisetup{uncertainty-mode=separate}
+
+            \qty{28.7 +- 0.5}{\kilo\newton}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Manejo de Unidades y Números con \texttt{siunitx}}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}
+    {S[table-format=2.3]}
+    12.345 \\
+    0.1 \\
+    99.99 \\
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{S[table-format=2.3]}
+                12.345 \\
+                0.1 \\
+                99.99 \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Manejo de Unidades y Números con \texttt{siunitx}}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}
+    {S[table-format=2.3(1)]}
+    12.345 +- 0.001 \\
+    0.1 +- 0.1\\
+    99.99 +- 0.01 \\
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{S[table-format=2.3(1)]}
+                12.345 +- 0.001 \\
+                0.1 +- 0.1\\
+                99.99 +- 0.01 \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Manejo de Unidades y Números con \texttt{siunitx}}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \begin{minted}{latex}
+\begin{tabular}
+    {S[table-format=2.3(1),
+    uncertainty-mode=separate]}
+    12.345 +- 0.001\\
+    0.1 +- 0.1 \\
+    99.99 +- 0.01 \\
+\end{tabular}
+            \end{minted}
+        \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+        \centering $\rightarrow$
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \begin{block}{}
+            \lmr
+            \begin{tabular}{S[table-format=2.3(1),uncertainty-mode=separate]}
+                12.345 +- 0.001\\
+                0.1 +- 0.1 \\
+                99.99 +- 0.01 \\
+            \end{tabular}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

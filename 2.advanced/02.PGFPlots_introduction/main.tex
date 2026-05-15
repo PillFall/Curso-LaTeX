@@ -1,0 +1,1328 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+
+\newcommand{\TikZ}{Ti\textit{k}Z}
+\newcommand{\PGFPlots}{\textsc{pgfplots}}
+
+\title{Introducción a {\lmr\textmd{\PGFPlots}}}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+
+
+\section{¿Qué es {\lmr\PGFPlots}?}
+
+\begin{frame}
+\frametitle{¿Qué es {\lmr\PGFPlots}?}
+
+\pause
+
+\begin{itemize}[<+->]
+    \item Es un conjunto de macros de {\lmr PGF/\TikZ} para realizar gráficas.
+    \item Como está basado en {\lmr PGF/\TikZ}, tenemos todas las ventajas de este sistema.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\section{Fundamentos}
+
+\begin{frame}[fragile]
+\begin{center}
+    \fontsize{30}{36}\selectfont
+    \begin{minted}[escapeinside=||]{latex}
+\usepackage{pgfplots}|\pause|
+\pgfplotsset{compat=1.18}
+    \end{minted}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{minted}[escapeinside=||]{latex}
+\begin{tikzpicture}
+    \begin{axis}
+        <|\textit{gráfico}|>
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El comando \mintinline{latex}{\addplot}}
+
+\begin{minted}[escapeinside=||]{latex}
+\addplot [<|\textit{opciones}|>] <|\textit{datos}|> <|\textit{comandos adicionales}|>;
+\end{minted}
+\end{frame}
+
+
+
+
+
+\subsection{El comando \mintinline{latex}{\addplot}}
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot {sin(deg(x))};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot {sin(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot {sin(deg(x))};
+    \addplot {cos(deg(x))};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot {sin(deg(x))};
+                    \addplot {cos(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+El comando \mintinline{latex}{\addplot} sin opciones se comporta de manera distinta al comando con opciones.
+
+\pause
+
+Cuando \mintinline{latex}{\addplot} no tiene opciones, utiliza una lista de parámetros cíclica (\texttt{cycle list}) por defecto para asignar un estilo «diferente» a cada curva de la gráfica.
+
+\pause
+
+Para que se comporte de manera similar, debemos usar el comando \mintinline{latex}{\addplot+}.
+
+Este funciona igual que \mintinline[escapeinside=||]{latex}{\addplot [<|\textit{options}|>] ...}, con la diferencia de que las opciones se añaden a los argumentos que se habrían utilizado para \mintinline{latex}{\addplot ...} (el elemento de la lista predeterminada).
+
+De esta forma, se pueden combinar \texttt{cycle list} y \texttt{\textit{opciones}}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot+ [
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot+ [
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        mark=*,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        mark=*,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        mark=diamond*,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        mark=diamond*,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red!50,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red!50,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+        domain=0:5,
+        samples=3,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        very thick,
+                        domain=0:5,
+                        samples=3,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+        domain=0:5,
+        samples=3,
+        smooth,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \only<2->{\addplot [
+                        help lines,
+                        very thick,
+                        dashed,
+                        domain=0:5,
+                    ] {x^2};}
+                    \addplot [
+                        red,
+                        very thick,
+                        domain=0:5,
+                        samples=3,
+                        smooth,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+        mark=*,
+        only marks,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        very thick,
+                        mark=*,
+                        only marks,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+        dashed,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        very thick,
+                        dashed,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+        domain=0:5,
+    ] expression {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        very thick,
+                        domain=0:5,
+                    ] expression {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        mark=*,
+        very thick,
+    ] coordinates {
+        (0,0)
+        (1,2)
+        (3,-1)
+    };
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        mark=*,
+                        very thick,
+                    ] coordinates {
+                        (0,0)
+                        (1,2)
+                        (3,-1)
+                    };
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+
+Para utilizar \texttt{gnuplot} se debe habilitar \texttt{write18} o \texttt{shell-escape} en {\lmr\LaTeX}.
+
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot [
+        red,
+        very thick,
+    ] gnuplot {x ** 2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot [
+                        red,
+                        very thick,
+                    % Debido a limitaciones técnicas por la manera en que se crearon estas presentaciones, no se puede utilizar gnuplot. Pero el resultado es el mismo.
+                    ] expression {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot+ [
+        very think,
+        const plot,
+    ] coordinates {
+        (0,0.1) (0.1,0.15)
+        (0.2,0.5) (0.3,0.62)
+        (0.4,0.56) (0.5,0.58)
+        (0.6,0.65) (0.7,0.6)
+        (0.8,0.58) (0.9,0.55)
+        (1,0.52)
+    };
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot+ [
+                        very thick,
+                        const plot,
+                    ] coordinates {
+                        (0,0.1) (0.1,0.15)
+                        (0.2,0.5) (0.3,0.62)
+                        (0.4,0.56) (0.5,0.58)
+                        (0.6,0.65) (0.7,0.6)
+                        (0.8,0.58) (0.9,0.55)
+                        (1,0.52)
+                    };
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot+ [
+        very thick,
+        xbar,
+    ] coordinates {
+        (4,0) (1,1) (2,2)
+        (5,3) (6,4) (1,5)
+    };
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot+ [
+                        very thick,
+                        xbar,
+                    ] coordinates {
+                        (4,0) (1,1) (2,2)
+                        (5,3) (6,4) (1,5)
+                    };
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot+ [
+        very thick,
+        ybar,
+    ] coordinates {
+        (0,3) (1,2) (2,4)
+        (3,1) (4,2)
+    };
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot+ [
+                        very thick,
+                        ybar,
+                    ] coordinates {
+                        (0,3) (1,2) (2,4)
+                        (3,1) (4,2)
+                    };
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot+ [
+        very thick,
+    ] {x^2};
+    \addlegendentry{Texto};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    legend style={fill=black,draw=white},
+                ]
+                    \addplot+ [
+                        very thick,
+                    ] {x^2};
+                    \addlegendentry{Texto};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    legend style={
+        legend pos=
+            south west,
+    },
+]
+    \addplot+ [
+        very thick,
+    ] {x^2};
+    \addlegendentry{Texto};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    legend style={
+                        fill=black,
+                        draw=white,
+                        legend pos=south west,
+                    },
+                ]
+                    \addplot+ [
+                        very thick,
+                    ] {x^2};
+                    \addlegendentry{Texto};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    legend style={
+        legend pos=
+            outer north east,
+    },
+]
+    \addplot+ [
+        very thick,
+    ] {x^2};
+    \addlegendentry{Texto};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    legend style={
+                        fill=black,
+                        draw=white,
+                        legend pos=outer north east,
+                    },
+                ]
+                    \addplot+ [
+                        very thick,
+                    ] {x^2};
+                    \addlegendentry{Texto};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Tiempo $t$},
+    ylabel={Distancia $x$},
+]
+    \addplot+ [
+        very thick,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel={Tiempo $t$},
+                    ylabel={Distancia $x$},
+                ]
+                    \addplot+ [
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    xmode=log,
+    ymode=log,
+]
+    \addplot+ [
+        very thick,
+        domain=1:10,
+    ] {x^2};
+    \addplot+ [
+        very thick,
+        domain=1:10,
+    ] {x^3};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xmode=log,
+                    ymode=log,
+                ]
+                    \addplot+ [
+                        very thick,
+                        domain=1:10,
+                    ] {x^2};
+                    \addplot+ [
+                        very thick,
+                        domain=1:10,
+                    ] {x^3};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    minor tick num=3,
+]
+    \addplot+ [
+        very thick,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    minor tick num=3,
+                ]
+                    \addplot+ [
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    grid=major,
+]
+    \addplot+ [
+        very thick,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    grid=major,
+                ]
+                    \addplot+ [
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    minor tick num=3,
+    grid=both,
+]
+    \addplot+ [
+        very thick,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    minor tick num=3,
+                    grid=both,
+                ]
+                    \addplot+ [
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}[
+    axis x line=center,
+    axis y line=right,
+]
+    \addplot+ [
+        very thick,
+        domain=0:5,
+    ] {x^2};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}[
+                    axis x line=middle,
+                    axis y line=right,
+                ]
+                    \addplot+ [
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{tikzpicture}
+\begin{axis}
+    \addplot+ [
+        very thick,
+        domain=0:5,
+    ] {x^2};
+
+    \draw (0,0) -- (3,10)
+        -- (5,-100);
+    \draw (2,10) node [left]
+        {Ejemplo};
+\end{axis}
+\end{tikzpicture}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \resizebox{\linewidth}{!}{
+            \begin{tikzpicture}
+                \begin{axis}
+                    \addplot+ [
+                        very thick,
+                        domain=0:5,
+                    ] {x^2};
+
+                    \draw (0,0) -- (3,10) -- (5,-100);
+                    \draw (2,10) node [left] {Ejemplo};
+                \end{axis}
+            \end{tikzpicture}
+        }
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

@@ -37,9 +37,9 @@ Todos los comandos pueden tener argumentos, los cuales son distinguidos entre op
 \pause
 
 \begin{exampleblock}{}
-    \begin{minted}{latex}
+    \begin{minted}[escapeinside=||]{latex}
         \item
-        \raisebox{<distance>}[<height>][<depth>]{<text>}
+        \raisebox{<|\textit{distance}|>}[<|\textit{height}|>][<|\textit{depth}|>]{<|\textit{text}|>}
     \end{minted}
 \end{exampleblock}
 \end{frame}
@@ -76,9 +76,9 @@ En {\lmr\LaTeX} los comandos globales, o declaraciones globales, son válidos du
 Un ámbito se delimita mediante:
 
 \begin{description}
-    \item[Corchetes] \mintinline{latex}{{ <ámbito> }}
-    \item[Grupos] \mintinline{latex}{\begingroup <ámbito> \endgroup}
-    \item[Entornos] \mintinline{latex}{\begin{environment} <ámbito> \end{environment}}
+    \item[Corchetes] \mintinline[escapeinside=||]{latex}{{ <|\textit{ámbito}|> }}
+    \item[Grupos] \mintinline[escapeinside=||]{latex}{\begingroup <|\textit{ámbito}|> \endgroup}
+    \item[Entornos] \mintinline[escapeinside=||]{latex}{\begin{environment} <|\textit{ámbito}|> \end{environment}}
 \end{description}
 \end{frame}
 
@@ -440,10 +440,10 @@ Anidar listas es bastante sencillo. Solamente debemos colocar un entorno dentro 
 \begin{columns}
     \begin{column}{0.45\textwidth}
         \begin{block}{}
-            \begin{minted}{latex}
+            \begin{minted}[escapeinside=||]{latex}
 \begin{tabular}
-    [<posición>]
-    {<formato>}
+    [<|\textit{posición}|>]
+    {<|\textit{formato}|>}
     ... & ... & ... \\
     ... & ... & ... \\
     ... & ... & ... \\
@@ -480,10 +480,10 @@ Existe una versión estrella de este entorno que nos permite definir tablas con 
 \pause
 
 \begin{block}{}
-    \begin{minted}{latex}
+    \begin{minted}[escapeinside=||]{latex}
 \begin{tabular*}
-    {<ancho>}
-    {<formato>}
+    {<|\textit{ancho}|>}
+    {<|\textit{formato}|>}
     ... & ... & ... \\
     ... & ... & ... \\
     ... & ... & ... \\
@@ -769,8 +769,8 @@ texto
 
 Para combinar celdas horizontalmente usamos el comando \mintinline{latex}{multicolumn}:
 
-\begin{minted}{latex}
-\multicolumn{<columnas>}{<formato>}{<texto>}
+\begin{minted}[escapeinside=||]{latex}
+\multicolumn{<|\textit{columnas}|>}{<|\textit{formato}|>}{<|\textit{texto}|>}
 \end{minted}
 \end{frame}
 
@@ -821,8 +821,8 @@ Para combinar celdas horizontalmente usamos el comando \mintinline{latex}{multic
 
 Para combinar celdas verticalmente usamos el comando \mintinline{latex}{multirow} del paquete hómonimo:
 
-\begin{minted}{latex}
-\multirow[<vpos>]{<filas>}{<ancho>}{<text>}
+\begin{minted}[escapeinside=||]{latex}
+\multirow[<|\textit{vpos}|>]{<|\textit{filas}|>}{<|\textit{ancho}|>}{<|\textit{text}|>}
 \end{minted}
 
 \pause

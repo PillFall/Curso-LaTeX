@@ -37,16 +37,20 @@
 \usemintedstyle{native}
 
 \setbeamercolor{background canvas}{bg=black}
-\setbeamercolor{normal text}{fg=white}
+\setbeamercolor{normal text}{fg=white,bg=black}
 \setbeamercolor{titlelike}{fg=white}
 
 \setbeamercolor{description item}{fg=black!40}
 \setbeamercolor{alerted text}{fg=green}
 \setbeamercolor{caption name}{fg=black!20}
-\setbeamercolor{block title}{fg=black!40}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{color(0pt)=(lower.bg);color(0pt)=(upper.bg)}
+\setbeamercolor{block title}{fg=white,bg=cyan}
 \setbeamerfont{block title}{series=\bfseries}
+\setbeamercolor{block body}{bg=cyan!20!black}
+\setbeamercolor{block title alerted}{bg=red,fg=white}
+\setbeamercolor{block body alerted}{bg=red!20!black}
 \setbeamercolor{block title example}{fg=black!40}
-\setbeamercolor{block title alerted}{fg=black!40}
 
 \setbeamercolor{bibliography entry author}{fg=black!20}
 \setbeamercolor{bibliography entry title}{fg=white}

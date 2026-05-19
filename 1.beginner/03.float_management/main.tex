@@ -1,0 +1,991 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+
+\title{Elementos Flotantes}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\usepackage{verbatim}
+
+\usetikzlibrary{spy}
+
+\addbibresource{bibliography.bib}
+
+
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{El Paquete \texttt{graphicx}}
+
+El estándar de facto para incluir contenido gráfico en documentos {\lmr\LaTeX} es el paquete \texttt{graphicx}.
+
+\bigskip\pause
+
+\begin{columns}
+    \begin{column}{0.2\textwidth}
+        {\Large Raster}
+
+        \begin{itemize}
+            \item JPEG
+            \item PNG
+            \item BMP
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.2\textwidth}
+        {\Large Vector}
+
+        \begin{itemize}
+            \item EPS
+            \item PS
+            \item PDF
+        \end{itemize}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\section{El paquete \texttt{graphicx}}
+
+% Muchos de los ejemplos que verán en esta sección no corresponden con lo que se muestra como su código, esto es porque las imágenes de muestra son muy grandes, y LaTeX las colocará acorde a su densidad o PPP (Pixeles Por Pulgada). La mayoría de imágenes tienen una densidad de 72 PPP (de aquí la definición de `big point` `bp`).
+
+% Por ejemplo, la imagen `assets/beach.jpg` tiene 1200 * 800 px, y una densidad de 72 PPP, que haciendo un cálculo sencillo podemos notar rápidamente que la imagen tiene un tamaño físico de 42 1/3 * 28 2/9 cm, que es muy superior al tamaño de una sola diapositiva de esta presentación (que a una relación de aspecto 16:9 tiene 16 * 9 cm).
+
+\begin{frame}
+\frametitle{El Paquete \texttt{graphicx}}
+\begin{columns}
+    \begin{column}{0.3\textwidth}
+        \centering
+        {\Large Raster}\bigskip
+
+        \begin{tikzpicture}[
+            spy using outlines={
+                rectangle,
+                red,
+                magnification=25,
+                size=2cm,
+                connect spies,
+            },
+        ]
+            \node [inner sep=0] (element) {\includegraphics{assets/A.png}};
+
+            \draw (element.north) ++(0.05,-0.15) coordinate (spy);
+
+            \spy [] on (spy) in node [right of=element,xshift=1cm];
+        \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        \centering
+        {\Large Vector}\bigskip
+
+        \begin{tikzpicture}[
+            spy using outlines={
+                rectangle,
+                red,
+                magnification=25,
+                size=2cm,
+                connect spies,
+            },
+        ]
+            \node [inner sep=0] (element) {\includegraphics{assets/A.pdf}};
+
+            \draw (element.north) ++(0.05,-0.15) coordinate (spy);
+
+            \spy [] on (spy) in node [right of=element,xshift=1cm];
+        \end{tikzpicture}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{minted}[escapeinside=||]{latex}
+\includegraphics[<|\textit{opciones clave=valor}|>]{<|\textit{archivo}|>}
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\includegraphics{assets/beach.jpg}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[width=0.95\textwidth]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\includegraphics{
+    C:/Users/User/Images/beach.jpg
+}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[width=0.95\textwidth]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\begin{alertblock}{IMPORTANTE}
+    Todas las gráficas incluidas por {\lmr\LaTeX} son \alert{cajas}.
+\end{alertblock}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{scale}}
+
+\texttt{scale=\textit{escala}} Escala la imagen proporcionalmente.
+
+\bigskip\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\includegraphics[
+    scale=1,
+]{assets/beach.jpg}
+
+\includegraphics[
+    scale=0.5,
+]{assets/beach.jpg}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[width=0.8\textwidth]{assets/beach.jpg}
+
+        \includegraphics[width=0.4\textwidth]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{width} y \texttt{height}}
+
+\texttt{width=\textit{ancho}} y \texttt{height=\textit{alto}} definen el tamaño de la imagen. Reciben una dimensión de {\lmr\TeX}.
+
+\bigskip\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\includegraphics[
+    width=3cm,
+    height=4cm,
+]{assets/beach.jpg}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[width=3cm,height=4cm]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{width} y \texttt{height}}
+
+Podemos definir solamente una de las dos y la otra será calculada de manera automática.
+
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\includegraphics[
+    width=3cm,
+]{assets/beach.jpg}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[width=3cm]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{width} y \texttt{height}}
+
+{\lmr\LaTeX} posee comandos especiales que nos dan longitudes dependiendo de nuestro contexto.
+
+\bigskip\pause
+
+\begin{center}
+\scriptsize
+\begin{tabular}{>{\ttfamily}ll}
+    \toprule
+    {\sffamily Comando} & Definición \\
+    \midrule
+    \mintinline{latex}{\linewidth} & Ancho de la línea en el entorno actual \\
+    \mintinline{latex}{\textwidth} & Ancho del área de texto en la página \\
+    \mintinline{latex}{\textheight} & Altura del área de texto en la página \\
+    \mintinline{latex}{\paperwidth} & Ancho de la página \\
+    \mintinline{latex}{\paperheight} & Altura de la página \\
+    \mintinline{latex}{\columnwidth} & Ancho de la columna \\
+    \mintinline{latex}{\columnsep} & Separación entre columnas \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{width} y \texttt{height}}
+
+Nosotros podemos definir nuestras propias longitudes o modificar otras ya definidas por {\lmr\LaTeX}.
+
+\bigskip
+
+\begin{minted}[escapeinside=||]{latex}
+\newlength{|\textit{\textbackslash nombre}|}
+\setlength{|\textit{\textbackslash nombre}|}{|\textit{dimensión}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{draft}}
+
+\texttt{draft} cambia la inclusión de la imagen a modo borrador. Muy útil cuando la imagen es muy pesada, y se desea excluir temporalmente de la compilación.
+
+\bigskip\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\includegraphics[
+    draft,
+]{assets/beach.jpg}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[width=0.95\linewidth,draft]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{angle} y \texttt{origin}}
+
+\texttt{angle=\textit{ángulo}} y \texttt{origin=\textit{posición}} definen la rotación de la gráfica incluida.
+
+\bigskip\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\includegraphics[
+    angle=30,
+    origin=c,
+]{assets/beach.jpg}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[width=0.5\linewidth,angle=30,origin=c]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{angle} y \texttt{origin}}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+texto
+\includegraphics[
+    angle=180,
+    origin=c,
+]{assets/beach.jpg}
+texto
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        texto
+        \includegraphics[width=0.5\linewidth,angle=180,origin=c]{assets/beach.jpg}
+        texto
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{angle} y \texttt{origin}}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+texto
+\includegraphics[
+    angle=180,
+    origin=t,
+]{assets/beach.jpg}
+texto
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        texto
+        \includegraphics[width=0.5\linewidth,angle=180,origin=t]{assets/beach.jpg}
+        texto
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones de inclusión de gráficas}
+\framesubtitle{\texttt{angle} y \texttt{origin}}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+texto
+\includegraphics[
+    angle=180,
+    origin=b,
+]{assets/beach.jpg}
+texto
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        texto
+        \includegraphics[width=0.5\linewidth,angle=180,origin=b]{assets/beach.jpg}
+        texto
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\section{Entornos Flotantes}
+
+\begin{frame}[fragile]
+\frametitle{¿Qué son los Entornos Flotantes?}
+
+Son bloques de contenido que {\lmr\LaTeX} decide dónde colocar mejor para optimizar el diseño de la página.
+
+\bigskip\pause
+
+\begin{itemize}[<+->]
+    \item Asignan un número secuencial (e.g., Figura 1, Tabla 2).
+    \item Permiten añadir una leyenda con \mintinline{latex}{\caption}.
+    \item Permiten etiquetar el entorno usando \mintinline{latex}{\label} para hacer referencias cruzadas.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Especificadores de Posicionamiento}
+
+Los entornos flotantes toman un argumento opcional que sugiere la ubicación
+
+\begin{center}
+    \scriptsize
+    \begin{tabular}{>{\ttfamily}lll}
+        \toprule
+        {\sffamily Comando} & Significado & Acción \\
+        \midrule
+        h & here & Ubicar en donde se utiliza el entorno. \\
+        t & top & Colocarlo en la parte \textbf{superior} de una página. \\
+        b & bottom & Colocarlo en la parte \textbf{inferior} de una página. \\
+        p & page & Colocarlo en una \textbf{página separada} de flotantes. \\
+        ! & override & Ignora la mayoría de los parámetros internos de {\lmr\LaTeX}. \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+\pause
+
+Por defecto {\lmr\LaTeX} utiliza el especificador \texttt{tbp}.
+\end{frame}
+
+
+
+
+\begin{frame}
+\begin{alertblock}{IMPORTANTE}
+    El especificador de ubicación es solamente una \textbf{sugerencia} que hacemos a {\lmr\LaTeX}.
+
+    \bigskip
+
+    {\lmr\LaTeX} internamente utilizará diversos parámetros para acomodarse a esa sugerencia, pero si no encuentra como ubicar el contenido del entorno dentro de esos parámetros, la ignorará.
+\end{alertblock}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Referencias Cruzadas}
+
+Para añadir numeración y leyenda a los elementos flotantes utilizaremos el comando \mintinline{latex}{\caption}.
+
+\pause
+
+\begin{minted}[escapeinside=||]{latex}
+\caption[|\textit{short title}|]{|\textit{title}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Referencias Cruzadas}
+
+Para etiquetar la numeración que asigno {\lmr\LaTeX} al entorno flotante, utilizaremos \mintinline{latex}{\label} dentro o después del comando \mintinline{latex}{\caption}
+
+\bigskip\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\caption{Cuerpo A \label{flt:b1}}
+
+\caption{Cuerpo B}
+\label{flt:b2}
+
+\ref{flt:b1} \ref{flt:b2}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \begingroup
+        \centering
+        Flotante 1: Cuerpo A\par
+        \endgroup
+
+        \begingroup
+        \centering
+        Flotante 2: Cuerpo B\par
+        \endgroup
+
+        1 2
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Entornos Flotantes}
+
+Los dos entornos flotantes que incluye {\lmr\LaTeX} por defecto son:
+
+\begin{description}
+    \item[\texttt{figure}] Para figuras, gráficas o demás elementos visuales.
+    \item[\texttt{table}] Para tablas.
+\end{description}
+
+\pause
+
+Cada uno de estos entornos incluye una versión estrellada que coloca sus contenidos a lo ancho de toda la página en caso de que estemos creando un documento a dos columnas.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos Flotantes}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{figure}[htb]
+    \includegraphics[
+        width=0.5\linewidth,
+    ]{assets/beach.jpg}
+    \caption{Una hermosa playa}
+    \label{fig:playa}
+\end{figure}
+        \end{minted}
+    \end{column}
+    \pause
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[
+            width=0.5\linewidth,
+        ]{assets/beach.jpg}
+
+        \begingroup
+        \centering
+        Figura 1: Una hermosa playa\par
+        \endgroup
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Alineación}
+
+Para realizar la alineación del texto, {\lmr\LaTeX} ofrece diversas opciones para este fin.
+
+\pause\bigskip
+
+\begin{columns}
+    \begin{column}{0.3\textwidth}
+        {\Large Izquierda}\bigskip
+
+        \begin{itemize}
+            \item \mintinline{latex}{\raggedright}
+            \item \texttt{flushleft}
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        {\Large Centro}\bigskip
+
+        \begin{itemize}
+            \item \mintinline{latex}{\centering}
+            \item \texttt{center}
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        {\Large Derecha}\bigskip
+
+        \begin{itemize}
+            \item \mintinline{latex}{\raggedleft}
+            \item \texttt{flushright}
+        \end{itemize}
+    \end{column}
+\end{columns}
+
+\pause\bigskip
+
+\begin{block}{Entorno Caprichoso}
+    El entorno \texttt{center} añade espacio extra encima y debajo de su contenido.
+\end{block}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos Flotantes}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{figure}[htb]
+    \includegraphics[
+        width=0.5\linewidth,
+    ]{assets/beach.jpg}
+    \caption{Una hermosa playa}
+    \label{fig:playa}
+\end{figure}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \includegraphics[
+            width=0.5\linewidth,
+        ]{assets/beach.jpg}
+
+        \medskip
+        \begingroup
+        \centering
+        Figura 1: Una hermosa playa\par
+        \endgroup
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos Flotantes}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[
+        width=0.5\linewidth,
+    ]{assets/beach.jpg}
+    \caption{Una hermosa playa}
+    \label{fig:playa}
+\end{figure}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \centering
+        \includegraphics[
+            width=0.5\linewidth,
+        ]{assets/beach.jpg}
+
+        \medskip
+        \begingroup
+        \centering
+        Figura 1: Una hermosa playa\par
+        \endgroup
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos Flotantes}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{table}[htb]
+    \begin{tabular}{ccc}
+        \toprule
+        Given Name & Surname \\
+        \midrule
+        Biggus & Dickus \\
+        Monty & Python \\
+        \bottomrule
+    \end{tabular}
+    \caption{Listado de usuarios}
+    \label{tab:usuarios}
+\end{figure}
+        \end{minted}
+    \end{column}
+    \pause
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \begin{tabular}{cc}
+            \toprule
+            Given Name & Surname \\
+            \midrule
+            Biggus & Dickus \\
+            Monty & Python \\
+            \bottomrule
+        \end{tabular}
+
+        \medskip
+        \begingroup
+        \centering
+        Cuadro 1: Listado de usuarios\par
+        \endgroup
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos Flotantes}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{table}[htb]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        Given Name & Surname \\
+        \midrule
+        Biggus & Dickus \\
+        Monty & Python \\
+        \bottomrule
+    \end{tabular}
+    \caption{Listado de usuarios}
+    \label{tab:usuarios}
+\end{figure}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \centering
+        \begin{tabular}{cc}
+            \toprule
+            Given Name & Surname \\
+            \midrule
+            Biggus & Dickus \\
+            Monty & Python \\
+            \bottomrule
+        \end{tabular}
+
+        \medskip
+        \begingroup
+        \centering
+        Cuadro 1: Listado de usuarios\par
+        \endgroup
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+
+\section{El paquete \texttt{float}}
+
+\begin{frame}
+\frametitle{El Paquete \texttt{float}}
+
+Al momento de trabajar con elementos flotantes, puede llegar a ser frustrante el no tener control sobre la posición de los entornos flotantes.
+
+\pause
+
+El paquete \texttt{float} nos ofrece una herramienta para lidiar con esto.
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{El especificador \texttt{H}}
+
+El especificador de posición \texttt{H} que incluye el paquete \texttt{float} fuerza a {\lmr\LaTeX} a ubicar el entorno flotante en la posición en la que es utilizado en el documento.
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El especificador \texttt{H}}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        Given Name & Surname \\
+        \midrule
+        Biggus & Dickus \\
+        Monty & Python \\
+        \bottomrule
+    \end{tabular}
+    \caption{Listado de usuarios}
+    \label{tab:usuarios}
+\end{figure}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \centering
+        \begin{tabular}{cc}
+            \toprule
+            Given Name & Surname \\
+            \midrule
+            Biggus & Dickus \\
+            Monty & Python \\
+            \bottomrule
+        \end{tabular}
+
+        \medskip
+        \begingroup
+        \centering
+        Cuadro 1: Listado de usuarios\par
+        \endgroup
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos Flotantes}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[
+        width=0.5\linewidth,
+    ]{assets/beach.jpg}
+    \caption{Una hermosa playa}
+    \label{fig:playa}
+\end{figure}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \centering
+        \includegraphics[
+            width=0.5\linewidth,
+        ]{assets/beach.jpg}
+
+        \medskip
+        \begingroup
+        \centering
+        Figura 1: Una hermosa playa\par
+        \endgroup
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos Flotantes}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\begin{figure}[htb]
+    \centering
+    \caption{Una hermosa playa}
+    \includegraphics[
+        width=0.5\linewidth,
+    ]{assets/beach.jpg}
+    \label{fig:playa}
+\end{figure}
+        \end{minted}
+    \end{column}
+    {\color{gray}\vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \centering
+        \begingroup
+        \centering
+        Figura 1: Una hermosa playa\par
+        \endgroup
+
+        \medskip
+        \includegraphics[
+            width=0.5\linewidth,
+        ]{assets/beach.jpg}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

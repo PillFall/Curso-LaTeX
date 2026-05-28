@@ -1,0 +1,1045 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+
+\title{Depuración}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+
+
+
+
+
+\section{Anatomía de un archivo \texttt{.tex}}
+\begin{frame}[fragile]
+\frametitle{Anatomía de un archivo \texttt{.tex}}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+
+        \begin{minted}[escapeinside=||]{latex}
+\documentclass[12pt]{article}|\tikz[remember picture,baseline]{\node [anchor=base] (class) {\strut};}|
+
+\title{Mi Primer Documento}|\tikz[remember picture,baseline]{\node [anchor=base] (preamble begin) {\strut};}|
+\author{Joar Buitrago}
+\date{}|\tikz[remember picture,baseline]{\node [anchor=base] (preamble end) {\strut};}|
+
+\begin{document}
+\maketitle|\tikz[remember picture,baseline]{\node [anchor=base] (body begin) {\strut};}|
+¡Hola, Mundo {\LaTeX}!|\tikz[remember picture,baseline]{\node [anchor=base] (body end) {\strut};}|
+\end{document}
+        \end{minted}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+        \tikz[remember picture,baseline]{\coordinate [anchor=base] (braces);}
+    \end{column}
+\end{columns}
+
+\pause
+
+\begin{tikzpicture}[remember picture, overlay]
+    \draw [thick,decoration=brace,decorate] (class.north -| braces) -- (class.south -| braces) node [midway, right] {Clase};
+    \draw [thick,decoration=brace,decorate] (preamble begin.north -| braces) -- (preamble end.south -| braces) node [midway, right] {Preámbulo};
+    \draw [thick,decoration=brace,decorate] (body begin.north -| braces) -- (body end.south -| braces) node [midway, right] {Cuerpo};
+\end{tikzpicture}
+\end{frame}
+
+
+
+
+
+\section{Compilación}
+\begin{frame}
+\frametitle{Compilación}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{scope}[local bounding box=tex]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{TEX}};
+    \end{scope}
+
+    \pause
+
+    \begin{scope}[local bounding box=compiler, shift={([xshift=2cm]tex)}]
+        \node {\lmr\LaTeX};
+    \end{scope}
+
+    \draw [->, very thick] (tex) -- (compiler);
+
+    \pause
+
+    \begin{scope}[local bounding box=pdf, shift={([xshift=2cm]compiler)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{PDF}};
+    \end{scope}
+
+    \draw [->, very thick] (compiler) -- (pdf);
+
+    \pause
+
+    \begin{scope}[local bounding box=log, shift={([yshift=2cm]pdf)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{LOG}};
+    \end{scope}
+
+    \begin{scope}[local bounding box=aux, shift={([yshift=-2cm]pdf)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{AUX}};
+    \end{scope}
+
+    \draw [->, very thick] (compiler) -- (log);
+    \draw [->, very thick] (compiler) -- (aux);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Compilación}
+
+\begin{minted}[escapeinside=\%\%]{text}
+%\textit{latex}% %\textit{documento}%.tex
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Compilación}
+
+\begin{minted}[escapeinside=\%\%]{text}
+lualatex %\textit{documento}%.tex
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Compilación}
+
+\begin{minted}[escapeinside=\%\%]{text}
+lualatex --interaction=batchmode %\textit{documento}%.tex
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Compilación}
+
+\begin{minted}{text}
+user@linux$ ls
+  documento.aux documento.log documento.pdf documento.tex
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Compilación}
+
+\begin{minted}{text}
+user@windows> dir
+ El volumen de la unidad C no tiene etiqueta.
+ El número de serie del volumen es: XXXX-XXXX
+
+ Directorio de C:\Users\User\Documents\Documento
+
+20/08/1803  16:04    <DIR>          .
+20/08/1803  16:04    <DIR>          ..
+20/08/1803  16:04                32 documento.aux
+20/08/1803  16:04             3 434 documento.log
+20/08/1803  16:04            31 119 documento.pdf
+20/08/1803  16:02               168 documento.tex
+               4 archivos         34 753 bytes
+               2 dirs  255 485 902 848 bytes libres
+\end{minted}
+\end{frame}
+
+
+
+
+
+\section{El archivo \texttt{.log}}
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\tiny
+\begin{minted}{text}
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.5.24)  24 MAY 2026 16:04
+ restricted system commands enabled.
+**documento.tex
+(./documento.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-04-28>
+Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
+Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended collection.
+luaotfload | conf : Root cache directory is "/var/lib/overleaf/tmp/texmf-var/luatex-cache/generic/names".
+luaotfload | init : Loading fontloader "fontloader-2023-12-28.lua" from kpse-resolved path "/usr/local/texlive/2026/texmf-dist/tex/luatex/luaotfload/fontloader-2023-12-28.lua".
+Lua-only attribute luaotfload@noligature = 1
+luaotfload | init : Context OpenType loader version 3.134
+Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' in `hpack_filter'.
+Inserting `luaotfload.glyph_stream' in `glyph_stream_provider'.
+Inserting `luaotfload.define_font' in `define_font'.
+Lua-only attribute luaotfload_color_attribute = 2
+luaotfload | conf : Root cache directory is "/var/lib/overleaf/tmp/texmf-var/luatex-cache/generic/names".
+Inserting `luaotfload.harf.strip_prefix' in `find_opentype_file'.
+Inserting `luaotfload.harf.strip_prefix' in `find_truetype_file'.
+Removing  `luaotfload.glyph_stream' from `glyph_stream_provider'.
+Inserting `luaotfload.harf.glyphstream' in `glyph_stream_provider'.
+Inserting `luaotfload.harf.finalize_vlist' in `post_linebreak_filter'.
+Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.
+Inserting `luaotfload.cleanup_files' in `wrapup_run'.
+Inserting `luaotfload.harf.finalize_unicode' in `finish_pdffile'.
+Inserting `luaotfload.glyphinfo' in `glyph_info'.
+Lua-only attribute luaotfload.letterspace_done = 3
+Inserting `luaotfload.aux.set_sscale_dimens' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_font_index' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.patch_cambria_domh' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.fixup_fontdata' in `luaotfload.patch_font_unsafe'.
+Inserting `luaotfload.aux.set_capheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'.
+Inserting `tracingstacklevels' in `input_level_string'.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+luaotfload | db : Font names database loaded from /var/lib/overleaf/tmp/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz)
+\c@part=\count274
+\c@section=\count275
+\c@subsection=\count276
+\c@subsubsection=\count277
+\c@paragraph=\count278
+\c@subparagraph=\count279
+\c@figure=\count280
+\c@table=\count281
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen149
+)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
+File: l3backend-luatex.def 2026-02-18 L3 backend support: PDF output (LuaTeX)
+\l__color_backend_stack_int=\count282
+Inserting `l3color' in `luaotfload.parse_color'.) (./documento.aux)
+\openout1 = documento.aux
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 9.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 9.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 9.
+[1
+
+{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./documento.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-04-28>
+ ***********
+)
+
+Here is how much of LuaTeX's memory you used:
+ 462 strings out of 475892
+ 100000,460012 words of node,token memory allocated
+ 406 words of node memory still in use:
+   3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 4 attribute, 48 glue_spec,
+ 4 attribute_list, 1 write nodes
+   avail lists: 2:80,3:14,4:4,5:28,6:6,7:218,8:1,9:46,10:3,11:4
+ 23177 multiletter control sequences out of 65536+600000
+ 37 fonts using 2300247 bytes
+ 35i,6n,37p,124b,207s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf>
+</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf>
+</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf>
+Output written on documento.pdf (1 page, 8615 bytes).
+
+PDF statistics: 29 PDF objects out of 1000 (max. 8388607)
+ 16 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 1048576)
+ 1 words of extra memory for PDF output out of 10000 (max. 100000000)
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.5.24)  24 MAY 2026 16:04
+\end{minted}
+
+\bigskip
+
+Indica qué compilador se está usando, su versión, la versión de los archivos de formato de {\lmr\LaTeX} y la fecha y hora en la que se ejecutó el programa.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+ restricted system commands enabled.
+\end{minted}
+
+\bigskip
+
+Indica el nivel de acceso que tienen las ejecuciones de programas externos.\pause
+
+Se modifica con la opción \texttt{-shell-escape} o \texttt{-enable-write18}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+**documento.tex
+\end{minted}
+
+\bigskip
+
+Indica el archivo que se va a procesar.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+(./documento.tex
+\end{minted}
+
+\bigskip
+
+Indica que {\lmr\LaTeX} encontró el archivo e inició el procesamiento del mismo.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+LaTeX2e <2025-11-01>
+\end{minted}
+
+\bigskip
+
+Indica cuándo fue compilado el motor de {\lmr\LaTeXe}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+L3 programming layer <2026-04-28>
+\end{minted}
+
+\bigskip
+
+Indica cuándo fue compilado el motor de {\lmr\LaTeX\kern.15em3}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
+Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended collection.
+\end{minted}
+
+\bigskip
+
+Como estamos usando {\lmr Lua\LaTeX}, indica que se han cargado distintos módulos de {\lmr Lua\LaTeX}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+luaotfload | conf : Root cache directory is "/var/lib/overleaf/tmp/texmf-var/luatex-cache/generic/names".
+
+.
+.
+.
+
+Inserting `tracingstacklevels' in `input_level_string'.
+\end{minted}
+
+\bigskip
+
+Como estamos usando {\lmr Lua\LaTeX}, muestran los registros de la carga de los módulos de {\lmr Lua\LaTeX}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
+\end{minted}
+
+\bigskip
+
+Indica que {\lmr\LaTeX} encontró e inició el procesamiento de la clase.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+\end{minted}
+
+\bigskip
+
+Informa cuál es la clase que se va a procesar, la fecha de su última modificación, su versión y descripción.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/size12.clo
+\end{minted}
+
+\bigskip
+
+Indica que {\lmr\LaTeX} encontró e inició el procesamiento de una opción de la clase.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+\end{minted}
+
+\bigskip
+
+Informa cuál es la opción que se va a procesar, la fecha de su última modificación, su versión y descripción.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines,breakanywhere]{text}
+luaotfload | db : Font names database loaded from /var/lib/overleaf/tmp/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz)
+\end{minted}
+
+\bigskip
+
+Como estamos usando {\lmr Lua\LaTeX}, muestran los registros de la carga de los módulos de {\lmr Lua\LaTeX}. Además del fin del procesamiento del archivo de opciones.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+\c@part=\count274
+\c@section=\count275
+...
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen149
+)
+\end{minted}
+
+\bigskip
+
+Indica configuraciones iniciales de la clase y el final del procesamiento de la misma.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines,breakanywhere]{text}
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
+\end{minted}
+
+\bigskip
+
+Como estamos usando {\lmr Lua\LaTeX}, indica que {\lmr\LaTeX} encontró e inicio el procesamiento de las definiciones del motor de {\lmr\LaTeX\kern.15em3} para {\lmr Lua\LaTeX}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+File: l3backend-luatex.def 2026-02-18 L3 backend support: PDF output (LuaTeX)
+\l__color_backend_stack_int=\count282
+Inserting `l3color' in `luaotfload.parse_color'.)
+\end{minted}
+
+\bigskip
+
+Como estamos usando {\lmr Lua\LaTeX}, muestran registros de la carga de las definiciones del motor de {\lmr\LaTeX\kern.15em3} para {\lmr Lua\LaTeX}. Además del fin del procesamiento del mismo.
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+(./documento.aux)
+\openout1 = documento.aux
+\end{minted}
+
+\bigskip
+
+Indica lectura del archivo auxiliar y marcado del archivo auxiliar.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+...
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 9.
+\end{minted}
+
+\bigskip
+
+Indica la búsqueda y carga de las fuentes de {\lmr\LaTeX}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines,breakanywhere]{text}
+[1
+
+{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+\end{minted}
+
+\bigskip
+
+Indica la escritura de la primera página del documento. Con configuración adicional cargada durante el procesamiento de la misma.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+(./documento.aux)
+\end{minted}
+
+\bigskip
+
+Indica lectura del archivo auxiliar.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+
+\begin{minted}[breaklines]{text}
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-04-28>
+ ***********
+)
+\end{minted}
+
+\bigskip
+
+Indica que se terminó de procesar el documento y se descargaron los motores de memoria.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+{
+\scriptsize
+\begin{minted}[breaklines]{text}
+Here is how much of LuaTeX's memory you used:
+ 462 strings out of 475892
+ 100000,460012 words of node,token memory allocated
+ 406 words of node memory still in use:
+   3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 4 attribute, 48 glue_spec,
+ 4 attribute_list, 1 write nodes
+   avail lists: 2:80,3:14,4:4,5:28,6:6,7:218,8:1,9:46,10:3,11:4
+ 23177 multiletter control sequences out of 65536+600000
+ 37 fonts using 2300247 bytes
+ 35i,6n,37p,124b,207s stack positions out of 10000i,1000n,20000p,200000b,200000s
+\end{minted}
+}
+
+\bigskip
+
+Indica cuántos recursos estaban disponibles y cuántos se utilizaron durante el procesamiento del documento.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+\begin{minted}[breaklines,breakanywhere]{text}
+</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman8-regular.otf>
+</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf>
+</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf>
+\end{minted}
+
+\bigskip
+
+Indica cuáles son las fuentes que se incrustaron en el archivo PDF.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+\begin{minted}[breaklines]{text}
+Output written on documento.pdf (1 page, 8615 bytes).
+\end{minted}
+
+\bigskip
+
+Indica cuál es el nombre del archivo de salida, su tamaño en páginas y en disco.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El archivo \texttt{.log}}
+{
+\scriptsize
+\begin{minted}[breaklines]{text}
+PDF statistics: 29 PDF objects out of 1000 (max. 8388607)
+ 16 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 1048576)
+ 1 words of extra memory for PDF output out of 10000 (max. 100000000)
+\end{minted}
+}
+
+\bigskip
+
+Indica estadísticas de generación del PDF.
+\end{frame}
+
+
+
+
+
+\section{Errores comunes}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Comando desconocido}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitl
+¡Hola, Mundo {\LaTeX}!
+\end{minted}
+
+\bigskip\pause
+
+\begin{minted}[breaklines]{text}
+! Undefined control sequence.
+l.8 \maketitl
+
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+\end{minted}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Comando desconocido}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitle
+¡Hola, Mundo {\LaTeXq}!
+\end{minted}
+
+\bigskip\pause
+
+\begin{minted}[breaklines]{text}
+! Undefined control sequence.
+l.9 ¡Hola, Mundo {\LaTeXq
+                        }!
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Referencia desconocida}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitle
+¡Hola, Mundo {\LaTeX}!
+
+\ref{eq:missing}
+\end{minted}
+
+\bigskip\pause
+
+\begin{minted}[breaklines]{text}
+LaTeX Warning: Reference `eq:missing' on page 1 undefined on input line 11.
+\end{minted}
+\pause
+\begin{minted}[breaklines]{text}
+LaTeX Warning: There were undefined references.
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Fin de un grupo prematuramente}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitle
+¡Hola, Mundo {\LaTeX!
+\end{minted}
+
+\bigskip\pause
+
+\begin{minted}[breaklines]{text}
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 9 ({)
+### bottom level
+\end{minted}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entorno sin fin}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitle
+
+\begin{center}
+    ¡Hola, Mundo {\LaTeX}!
+\end{minted}
+
+\bigskip\pause
+
+{
+\scriptsize
+\begin{minted}[breaklines]{text}
+! LaTeX Error: \begin{center} on input line 10 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+
+l.12 \end{document}
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+\end{minted}
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entorno desconocido}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitle
+
+\begin{nonexist}
+    ¡Hola, Mundo {\LaTeX}!
+\end{nonexists}
+\end{minted}
+
+\bigskip\pause
+
+\begin{onlyenv}<1-2>
+    \scriptsize
+    \begin{minted}[breaklines]{text}
+! LaTeX Error: Environment nonexist undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+
+l.10 \begin{nonexist}
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<3>
+    \scriptsize
+    \begin{minted}[breaklines]{text}
+! LaTeX Error: \begin{document} ended by \end{nonexist}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+
+l.12 \end{nonexist}
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+    \end{minted}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Grupo no cerrado}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitle
+
+\begin{center}
+    ¡Hola, Mundo {\LaTeX!
+\end{center}
+\end{minted}
+
+\bigskip\pause
+
+{
+\scriptsize
+\begin{minted}[breaklines]{text}
+! Missing } inserted.
+<inserted text>
+}
+l.12 \end{center}
+
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+\end{minted}
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Advertecia por Espacio}
+
+\begin{minted}[linenos,firstnumber=8]{latex}
+\maketitle
+¡Hola, Mundo {\LaTeX}! \\
+
+Este es un nuevo párrafo.
+\end{minted}
+
+\bigskip\pause
+
+\begin{minted}[breaklines]{text}
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Estrategias para depuración}
+
+\begin{itemize}[<+->]
+    \item Leer los registros (\texttt{.log}).
+    \item Comentar código (\texttt{\%}). Comentar las líneas con el problema, analizar si cambia el comportamiento de {\lmr\LaTeX}.
+    \item Generar un MWE. Intentar aislar el problema, ver si es posible reproducirlo en un documento más pequeño.
+    \item Preguntar. Si no pueden solucionarlo por ustedes mismos, en la web, o ahora con los LLM les pueden ayudar.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

@@ -1,0 +1,934 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+
+\newcommand{\TikZ}{Ti\textit{k}Z}
+\newcommand{\PGFPlots}{\textsc{pgfplots}}
+
+\title{{\lmr\textmd{\PGFPlots}}}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\sisetup{
+    uncertainty-mode=separate,
+}
+
+
+\addbibresource{bibliography.bib}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{
+    compat=1.18,
+    legend style={
+        fill=black,
+        draw=white,
+    },
+}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Archivos fuente}
+
+Vamos a trabajar con tres archivos
+
+\begin{description}
+    \item[battery.tsv] Archivo de datos en formato Tab Separated Values.
+    \item[battery.csv] Archivo de datos en formato Comma Separated Values.
+    \item[battery-title.csv] Archivo de datos en formato Comma Separated Values con títulos de tabla.
+\end{description}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Archivos fuente}
+
+Los tres archivos contienen la misma información
+
+\begin{center}
+    \tiny
+    \begin{tabular}{S[table-format=2.1(1)] S[table-format=0.6(1)]}
+        \toprule
+        {Resistencia [\unit{\ohm}]} & {Potencia [\unit{\watt}]} \\
+        \midrule
+        50.0 +- 2.5 & 0.036990 +- 0.007039 \\
+        47.0 +- 2.5 & 0.036990 +- 0.007039 \\
+        44.0 +- 2.5 & 0.038360 +- 0.007053 \\
+        41.0 +- 2.5 & 0.042160 +- 0.007050 \\
+        38.0 +- 2.5 & 0.043200 +- 0.007018 \\
+        35.0 +- 2.5 & 0.046900 +- 0.007021 \\
+        32.0 +- 2.5 & 0.048840 +- 0.006963 \\
+        29.0 +- 2.5 & 0.052000 +- 0.006929 \\
+        26.0 +- 2.5 & 0.055470 +- 0.006947 \\
+        23.0 +- 2.5 & 0.060000 +- 0.006882 \\
+        20.0 +- 2.5 & 0.064660 +- 0.006879 \\
+        17.0 +- 2.5 & 0.069600 +- 0.006936 \\
+        14.0 +- 2.5 & 0.079800 +- 0.007080 \\
+        11.0 +- 2.5 & 0.086920 +- 0.007232 \\
+         8.0 +- 2.5 & 0.085500 +- 0.007262 \\
+         5.0 +- 2.5 & 0.101260 +- 0.008415 \\
+         2.0 +- 2.5 & 0.091000 +- 0.011203 \\
+         0.0 +- 2.5 & 0.081480 +- 0.011828 \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table {resources/battery.tsv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table {resources/battery.tsv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table {resources/battery.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\ttfamily
+Package pgfplots Error: Sorry, the requested column number '1' in table 'resources/battery.csv' does not exist!? Please verify you used the correct index 0
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{minted}[escapeinside=||]{latex}
+\usepackage{pgfplots}
+
+\pgfplotstableset{|\textit{opciones}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\pgfplotstableset{
+    col sep=comma,
+}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table {resources/battery.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<3->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table {resources/battery.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Separadores de columna}
+
+{\lmr\PGFPlots} posee configuración para diversos tipos de columnas.
+
+\bigskip
+
+\begingroup
+\centering
+\begin{tabular}{>{\ttfamily}l>{\ttfamily}lp{0.5\linewidth}}
+    \toprule
+    {\sffamily Opción} & {\sffamily RegExp} & Notas \\
+    \midrule
+    space & \textbackslash s+ & Al menos un espacio en blanco \\
+    tab & \textbackslash t & \\
+    comma & , & \\
+    semicolon & ; & \\
+    colon & : & \\
+    braces & \{.*?\} & Todo el contenido dentro de las llaves se considera parte de la celda, incluyendo los saltos de línea \\
+    \& & \& & \\
+    ampersand & \& & \\
+    \bottomrule
+\end{tabular}\par
+\endgroup
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table [
+            col sep=comma,
+        ] {resources/battery.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table [
+            col sep=comma,
+        ] {resources/battery.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [...] table [
+            x index=1,
+            y index=0,
+        ] {resources/battery.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        ylabel={Resistencia [\unit{\ohm}]},
+        xlabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table [
+            x index=1,
+            y index=0,
+        ] {resources/battery.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [...] table [
+            x index=1,
+            y=Resistance,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        ylabel={Resistencia [\unit{\ohm}]},
+        xlabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table [
+            x index=1,
+            y=Resistance,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [...] table [
+            x index=1,
+            y expr=123,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        ylabel={Resistencia [\unit{\ohm}]},
+        xlabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table [
+            x index=1,
+            y expr=123,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Expresiones}
+
+Las expresiones para columnas de {\lmr\PGFPlots} pueden incluir los siguientes comandos.
+
+\bigskip
+
+\begingroup
+\centering
+\begin{tabular}{lp{0.5\linewidth}}
+    \toprule
+    Comando & Detalle \\
+    \midrule
+    \mintinline[escapeinside=||]{latex}{\thisrow{|\textit{columna}|}} & Valor de la fila actual en la columna con el nombre \texttt{\textit{columna}} \\
+    \mintinline[escapeinside=||]{latex}{\thisrowno{|\textit{columna}|}} & Valor de la fila actual en la columna con el índice \texttt{\textit{columna}} \\
+    \mintinline{latex}{\coordindex} & Índice de la fila actual \\
+    \mintinline{latex}{\lineno} & Línea actual del documento \\
+    \bottomrule
+\end{tabular}\par
+\endgroup
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [...] table [
+            y expr=100 * \thisrowno{1},
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table [
+            y expr=100 * \thisrowno{1},
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [...] table [
+            y expr=sqrt(\thisrow{Power}),
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+        ] table [
+            y expr=sqrt(\thisrow{Power}),
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [
+            ...,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error=ResistanceError,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error=ResistanceError,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [
+            ...,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error expr=10,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error expr=10,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [
+            ...,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error index=2,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error index=2,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [
+            ...,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error minus expr=1,
+            x error plus=ResistanceError,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+            error bars,
+            x dir=both,
+            x explicit,
+            y dir=both,
+            y explicit,
+        ] table [
+            x error minus expr=1,
+            x error plus=ResistanceError,
+            y error=PowerError,
+        ] {resources/battery-title.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Regresiones Lineales}
+
+Con {\lmr\PGFPlots} podemos realizar regresiones lineales de una manera relativamente sencilla. Con el paquete \texttt{pgfplotstable}
+
+\bigskip
+
+\begin{minted}[escapeinside=||]{latex}
+create col/linear regression={|\textit{config}|}
+\end{minted}
+
+\bigskip\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{alertblock}{IMPORTANTE}
+            Aunque esto es posible hacerlo, es recomendable no utilizar estos comandos sobre un conjunto de datos muy grande o podremos acabar con la máxima memoria reservada de {\lmr\LaTeX}
+        \end{alertblock}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{axis}[...]
+        \addplot [
+            ...,
+            forget plot,
+        ] table {resources/battery-title.csv};
+        \addplot [...] table [
+            y={create col/linear regression={x=Resistance, y=Power}}
+        ] {resources/battery-title.csv};
+        \addlegendentry{%
+            $\pgfmathprintnumber{\pgfplotstableregressiona} \cdot x
+            \pgfmathprintnumber[print sign]{\pgfplotstableregressionb}$}
+
+    \end{axis}
+\end{tikzpicture}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\pgfplotstableset{
+    col sep=comma,
+}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.75\paperwidth,
+        height=0.75\paperheight,
+        xlabel={Resistencia [\unit{\ohm}]},
+        ylabel={Potencia [\unit{\watt}]},
+    ]
+        \addplot [
+            red,
+            mark=*,
+            only marks,
+            forget plot,
+        ] table {resources/battery-title.csv};
+
+        \addplot [
+            red,
+        ] table [
+            y={create col/linear regression={x=Resistance, y=Power}}
+        ] {resources/battery-title.csv};
+        \addlegendentry{%
+            $\pgfmathprintnumber{\pgfplotstableregressiona} \cdot x
+            \pgfmathprintnumber[print sign]{\pgfplotstableregressionb}$}
+    \end{axis}
+\end{tikzpicture}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Inclusión de tablas}
+
+Con \texttt{pgfplotstable} podemos incluir tablas externas, de igual manera que con las gráficas y darles formato directamente en {\lmr\LaTeX}.
+
+\bigskip\pause
+
+\begin{minted}[escapeinside=||]{latex}
+\pgfplotstabletypeset[|\textit{opciones}|]{|\textit{archivo}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\pgfplotstabletypeset{resources/battery.tsv}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\tiny
+\pgfplotstabletypeset{resources/battery.tsv}
+\par
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\begin{onlyenv}<1>
+\begin{minted}{latex}
+\pgfplotstableset{
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule}
+}
+\pgfplotstabletypeset{resources/battery.tsv}
+\end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2->
+\centering
+\tiny
+\pgfplotstableset{
+    every head row/.style={before row=\toprule,after row=\midrule},
+    every last row/.style={after row=\bottomrule}
+}
+\pgfplotstabletypeset{resources/battery.tsv}
+\par
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

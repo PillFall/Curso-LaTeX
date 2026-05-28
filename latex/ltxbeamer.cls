@@ -21,10 +21,14 @@
 \RequirePackage{array}
 \RequirePackage{xcolor}
 \RequirePackage{minted}
-\RequirePackage[per-mode=fraction]{siunitx}
+\RequirePackage{siunitx}
 \RequirePackage{biblatex}
 \RequirePackage{booktabs}
 \RequirePackage{csquotes}
+
+\sisetup{
+    per-mode=fraction,
+}
 
 \newcommand{\lmr}{\fontfamily{lmr}\selectfont}
 \newcommand{\lmss}{\fontfamily{lmss}\selectfont}

@@ -1,0 +1,1324 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{tikz-feynman}
+\usepackage{circuitikz}
+\usepackage{asymptote}
+
+\tikzfeynmanset{
+    compat=1.1.0,
+}
+
+\ctikzset{
+    open poles fill=black,
+}
+
+\sisetup{
+    unit-mode=text,
+    text-font-command=\lmr,
+}
+
+\title{Diagramación}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+\newcommand{\TikZ}{Ti\textit{k}Z}
+
+
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+
+
+
+
+\section{Diagramas de Feynman}
+
+\begin{frame}
+\frametitle{Diagramas de Feynman}
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{feynman}[horizontal=a to b]
+        	  \diagram {
+                i1 -- [fermion] a -- [fermion] i2,
+            	  a -- [photon] b,
+            	  f1 -- [fermion] b -- [fermion] f2,
+            };
+        \end{feynman}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Diagramas de Feynman}
+
+\begin{minted}{latex}
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+\tikzfeynmanset{
+    compat=1.1.0,
+}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Diagramas de Feynman}
+
+\begin{onlyenv}<1>
+    \begin{minted}{latex}
+\begin{tikzpicture}
+    \begin{feynman}[horizontal=a to b]
+        \diagram {
+            i1 -- [fermion] a -- [fermion] i2,
+            a -- [photon] b,
+            f1 -- [fermion] b -- [fermion] f2,
+        };
+    \end{feynman}
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{feynman}[horizontal=a to b]
+                \diagram {
+                    i1 -- [fermion] a -- [fermion] i2,
+                    a -- [photon] b,
+                    f1 -- [fermion] b -- [fermion] f2,
+                };
+            \end{feynman}
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Diagramas de Feynman}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \begin{feynman}[large, vertical=e to f]
+        \diagram {
+            a -- [fermion] b -- [photon, momentum=\(k\)] c -- [fermion] d,
+            b -- [fermion, momentum'=\(p_{1}\)] e -- [fermion, momentum'=\(p_{2}\)] c,
+            e -- [gluon]  f,
+            h -- [fermion] f -- [fermion] i;
+        };
+    \end{feynman}
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{feynman}[large, vertical=e to f]
+                \diagram {
+                	  a -- [fermion] b -- [photon, momentum=\(k\)] c -- [fermion] d,
+                	  b -- [fermion, momentum'=\(p_{1}\)] e -- [fermion, momentum'=\(p_{2}\)] c,
+                	  e -- [gluon]  f,
+                	  h -- [fermion] f -- [fermion] i;
+                };
+            \end{feynman}
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Diagramas de Feynman}
+
+\begin{onlyenv}<1>
+    \tiny
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a1) {\(\overline b\)};
+        \vertex[right=1cm of a1] (a2);
+        \vertex[right=1cm of a2] (a3);
+        \vertex[right=1cm of a3] (a4) {\(b\)};
+        \vertex[right=1cm of a4] (a5);
+        \vertex[right=2cm of a5] (a6) {\(u\)};
+
+        \vertex[below=2em of a1] (b1) {\(d\)};
+        \vertex[right=1cm of b1] (b2);
+        \vertex[right=1cm of b2] (b3);
+        \vertex[right=1cm of b3] (b4) {\(\overline d\)};
+        \vertex[below=2em of a6] (b5) {\(\overline d\)};
+
+        \vertex[above=of a6] (c1) {\(\overline u\)};
+        \vertex[above=2em of c1] (c3) {\(d\)};
+        \vertex at ($(c1)!0.5!(c3) - (1cm, 0)$) (c2);
+            \end{minted}
+        \end{column}
+
+
+        \begin{column}{0.5\textwidth}
+            \begin{minted}[breaklines]{latex}
+        \diagram* {
+            {[edges=fermion]
+                (b1) -- (b2) -- (a2) -- (a1),
+                (b5) -- (b4) -- (b3) -- (a3) -- (a4) -- (a5) -- (a6),
+            },
+            (a2) -- [boson, edge label=\(W\)] (a3),
+            (b2) -- [boson, edge label'=\(W\)] (b3),
+
+            (c1) -- [fermion, out=180, in=-45] (c2) -- [fermion, out=45, in=180] (c3),
+            (a5) -- [boson, bend left, edge label=\(W^{-}\)] (c2),
+        };
+
+        \draw [decoration={brace}, decorate] (b1.south west) -- (a1.north west) node [pos=0.5, left] {\(B^{0}\)};
+        \draw [decoration={brace}, decorate] (c3.north east) -- (c1.south east) node [pos=0.5, right] {\(\pi^{-}\)};
+        \draw [decoration={brace}, decorate] (a6.north east) -- (b5.south east) node [pos=0.5, right] {\(\pi^{+}\)};
+    \end{feynman}
+\end{tikzpicture}
+            \end{minted}
+        \end{column}
+    \end{columns}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{feynman}
+                \vertex (a1) {\(\overline b\)};
+        	    \vertex[right=1cm of a1] (a2);
+        	    \vertex[right=1cm of a2] (a3);
+        	    \vertex[right=1cm of a3] (a4) {\(b\)};
+        	    \vertex[right=1cm of a4] (a5);
+        	    \vertex[right=2cm of a5] (a6) {\(u\)};
+
+        	    \vertex[below=2em of a1] (b1) {\(d\)};
+        	    \vertex[right=1cm of b1] (b2);
+        	    \vertex[right=1cm of b2] (b3);
+        	    \vertex[right=1cm of b3] (b4) {\(\overline d\)};
+        	    \vertex[below=2em of a6] (b5) {\(\overline d\)};
+
+        	    \vertex[above=of a6] (c1) {\(\overline u\)};
+        	    \vertex[above=2em of c1] (c3) {\(d\)};
+        	    \vertex at ($(c1)!0.5!(c3) - (1cm, 0)$) (c2);
+
+        	    \diagram* {
+        	      {[edges=fermion]
+        	        (b1) -- (b2) -- (a2) -- (a1),
+        	        (b5) -- (b4) -- (b3) -- (a3) -- (a4) -- (a5) -- (a6),
+        	      },
+        	      (a2) -- [boson, edge label=\(W\)] (a3),
+        	      (b2) -- [boson, edge label'=\(W\)] (b3),
+
+        	      (c1) -- [fermion, out=180, in=-45] (c2) -- [fermion, out=45, in=180] (c3),
+        	      (a5) -- [boson, bend left, edge label=\(W^{-}\)] (c2),
+        	    };
+
+        	    \draw [decoration={brace}, decorate] (b1.south west) -- (a1.north west)
+        	          node [pos=0.5, left] {\(B^{0}\)};
+        	    \draw [decoration={brace}, decorate] (c3.north east) -- (c1.south east)
+        	          node [pos=0.5, right] {\(\pi^{-}\)};
+        	    \draw [decoration={brace}, decorate] (a6.north east) -- (b5.south east)
+        	          node [pos=0.5, right] {\(\pi^{+}\)};
+            \end{feynman}
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\section{Circuitos}
+
+\begin{frame}
+\frametitle{Circuitos}
+
+\begin{center}
+    \lmr
+    \begin{tikzpicture}
+        \draw (0,0) to[R=\qty{2}{\ohm}, i=?, v<=\qty{84}{\volt}] (2,0) -- (2,2) to[V<=\qty{84}{\volt}] (0,2) -- (0,0);
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{minted}{latex}
+    \usepackage{circuitikz}
+\end{minted}
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.75\textwidth}
+        \begin{block}{INFORMACIÓN}
+            En la documentación de {\lmr Circui\TikZ} utilizan el entorno \texttt{circuitikz}.
+
+            Este entorno es un alias del entorno \texttt{tikzpicture}.
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \draw (0,0) to[isource] (0,3) -- (2,3) to[R] (2,0) -- (0,0);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{feynman}[large, vertical=e to f]
+                \draw (0,0) to[isource] (0,3) -- (2,3) to[R] (2,0) -- (0,0);
+            \end{feynman}
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[american]
+    \draw (0,0) to[isource, l=$I_0$] (0,3) -- (2,3) to[R=$R_1$] (2,0) -- (0,0);
+    \draw (2,3) -- (4,3) to[R=$R_2$] (4,0) -- (2,0);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[american]
+            \draw (0,0) to[isource, l=$I_0$] (0,3) -- (2,3) to[R=$R_1$] (2,0) -- (0,0);
+            \draw (2,3) -- (4,3) to[R=$R_2$] (4,0) -- (2,0);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[american]
+    \draw (0,0)
+        to[isource, l=$I_0$] (0,3)
+        to[short, -*, i=$I_0$] (2,3)
+        to[R=$R_1$, i=$i_1$] (2,0)
+        -- (0,0);
+    \draw (2,3)
+        -- (4,3)
+        to[R=$R_2$, i=$i_2$] (4,0)
+        to[short, -*] (2,0);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[american]
+            \draw (0,0)
+                to[isource, l=$I_0$] (0,3)
+                to[short, -*, i=$I_0$] (2,3)
+                to[R=$R_1$, i=$i_1$] (2,0)
+                -- (0,0);
+            \draw (2,3)
+                -- (4,3)
+                to[R=$R_2$, i=$i_2$] (4,0)
+                to[short, -*] (2,0);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[american]
+    \draw (0,0)
+        to[isource, l=$I_0$] (0,3)
+        to[short, -*, i=$I_0$] (2,3)
+        to[R=$R_1$, i>_=$i_1$] (2,0)
+        -- (0,0);
+    \draw (2,3)
+        -- (4,3)
+        to[R=$R_2$, i>_=$i_2$] (4,0)
+        to[short, -*] (2,0);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[american]
+            \draw (0,0)
+                to[isource, l=$I_0$] (0,3)
+                to[short, -*, i=$I_0$] (2,3)
+                to[R=$R_1$, i>_=$i_1$] (2,0)
+                -- (0,0);
+            \draw (2,3)
+                -- (4,3)
+                to[R=$R_2$, i>_=$i_2$] (4,0)
+                to[short, -*] (2,0);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[american, voltage shift=0.5]
+    \draw (0,0)
+        to[isource, l=$I_0$, v=$V_0$] (0,3)
+        to[short, -*, i=$I_0$] (2,3)
+        to[R=$R_1$, i>_=$i_1$] (2,0)
+        -- (0,0);
+    \draw (2,3)
+        -- (4,3)
+        to[R=$R_2$, i>_=$i_2$] (4,0)
+        to[short, -*] (2,0);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[american, voltage shift=0.5]
+            \draw (0,0)
+                to[isource, l=$I_0$, v=$V_0$] (0,3)
+                to[short, -*, i=$I_0$] (2,3)
+                to[R=$R_1$, i>_=$i_1$] (2,0)
+                -- (0,0);
+            \draw (2,3) -- (4,3)
+                to[R=$R_2$, i>_=$i_2$] (4,0)
+                to[short, -*] (2,0);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[european, voltage shift=0.5]
+    \draw (0,0)
+        to[isourceC, l=$I_0$, v=$V_0$] (0,3)
+        to[short, -*, f=$I_0$] (2,3)
+        to[R=$R_1$, f>_=$i_1$] (2,0)
+        -- (0,0);
+    \draw (2,3)
+        -- (4,3)
+        to[R=$R_2$, f>_=$i_2$] (4,0)
+        to[short, -*] (2,0);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[european, voltage shift=0.5]
+            \draw (0,0)
+                to[isourceC, l=$I_0$, v=$V_0$] (0,3)
+                to[short, -*, f=$I_0$] (2,3)
+                to[R=$R_1$, f>_=$i_1$] (2,0)
+                -- (0,0);
+            \draw (2,3)
+                -- (4,3)
+                to[R=$R_2$, f>_=$i_2$] (4,0)
+                to[short, -*] (2,0);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[american, voltage shift=0.5]
+    \draw (0,0)
+        to[isource, l=$I_0$, v=$V_0$] (0,3)
+        to[short, -*, f=$I_0$] (2,3)
+        to[R=$R_1$, f>_=$i_1$] (2,0)
+        -- (0,0);
+    \draw (2,3)
+        -- (4,3)
+        to[R=$R_2$, f>_=$i_2$] (4,0)
+        to[short, -*] (2,0);
+    \draw[red, thick] (0.5,2.0) rectangle (4.3,3.9)
+        node[pos=0.5, above] {KCL};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[american, voltage shift=0.5]
+            \draw (0,0)
+                to[isource, l=$I_0$, v=$V_0$] (0,3)
+                to[short, -*, f=$I_0$] (2,3)
+                to[R=$R_1$, f>_=$i_1$] (2,0)
+                -- (0,0);
+            \draw (2,3)
+                -- (4,3)
+                to[R=$R_2$, f>_=$i_2$] (4,0)
+                to[short, -*] (2,0);
+            \draw[red, thick] (0.5,2.0) rectangle (4.3,3.9)
+                node[pos=0.5, above] {KCL};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \node [op amp] {\texttt{OA1}};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}
+            \node [op amp] {\texttt{OA1}};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \node [op amp, noinv input up] {\texttt{OA1}};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}
+            \node [op amp, noinv input up] {\texttt{OA1}};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{center}
+    \begin{tikzpicture}
+        \node [op amp] (OA) {\texttt{OA1}};
+
+        \pause
+
+        \begin{scope}[red,fill=transparent]
+            \draw (OA.-) node[circle,red,draw,inner sep=1pt,pin={[red,overlay,pin edge={red, overlay}]left:$-$}] {};
+            \draw (OA.+) node[circle,red,draw,inner sep=1pt,pin={[red,overlay,pin edge={red, overlay}]left:$+$}] {};
+            \draw (OA.up) node[circle,red,draw,inner sep=1pt,pin={[red,overlay,pin edge={red, overlay}]above:up}] {};
+            \draw (OA.down) node[circle,red,draw,inner sep=1pt,pin={[red,overlay,pin edge={red, overlay}]below:down}] {};
+            \draw (OA.out) node[circle,red,draw,inner sep=1pt,pin={[red,overlay,pin edge={red, overlay}]right:out}] {};
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \node [op amp, noinv input up] (OA) {\texttt{OA1}};
+
+    \draw (OA.+) to[short, -o] ++(-1,0) node [above] {$v_i$};
+    \draw (OA.-)
+        -- ++(0,-1)
+        coordinate (FB)
+        to[R=$R_1$] ++(0,-2)
+        node [ground] {};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}
+            \node [op amp, noinv input up] (OA) {\texttt{OA1}};
+
+            \draw (OA.+) to[short, -o] ++(-1,0) node [above] {$v_i$};
+            \draw (OA.-)
+                -- ++(0,-1)
+                coordinate (FB)
+                to[R=$R_1$] ++(0,-2)
+                node [ground] {};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \node [op amp, noinv input up] (OA) {\texttt{OA1}};
+
+    \draw (OA.+) to[short, -o] ++(-1,0) node [above] {$v_i$};
+    \draw (OA.-)
+        -- ++(0,-1)
+        coordinate (FB)
+        to[R=$R_1$] ++(0,-2)
+        node [ground] {};
+    \draw (FB)
+        to[R=$R_2$,*-] (FB -| OA.out)
+        -- (OA.out)
+        to[short,*-o] ++(1,0)
+        node [above] {$v_o$};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}
+            \node [op amp, noinv input up] (OA) {\texttt{OA1}};
+
+            \draw (OA.+) to[short, -o] ++(-1,0) node [above] {$v_i$};
+            \draw (OA.-)
+                -- ++(0,-1)
+                coordinate (FB)
+                to[R=$R_1$] ++(0,-2)
+                node [ground] {};
+            \draw (FB)
+                to[R=$R_2$,*-] (FB -| OA.out)
+                -- (OA.out)
+                to[short,*-o] ++(1,0)
+                node [above] {$v_o$};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\ctikzset{
+    amplifiers/fill=red!80,
+    component text=left,
+}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \ctikzset{amplifiers/fill=red!80, component text=left}
+        \begin{tikzpicture}
+            \node [op amp, noinv input up] (OA) {\texttt{OA1}};
+
+            \draw (OA.+) to[short, -o] ++(-1,0) node [above] {$v_i$};
+            \draw (OA.-)
+                -- ++(0,-1)
+                coordinate (FB)
+                to[R=$R_1$] ++(0,-2)
+                node [ground] {};
+            \draw (FB)
+                to[R=$R_2$,*-] (FB -| OA.out)
+                -- (OA.out)
+                to[short,*-o] ++(1,0)
+                node [above] {$v_o$};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \scriptsize
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[american]
+    \node [nmos] (Q1) {Q1};
+    \draw (Q1.S)
+        to[R, l2^=$R_S$ and \qty{5}{\kilo\ohm}] ++(0,-3)
+        node [vee] (VEE) {$V_{EE}=\qty{-10}{\volt}$};
+    \draw (Q1.D)
+        to[R, l2_=$R_D$ and \qty{10}{\kilo\ohm}] ++(0,3)
+        node [vcc] (VCC) {$V_{CC}=\qty{10}{\volt}$};
+    \draw (Q1.S)
+        to[short] ++(2,0)
+        to[C=$C_1$] ++(0,-1.5)
+        node [ground] (GND) {};
+    \draw (Q1.G)
+        to[short] ++(-1,0) coordinate (in)
+        to[R, l2^=$R_G$ and \qty{1}{\mega\ohm}] (in |- GND)
+        node [ground] {};
+    \draw (in)
+        to[C, l_=$C_2$,*-o] ++(-1.5,0)
+        node [left] (vi1) {$v_i=v_{i1}$};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[american,scale=0.75,transform shape]
+            \node [nmos] (Q1) {Q1};
+            \draw (Q1.S)
+                to[R, l2^=$R_S$ and \qty{5}{\kilo\ohm}] ++(0,-3)
+                node [vee] (VEE) {$V_{EE}=\qty{-10}{\volt}$};
+            \draw (Q1.D)
+                to[R, l2_=$R_D$ and \qty{10}{\kilo\ohm}] ++(0,3)
+                node [vcc] (VCC) {$V_{CC}=\qty{10}{\volt}$};
+            \draw (Q1.S)
+                to[short] ++(2,0)
+                to[C=$C_1$] ++(0,-1.5)
+                node [ground] (GND) {};
+            \draw (Q1.G)
+                to[short] ++(-1,0) coordinate (in)
+                to[R, l2^=$R_G$ and \qty{1}{\mega\ohm}] (in |- GND)
+                node [ground] {};
+            \draw (in)
+                to[C, l_=$C_2$,*-o] ++(-1.5,0)
+                node [left] (vi1) {$v_i=v_{i1}$};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+\framesubtitle{Ejercicio}
+
+\begin{onlyenv}<1>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}[american]
+            \draw (0,0)
+                to[battery,v_=$V$,i=$I$] (0,-3)
+                to[capacitor,l_=$C$] (3,-3)
+                to[inductor,l_=$L$] (3,0)
+                to[resistor,l_=$R$] (0,0);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}[american]
+    \draw (0,0)
+        to[battery,v_=$V$,i=$I$] (0,-3)
+        to[capacitor,l_=$C$] (3,-3)
+        to[inductor,l_=$L$] (3,0)
+        to[resistor,l_=$R$] (0,0);
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{columns}
+    \begin{column}{0.3\textwidth}
+        \centering
+        \textbf{Dual-in-Line Package Chip}\bigskip
+
+        \begin{tikzpicture}
+            \node [dipchip] {};
+        \end{tikzpicture}\par
+    \end{column}
+
+    \begin{column}{0.3\textwidth}
+        \centering
+        \textbf{Quad-Flat Package Chip}\bigskip
+
+        \begin{tikzpicture}
+            \node [qfpchip] {};
+        \end{tikzpicture}\par
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \node [
+        dipchip,
+        num pins=12,
+    ] {IC1};
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}
+            \node [
+                dipchip,
+                num pins=12,
+            ] {IC1};
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Circuitos}
+
+\begin{columns}
+    \begin{column}{0.75\textwidth}
+        \begin{alertblock}{IMPORTANTE}
+            El número de pines que puede recibir \texttt{num pins} debe ser par y mayor que cero.
+
+            En caso de que sea un número impar, {\lmr Circui\TikZ} lo aproximara al par inmediatamente anterior.
+        \end{alertblock}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Circuitos}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\begin{tikzpicture}
+    \node [
+        dipchip,
+        num pins=8,
+    ] (555) {555};
+
+    \draw (555.pin 8) -- ++(0.5,0) to[short,-o] ++(0,0.5) node [above] {\qty{5}{\volt}};
+    \draw (555.pin 4) to[short,-o] ++(-0.5,0) node [left] {\qty{5}{\volt}};
+    \draw (555.pin 1) -- ++(0,0.5) -- ++(-0.5,0) node [ground] {};
+
+    ...
+\end{tikzpicture}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{tikzpicture}
+            \node [
+                dipchip,
+                num pins=8,
+            ] (555) {555};
+
+            \draw (555.pin 8) -- ++(0.5,0) to[short,-o] ++(0,0.5) node [above] {\qty{5}{\volt}};
+            \draw (555.pin 4) to[short,-o] ++(-0.5,0) node [left] {\qty{5}{\volt}};
+            \draw (555.pin 1) -- ++(0,0.5) -- ++(-0.5,0) node [ground] {};
+
+            \draw (555.pin 3) -- ++(-4,0)
+                to [resistor,l_=$\qty{470}{\ohm}$] ++(0,-1.5)
+                to [led,l_=LED] ++(0,-1.5)
+                node [ground] {};
+
+            \draw (555.pin 2)
+                -- ++(-2,0)
+                coordinate (TRG)
+                to[short,-o] ++(0,2)
+                node [above] {\qty{5}{\volt}};
+
+            \draw (TRG)
+                to[short,*-] (555.south -| TRG)
+                to[short,-*] ++(0,-1)
+                coordinate (TRO)
+                to[resistor,l=\qty{47}{\kilo\ohm}] ++(0,-1.5)
+                node [ground] {};
+
+            \draw (555.pin 6)
+                -- ++(0.5,0)
+                |- (TRO);
+        \end{tikzpicture}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\section{Asymptote}
+
+\begin{frame}[fragile]
+\begin{center}
+    \begin{asy}
+        size(140,80,IgnoreAspect);
+
+        picture logo(pair s=0, pen q)
+        {
+            picture pic;
+            pen p=linewidth(2)+fontsize(24pt)+q;
+            real a=-0.4;
+            real b=0.95;
+            real y1=-5;
+            real y2=-3y1/2;
+            path A=(a,0){dir(10)}::{dir(89.5)}(0,y2);
+            draw(pic,A,p);
+            draw(pic,(0,y1){dir(88.3)}::{dir(20)}(b,0),p);
+            real c=0.5*a;
+            pair z=(0,2.5);
+            label(pic,"{\it symptote}",z,0.25*E+0.169S,p);
+            pair w=(0,1.7);
+            draw(pic,intersectionpoint(A,w-1--w)--w,p);
+            draw(pic,(0,y1)--(0,y2),p);
+            draw(pic,(a,0)--(b,0),p);
+            return shift(s)*pic;
+        }
+
+        pair z=(-0.015,0.08);
+        for(int x=0; x < 10; ++x)
+            add(logo(0.1*x*z,gray(0.04*x)));
+
+        add(logo(red));
+    \end{asy}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{¿Qué es Asymptote?}
+
+\begin{itemize}
+    \item {\lmr\itshape Asymptote} es un sistema de composición de gráficos vectoriales para dibujo técnico.
+    \item Permite el manejo de elementos en tres dimensiones.
+    \item Posee una capa de integración con {\lmr\LaTeX}.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Prerrequisitos}
+
+\begin{itemize}
+    \item Compilador de {\lmr\itshape Asymptote}
+    \item Distribución de {\lmr\LaTeX}
+    \item GhostScript
+    \item ImageMagick
+    \item Visor de PostScript
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Asymptote}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{latex}
+\usepackage{asymptote}
+
+\begin{asy}
+    settings.prc = false;
+    import three;
+
+    size(4cm,0);
+
+    draw((0,0,0)--(2,0,0), blue);
+    draw((0,0,0)--(0,2,0), green);
+    draw((0,0,0)--(0,0,2), red);
+\end{asy}
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{asy}
+            settings.prc = false;
+            import three;
+            currentlight.background=opacity(0.0);
+            currentpen = white;
+
+            size(4cm,0);
+
+            draw((0,0,0)--(2,0,0), blue);
+            draw((0,0,0)--(0,2,0), green);
+            draw((0,0,0)--(0,0,2), red);
+        \end{asy}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Asymptote}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{asymptote}
+settings.prc = false;
+import three;
+
+size(4cm,0);
+
+draw((0,0,0)--(2,0,0), blue);
+draw((0,0,0)--(0,2,0), green);
+draw((0,0,0)--(0,0,2), red);
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{asy}
+            settings.prc = false;
+            import three;
+            currentlight.background=opacity(0.0);
+            currentpen = white;
+
+            size(4cm,0);
+
+            draw((0,0,0)--(2,0,0), blue);
+            draw((0,0,0)--(0,2,0), green);
+            draw((0,0,0)--(0,0,2), red);
+        \end{asy}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Asymptote}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{asymptote}
+settings.prc=false;
+import three;
+
+size(4cm,0);
+
+draw((0,0,0)--(2,0,0), blue);
+draw((0,0,0)--(0,2,0), green);
+draw((0,0,0)--(0,0,2), red);
+draw(box(O, (0.5, 1.5, 1)), blue);
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{asy}
+            settings.prc=false;
+            import three;
+            currentlight.background=opacity(0.0);
+            currentpen = white;
+
+            size(4cm,0);
+
+            draw((0,0,0)--(2,0,0), blue);
+            draw((0,0,0)--(0,2,0), green);
+            draw((0,0,0)--(0,0,2), red);
+            draw(box(O, (0.5, 1.5, 1)), blue);
+        \end{asy}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Asymptote}
+
+\begin{onlyenv}<1>
+    \begin{minted}[breaklines]{asymptote}
+settings.prc=false;
+settings.render=16;
+import three;
+
+size(3.55cm, 0);
+
+draw(-1.5X -- 1.5X, arrow=Arrow3(TeXHead2), L=Label("$x$", position=EndPoint, align=W));
+draw(-1.5Y -- 1.5Y, arrow=Arrow3(TeXHead2), L=Label("$y$", position=EndPoint));
+draw(-1.5Z -- 1.5Z, arrow=Arrow3(TeXHead2), L=Label("$z$", position=EndPoint));
+draw(unitsphere, surfacepen = material(white, emissivepen = gray(0.2)));
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{asy}
+            settings.prc=false;
+            settings.render=16;
+            import three;
+            currentlight.background=opacity(0.0);
+            currentpen = white;
+
+            size(3.55cm, 0);
+
+            draw(-1.5X -- 1.5X, arrow=Arrow3(TeXHead2), L=Label("$x$", position=EndPoint, align=W));
+            draw(-1.5Y -- 1.5Y, arrow=Arrow3(TeXHead2), L=Label("$y$", position=EndPoint));
+            draw(-1.5Z -- 1.5Z, arrow=Arrow3(TeXHead2), L=Label("$z$", position=EndPoint));
+            draw(unitsphere, surfacepen = material(white, emissivepen = gray(0.2)));
+        \end{asy}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Asymptote}
+
+\begin{onlyenv}<1>
+    \tiny
+    \begin{minted}[breaklines]{asymptote}
+settings.render = 8;
+defaultpen(fontsize(10pt));
+import graph;
+import three;
+
+size(4.15cm, 0);
+
+currentprojection = orthographic(5,0,10, up=Y);
+real xmin = -0.1;
+real xmax = 2;
+real ymin = -0.1;
+real ymax = 2;
+real margin = 0.2;
+real f(real x) { return sqrt(x); }
+path s = graph(f, 0, 2, operator..);
+path3 p3 = path3(s);
+draw(p3);
+surface solidsurface = surface(p3, c=O, axis=X);
+draw(solidsurface, white);
+draw(xmin*X -- xmax*X);
+draw(ymin*Y -- ymax*Y);
+path planeoutline = box((xmin, ymin), (xmax+margin, ymax+margin));
+draw(surface(planeoutline), surfacepen=white);
+    \end{minted}
+\end{onlyenv}
+
+\begin{onlyenv}<2>
+    \lmr
+    \begin{center}
+        \begin{asy}
+            settings.render = 8;
+            defaultpen(fontsize(10pt));
+            import graph;
+            import three;
+            currentlight.background=opacity(0.0);
+            currentpen = white;
+
+            size(4.15cm, 0);
+
+            currentprojection = orthographic(5,0,10, up=Y);
+            real xmin = -0.1;
+            real xmax = 2;
+            real ymin = -0.1;
+            real ymax = 2;
+            real margin = 0.2;
+            real f(real x) { return sqrt(x); }
+            path s = graph(f, 0, 2, operator..);
+            path3 p3 = path3(s);
+            draw(p3);
+            surface solidsurface = surface(p3, c=O, axis=X);
+            draw(solidsurface, white);
+            draw(xmin*X -- xmax*X);
+            draw(ymin*Y -- ymax*Y);
+            path planeoutline = box((xmin, ymin), (xmax+margin, ymax+margin));
+            draw(surface(planeoutline), surfacepen=white);
+        \end{asy}
+    \end{center}
+\end{onlyenv}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

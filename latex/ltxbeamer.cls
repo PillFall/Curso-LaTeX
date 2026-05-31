@@ -8,6 +8,7 @@
 \ProcessOptions\relax
 \LoadClass{beamer}
 
+\RequirePackage{hyperref}
 \RequirePackage{hyperxmp}
 
 \RequirePackage{amsmath}
@@ -25,6 +26,12 @@
 \RequirePackage{biblatex}
 \RequirePackage{booktabs}
 \RequirePackage{csquotes}
+
+\hypersetup{
+    pdfusetitle,
+    hidelinks,
+    unicode,
+}
 
 \sisetup{
     per-mode=fraction,

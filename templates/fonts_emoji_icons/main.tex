@@ -1,0 +1,159 @@
+\documentclass{article}
+
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\hypersetup{
+    hidelinks,
+    unicode,
+}
+
+
+
+
+
+\setlength{\parskip}{\baselineskip}
+
+\newcommand{\lmr}{\fontfamily{lmr}\selectfont}
+\newcommand{\lmss}{\fontfamily{lmss}\selectfont}
+\newcommand{\lmtt}{\fontfamily{lmtt}\selectfont}
+% El motor de renderización de HarfBuzz permite utilizar fuentes mas complejas, como Material Symbols que funcionan por ligaduras o Emojis a color.
+
+\setmainfont{NotoSans}[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\newfontfamily{\notocoloremoji}{NotoColorEmoji}[
+    Renderer = HarfBuzz,
+    Path = fonts/,
+    Extension = .ttf,
+]
+
+\newfontfamily{\notoemoji}{NotoEmoji}[
+    Renderer = HarfBuzz,
+    Path = fonts/,
+    Extension = .ttf,
+]
+
+\newfontfamily{\materialsymbolsoutlined}{MaterialSymbolsOutlined}[
+    Renderer = HarfBuzz,
+    Path = fonts/,
+    Extension = .ttf,
+]
+
+\newfontfamily{\materialsymbolsrounded}{MaterialSymbolsRounded}[
+    Renderer = HarfBuzz,
+    Path = fonts/,
+    Extension = .ttf,
+]
+
+\newfontfamily{\materialsymbolssharp}{MaterialSymbolsSharp}[
+    Renderer = HarfBuzz,
+    Path = fonts/,
+    Extension = .ttf,
+]
+
+\setmathfont{NotoSansMath}[
+    Path = fonts/,
+    Extension = .ttf,
+]
+
+\title{Fuentes Personalizadas}
+\author{Joar Buitrago <jebuitragoc@unal.edu.co>}
+\date{}
+
+\begin{document}
+
+\part*{Fuentes Personalizadas}
+
+
+
+
+
+\section{¿Qué deberías esperar?}
+
+Este proyecto utiliza las fuentes \href{https://fonts.google.com/noto}{\emph{Noto}} de Google. La idea es mostrar las capacidades de {\lmr\LaTeX} con estas fuentes específicamente diseñadas para la mayor cantidad de idiomas posibles.
+
+En específico este documento utiliza las fuentes \href{https://fonts.google.com/noto/specimen/Noto+Sans}{\emph{Noto Sans}}, y la fuente matemática \href{https://fonts.google.com/noto/specimen/Noto+Sans+Math}{\emph{Noto Sans Math}}, ¡probemos!
+
+\begin{equation*}
+    \int_a^b x^2 \, dx = \left.\frac{x^3}{3}\right|_a^b
+\end{equation*}
+
+Parece que hasta los entornos matemáticos funcionan perfectamente, probemos algo más avanzado.
+
+\begin{equation*}
+    i \hbar \frac{\partial}{\partial t} \Psi (x,t) = \left[ -\frac{\hbar^2}{2 m} \nabla^2 + V (x,t) \right] \Psi (x,t)
+\end{equation*}
+
+Lo bueno de esta mezcla es que ambas fuentes poseen el mismo estilo, por lo que es posible utilizar matematicas en linea y estas no se verán extrañas. Como por ejemplo:
+
+\begin{quotation}
+    \setlength{\parskip}{\baselineskip}
+    Las identidades trigonométricas de suma o resta de ángulos son fórmulas que permiten expresar las razones trigonométricas de la suma o resta de dos ángulos (\(\alpha \) y \(\beta \)) en función de las razones individuales de cada uno de ellos.
+
+    Estas expresiones son:
+    \begin{align*}
+        \sin (\alpha \pm \beta) &= \sin\alpha \cos\beta \pm \sin\beta \cos\alpha \\
+        \cos(\alpha \pm \beta) &= \cos\alpha \cos\beta \mp \sen\alpha \sen\beta \\
+        \tan(\alpha \pm \beta) &= \frac{\tan\alpha \pm \tan\beta}{1 \mp \tan\alpha \tan\beta}
+    \end{align*}
+\end{quotation}
+
+
+
+
+
+\section{Emojis}
+
+También funciona con emojis, para esto utilizaremos también las fuentes creadas por Google, en específico \href{https://fonts.google.com/noto/specimen/Noto+Color+Emoji}{\emph{Noto Color Emoji}} y \href{https://fonts.google.com/noto/specimen/Noto+Emoji}{\emph{Noto Emoji}}. Esta última es una \href{https://fonts.google.com/knowledge/glossary/variable_fonts}{\emph{fuente variable}}, por lo que su \href{https://fonts.google.com/knowledge/glossary/weight}{\emph{«peso»}} o \href{https://fonts.google.com/knowledge/glossary/weight}{\emph{«grosor»}} puede tomar cualquier valor entre 300 y 700 según la documentación oficial.
+
+\begin{center}
+    \begin{tabular}{cccc}
+        \toprule
+        \multirow{2}{*}{Color Emoji} & \multicolumn{3}{c}{Noto Emoji} \\
+        & {\scriptsize Weight=300} & {\scriptsize Weight=400} & {\scriptsize Weight=700} \\
+        \midrule
+        {\notocoloremoji \symbol{"1F343}} & {\notoemoji\addfontfeature{Weight=300} \symbol{"1F343}} & {\notoemoji \symbol{"1F343}} & {\notoemoji\addfontfeature{Weight=700} \symbol{"1F343}} \\
+        {\notocoloremoji \symbol{"1F4AF}} & {\notoemoji\addfontfeature{Weight=300} \symbol{"1F4AF}} & {\notoemoji \symbol{"1F4AF}} & {\notoemoji\addfontfeature{Weight=700} \symbol{"1F4AF}} \\
+        {\notocoloremoji \symbol{"1F525}} & {\notoemoji\addfontfeature{Weight=300} \symbol{"1F525}} & {\notoemoji \symbol{"1F525}} & {\notoemoji\addfontfeature{Weight=700} \symbol{"1F525}} \\
+        {\notocoloremoji \symbol{"1F3DC}} & {\notoemoji\addfontfeature{Weight=300} \symbol{"1F3DC}} & {\notoemoji \symbol{"1F3DC}} & {\notoemoji\addfontfeature{Weight=700} \symbol{"1F3DC}} \\
+        {\notocoloremoji \symbol{"1F335}} & {\notoemoji\addfontfeature{Weight=300} \symbol{"1F335}} & {\notoemoji \symbol{"1F335}} & {\notoemoji\addfontfeature{Weight=700} \symbol{"1F335}} \\
+        {\notocoloremoji \symbol{"1F60E}} & {\notoemoji\addfontfeature{Weight=300} \symbol{"1F60E}} & {\notoemoji \symbol{"1F60E}} & {\notoemoji\addfontfeature{Weight=700} \symbol{"1F60E}} \\
+        % También se pueden usar los emojis directamente, pero esto no tiene soporte en todos los editores a menos que tengan soporte Unicode
+        % Overleaf no soporta esta sintaxis
+        % {\notocoloremoji 🆒} & {\notoemoji\addfontfeature{Weight=300} 🆒} & {\notoemoji 🆒} & {\notoemoji\addfontfeature{Weight=700} 🆒} \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+
+
+
+
+\section{Iconos}
+
+Y podemos utilizar fuentes de iconos también, en este caso utilizaremos los iconos de Google, se llaman \href{https://fonts.google.com/icons}{\emph{Material Symbols}}. Estos vienen en tres estilos, y son una \href{https://fonts.google.com/knowledge/glossary/variable_fonts}{\emph{fuente variable}}, pero en este caso tiene múltiples ejes para controlar el cómo se verán.
+
+\begin{center}
+    \begin{tabular}{ccc}
+        \toprule
+        & Regular & Filled \\
+        \midrule
+        Outlined & {\materialsymbolsoutlined article} & {\materialsymbolsoutlined\addfontfeature{RawAxis={FILL=1}} article} \\
+        Rounded & {\materialsymbolsrounded article} & {\materialsymbolsrounded\addfontfeature{RawAxis={FILL=1}} article} \\
+        Sharp & {\materialsymbolsrounded article} & {\materialsymbolssharp\addfontfeature{RawAxis={FILL=1}} article} \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+\end{document}

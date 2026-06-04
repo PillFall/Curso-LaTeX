@@ -25,7 +25,7 @@ $NotoFonts = @(
 
 foreach ($NotoFont in $NotoFonts) {
     $NotoFontFileRef = $FileRefs.Where({ $_.filename -eq $NotoFont.filename })
-    Invoke-RestMethod -UseBasicParsing -Uri $NotoFontFileRef.url -OutFile $FontPath\$NotoFont.path
+    Invoke-RestMethod -UseBasicParsing -Uri $NotoFontFileRef.url -OutFile $FontFolder\$NotoFont.path
 }
 
 

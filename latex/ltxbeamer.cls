@@ -28,7 +28,6 @@
 \RequirePackage{csquotes}
 
 \hypersetup{
-    pdfusetitle,
     hidelinks,
     unicode,
 }

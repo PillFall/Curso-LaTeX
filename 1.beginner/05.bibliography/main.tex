@@ -1,0 +1,1303 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{multicol}
+
+\title{Bibliografía}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+\newcommand{\BibTeX}{\textsc{Bib}\TeX}
+
+
+
+\begin{document}
+\begin{frame}
+\maketitle
+\end{frame}
+
+
+
+
+
+\section{El problema}
+
+\begin{frame}
+\frametitle{¿Por qué bibliografía?}
+
+En cualquier documento escrito muchas veces es necesario incluir bibliografía o referencias.
+
+\pause
+
+\begin{itemize}[<+->]
+    \item Se tienen que escribir a mano.
+    \item Se debe mantener un estilo o reglas consistentes.
+    \item Las citaciones deben mantener un estilo consistente.
+    \item Si se cambia el estilo, hay que hacer todo de nuevo.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Ejemplo}
+
+\begin{enumerate}
+    \lmr
+    \setbeamercolor{enumerate item}{fg=white}
+    \setbeamertemplate{enumerate item}{[\insertenumlabel]}
+    \item García Márquez, Gabriel. Cien años de soledad, 1967.
+    \item 1967.  G. G. Márquez. Editorial Sudamericana.
+    \item Cien Años de Soledad. (1967) por G. G. Márquez. Editorial Sudamericana.
+\end{enumerate}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entorno \texttt{thebibliography}}
+
+    \begin{minted}[breaklines]{latex}
+\begin{thebibliography}{9}
+    \bibitem{GM1} García Márquez, Gabriel. Cien años de soledad, 1967.
+    \bibitem{GM2} 1967.  G. G. Márquez. Editorial Sudamericana.
+    \bibitem{GM3} Cien Años de Soledad. (1967) por G. G. Márquez. Editorial Sudamericana.
+\end{thebibliography}
+    \end{minted}
+\end{frame}
+
+
+
+
+
+\section{{\lmr\BibTeX}}
+
+\begin{frame}
+\centering
+\vfill
+\resizebox{0.95\linewidth}{!}{\lmr\BibTeX}
+\vfill
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{¿Qué es {\lmr\BibTeX}?}
+
+{\lmr\BibTeX} es un sistema automatizado para la gestión bibliográfica.
+
+\pause
+
+Fue creado por Oren Patashnik y Leslie Lamport en 1985.
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{La base de datos}
+
+Para poder trabajar con {\lmr\BibTeX} necesitamos crear un archivo de base de datos.
+
+\pause
+
+Estos archivos suelen tener la extensión \texttt{.bib}.
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+
+\begin{columns}
+    \begin{column}{0.55\textwidth}
+        \tikz[remember picture,baseline]{\node [anchor=base,inner sep=0] (top) {\strut};}
+        \begin{minted}{bibtex}
+@book{TeXbook,
+    author = {Donald Ervin Knuth},
+    title = {The {\lmr\TeX} book},
+    publisher = {Stanford University},
+    year = {1986},
+    edition = {1},
+}
+        \end{minted}
+        \tikz[remember picture,baseline]{\node [anchor=base,inner sep=0] (bottom) {\strut};}
+    \end{column}
+
+    \begin{column}{0.45\textwidth}
+        \tikz[remember picture,baseline]{\coordinate [anchor=base] (braces);}
+    \end{column}
+\end{columns}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \pause
+    \coordinate (keyline) at ($(top)!1/7!(bottom)$);
+    \draw [<-] (keyline -| braces) -- ++(1em,0) node [right] {Tipo y Clave};
+
+    \pause
+    \node (parameters begin) at ($(top)!2/7!(bottom)$) {\strut};
+    \node (parameters end) at ($(top)!5/7!(bottom)$) {\strut};
+    \draw [thick,decoration=brace,decorate] (parameters begin.north -| braces) -- (parameters end.south -| braces) node [midway, right] {Parametros};
+\end{tikzpicture}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\cite{TeXbook}|\pause|
+
+\nocite{TeXbook}
+\nocite{*}|\pause|
+
+\bibliographystyle{plain}
+\bibliography{|\textit{documento}|}
+        \end{minted}
+    \end{column}
+    \pause
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \begin{enumerate}
+            \setbeamerfont{enumerate item}{family=\lmr}
+            \setbeamercolor{enumerate item}{fg=white}
+            \setbeamertemplate{enumerate item}{[\insertenumlabel]}
+            \item Donald Knuth. \textit{The {\TeX} book}. Stanford University, 1 edition, 1986.
+        \end{enumerate}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{Compilación}
+
+\begin{frame}
+\frametitle{Compilación}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{scope}[local bounding box=tex]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{TEX}};
+    \end{scope}
+
+    \begin{scope}[local bounding box=compiler, shift={([xshift=2cm]tex)}]
+        \alt<6->{\node [black!75] {\lmr\LaTeX};}{\node {\lmr\LaTeX};}
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (tex) -- (compiler);}{\draw [->, very thick] (tex) -- (compiler);}
+
+    \begin{scope}[local bounding box=pdf, shift={([xshift=2cm]compiler)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{PDF}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{PDF}};
+        }
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (compiler) -- (pdf);}{\draw [->, very thick] (compiler) -- (pdf);}
+
+    \begin{scope}[local bounding box=log, shift={([yshift=2cm]pdf)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{LOG}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{LOG}};
+        }
+    \end{scope}
+
+    \begin{scope}[local bounding box=aux, shift={([yshift=-2cm]pdf)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{AUX}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{AUX}};
+        }
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (compiler) -- (log);}{\draw [->, very thick] (compiler) -- (log);}
+    \alt<6->{\draw [->, very thick, black!75] (compiler) -- (aux);}{\draw [->, very thick] (compiler) -- (aux);}
+
+    \pause
+
+    \begin{scope}[local bounding box=bib,shift={([yshift=2cm]tex)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BIB}};
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, shorten <=0.65em, black!75] (bib) -- (compiler);}{\draw [->, very thick, shorten <=0.65em] (bib) -- (compiler);}
+
+    \pause
+
+    \begin{scope}[local bounding box=bibtex, shift={([xshift=2cm]pdf)}]
+        \alt<6->{\node [black!75] {\lmr\BibTeX};}{\node {\lmr\BibTeX};}
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (aux) -- (bibtex);}{\draw [->, very thick] (aux) -- (bibtex);}
+
+    \pause
+
+    \begin{scope}[local bounding box=blg, shift={([xshift=2cm]bibtex)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BLG}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BLG}};
+        }
+    \end{scope}
+
+    \begin{scope}[local bounding box=bbl, shift={([yshift=-2cm]blg)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6-7>{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6-7>{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BBL}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BBL}};
+        }
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (bibtex) -- (bbl);}{\draw [->, very thick] (bibtex) -- (bbl);}
+    \alt<6->{\draw [->, very thick, black!75] (bibtex) -- (blg);}{\draw [->, very thick] (bibtex) -- (blg);}
+
+    \pause
+
+    \begin{scope}[local bounding box=compiler2, shift={([xshift=2cm]blg)}]
+        \node {\lmr\LaTeX};
+    \end{scope}
+
+    \pause
+    \pause
+
+    \draw [->, very thick] (tex) -- (compiler2);
+    \draw [->, very thick, rounded corners=5pt] (bib) -| (compiler2);
+    \pause
+    \draw [->, very thick] (bbl) -- (compiler2);
+
+    \pause
+
+    \begin{scope}[local bounding box=pdf2, shift={([xshift=2cm]compiler2)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{PDF}};
+    \end{scope}
+
+    \draw [->, very thick] (compiler2) -- (pdf2);
+
+    \begin{scope}[local bounding box=log2, shift={([yshift=2cm]pdf2)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{LOG}};
+    \end{scope}
+
+    \begin{scope}[local bounding box=aux2, shift={([yshift=-2cm]pdf2)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{AUX}};
+    \end{scope}
+
+    \draw [->, very thick] (compiler2) -- (log2);
+    \draw [->, very thick] (compiler2) -- (aux2);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+\subsection{El problema de {\lmr\BibTeX}}
+
+\begin{frame}
+\frametitle{Problemas de {\lmr\BibTeX}}
+
+\pause
+
+\begin{itemize}[<+->]
+    \item Falta de soporte a Unicode.
+    \item Los estilos de citación son limitados.
+    \item No personalización.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\section{\texttt{biblatex} y \texttt{biber}}
+
+\begin{frame}
+\frametitle{\texttt{biblatex} y \texttt{biber}}
+
+Debido a estas limitantes, se crearon muchos paquetes que buscan solucionar todos estos problemas.
+
+\pause
+
+Uno de los más utilizados es el paquete es \texttt{biblatex}. Este nos añade aún más tipos de elementos para la base de datos \texttt{.bib}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[escapeinside=||]{latex}
+\usepackage{biblatex}
+\addbibresource{|\textit{documento}|}|\pause|
+
+\cite{TeXbook}|\pause|
+
+\nocite{TeXbook}
+\nocite{*}|\pause|
+
+\printbibliography
+        \end{minted}
+    \end{column}
+    \pause
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \begin{enumerate}
+            \setbeamerfont{enumerate item}{family=\lmr}
+            \setbeamercolor{enumerate item}{fg=white}
+            \setbeamertemplate{enumerate item}{[\insertenumlabel]}
+            \item Donald Knuth. \textit{The {\TeX} book}. Stanford University, 1 edition, 1986.
+        \end{enumerate}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{Compilación}
+
+\begin{frame}
+\frametitle{Compilación}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{scope}[local bounding box=tex]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{TEX}};
+    \end{scope}
+
+    \begin{scope}[local bounding box=compiler, shift={([xshift=2cm]tex)}]
+        \alt<6->{\node [black!75] {\lmr\LaTeX};}{\node {\lmr\LaTeX};}
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (tex) -- (compiler);}{\draw [->, very thick] (tex) -- (compiler);}
+
+    \begin{scope}[local bounding box=pdf, shift={([xshift=2cm]compiler)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{PDF}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{PDF}};
+        }
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (compiler) -- (pdf);}{\draw [->, very thick] (compiler) -- (pdf);}
+
+    \begin{scope}[local bounding box=log, shift={([yshift=2cm]pdf)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{LOG}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{LOG}};
+        }
+    \end{scope}
+
+    \begin{scope}[local bounding box=aux, shift={([yshift=-2cm]pdf)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{AUX}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{AUX}};
+        }
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (compiler) -- (log);}{\draw [->, very thick] (compiler) -- (log);}
+    \alt<6->{\draw [->, very thick, black!75] (compiler) -- (aux);}{\draw [->, very thick] (compiler) -- (aux);}
+
+    \pause
+
+    \begin{scope}[local bounding box=bib,shift={([yshift=2cm]tex)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BIB}};
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, shorten <=0.65em, black!75] (bib) -- (compiler);}{\draw [->, very thick, shorten <=0.65em] (bib) -- (compiler);}
+
+    \pause
+
+    \begin{scope}[local bounding box=biber, shift={([xshift=2cm]pdf)}]
+        \alt<6->{\node [black!75] {\lmr Biber};}{\node {\lmr Biber};}
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (aux) -- (biber);}{\draw [->, very thick] (aux) -- (biber);}
+
+    \pause
+
+    \begin{scope}[local bounding box=blg, shift={([xshift=2cm]biber)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \alt<6->{
+            \draw [very thick, black!75]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }{
+            \draw [very thick]
+                [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+                [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+                [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+                (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        }
+        \alt<6->{
+            \draw [black!75] (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BLG}};
+        }{
+            \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BLG}};
+        }
+    \end{scope}
+
+    \begin{scope}[local bounding box=bbl, shift={([yshift=-2cm]blg)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{BBL}};
+    \end{scope}
+
+    \alt<6->{\draw [->, very thick, black!75] (biber) -- (bbl);}{\draw [->, very thick] (biber) -- (bbl);}
+    \alt<6->{\draw [->, very thick, black!75] (biber) -- (blg);}{\draw [->, very thick] (biber) -- (blg);}
+
+    \pause
+
+    \begin{scope}[local bounding box=compiler2, shift={([xshift=2cm]blg)}]
+        \node {\lmr\LaTeX};
+    \end{scope}
+
+    \pause
+
+    \draw [->, very thick] (tex) -- (compiler2);
+    \draw [->, very thick, rounded corners=5pt] (bib) -| (compiler2);
+    \draw [->, very thick] (bbl) -- (compiler2);
+
+    \pause
+
+    \begin{scope}[local bounding box=pdf2, shift={([xshift=2cm]compiler2)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{PDF}};
+    \end{scope}
+
+    \draw [->, very thick] (compiler2) -- (pdf2);
+
+    \begin{scope}[local bounding box=log2, shift={([yshift=2cm]pdf2)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{LOG}};
+    \end{scope}
+
+    \begin{scope}[local bounding box=aux2, shift={([yshift=-2cm]pdf2)}]
+        \useasboundingbox (-2ex,-2.5ex) rectangle (2ex,2.5ex);
+        \draw [very thick]
+            [rounded corners=2pt] (-1.5ex,-2ex) coordinate (element) -- ++(0ex,4ex)
+            [rounded corners=1pt] -- ++(2ex,0ex) -- ++(1ex,-1ex)
+            [rounded corners=2pt] -- ++(0ex,-3ex) -- cycle
+            (element) ++(2ex,4ex) |- ++(1ex,-1ex);
+        \draw (element) ++(3ex,0ex) node [fill=black, inner sep=0.5ex] {\texttt{AUX}};
+    \end{scope}
+
+    \draw [->, very thick] (compiler2) -- (log2);
+    \draw [->, very thick] (compiler2) -- (aux2);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+
+\section{La base de datos}
+
+\begin{frame}
+\frametitle{La base de datos}
+
+La base de datos de bibliografía (\texttt{.bib}) son totalemente independientes del documento (\texttt{.tex}).
+
+Por lo que estas pueden ser reutilizadas en múltiples documentos.
+
+Para {\lmr\BibTeX} solamente serán incluidos aquellas entradas que sean citadas en el documento.
+\end{frame}
+
+
+
+
+
+\subsection{Entradas}
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+
+Todas las entradas de la base de datos tiene la forma
+
+\begin{minted}{bibtex}
+@tipo{clave,
+    parametro = {valor},
+    parametro = "valor",
+}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+
+Se utilizará la siguiente nomenclatura
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{bibtex}
+@tipo{clave,
+    param0 = {value},
+    param1 = {value},
+    ALTparam2 = {value},
+    ALTparam3 = {value},
+    OPTparam4 = {value},
+    OPTparam5 = {value},
+    OPTparam6 = {value},
+    OPTparam7 = {value},
+}
+        \end{minted}
+    \end{column}
+    \pause
+    \begin{column}{0.5\linewidth}
+        \begin{minted}{bibtex}
+@tipo{clave,
+    param0 = {value},
+    param1 = {value},
+    param3 = {value},
+    param4 = {value},
+    param7 = {value},
+}
+        \end{minted}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Artículo}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Article{key,
+    author = {},
+    title = {},
+    journaltitle = {},
+    date = {},
+    OPTkey = {},
+    OPTsubtitle = {},
+    OPTeditor = {},
+    OPTissuetitle = {},
+    OPTlanguage = {},
+    OPToriglanguage = {},
+    OPTseries = {},
+    OPTvolume = {},
+    OPTnumber = {},
+    OPTeid = {},
+    OPTissue = {},
+    OPTpages = {},
+    OPTversion = {},
+    OPTnote = {},
+    OPTissn = {},
+    OPTaddendum = {},
+    OPTpubstate = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Libro}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Book{key,
+    author = {},
+    title = {},
+    date = {},
+    OPTkey = {},
+    OPTeditor = {},
+    OPTsubtitle = {},
+    OPTlanguage = {},
+    OPToriglanguage = {},
+    OPTvolume = {},
+    OPTpart = {},
+    OPTedition = {},
+    OPTvolumes = {},
+    OPTseries = {},
+    OPTnumber = {},
+    OPTpublisher = {},
+    OPTlocation = {},
+    OPTisbn = {},
+    OPTeid = {},
+    OPTchapter = {},
+    OPTpages = {},
+    OPTpagetotal = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Cuadernillo, Folleto o Panfleto}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Booklet{key,
+    ALTauthor = {},
+    ALTeditor = {},
+    title = {},
+    date = {},
+    OPTkey = {},
+    OPTsubtitle = {},
+    OPTlanguage = {},
+    OPThowpublished = {},
+    OPTtype = {},
+    OPTnote = {},
+    OPTlocation = {},
+    OPTeid = {},
+    OPTchapter = {},
+    OPTpages = {},
+    OPTpagetotal = {},
+    OPTaddendum = {},
+    OPTpubstate = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Conferencia}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Conference{key,
+    author = {},
+    title = {},
+    booktitle = {},
+    year = {},
+    OPTkey = {},
+    OPTeditor = {},
+    OPTvolume = {},
+    OPTnumber = {},
+    OPTseries = {},
+    OPTpages = {},
+    OPTaddress = {},
+    OPTorganization = {},
+    OPTpublisher = {},
+    OPTnote = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Dentro de un Libro}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@InBook{key,
+    title = {},
+    date = {},
+    author = {},
+    booktitle = {},
+    OPTkey = {},
+    OPTbookauthor = {},
+    OPTeditor = {},
+    OPTsubtitle = {},
+    OPTlanguage = {},
+    OPToriglanguage = {},
+    OPTvolume = {},
+    OPTpart = {},
+    OPTedition = {},
+    OPTvolumes = {},
+    OPTseries = {},
+    OPTnumber = {},
+    OPTnote = {},
+    OPTpublisher = {},
+    OPTlocation = {},
+    OPTisbn = {},
+    OPTeid = {},
+    OPTchapter = {},
+    OPTpages = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{En una colección}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@InCollection{key,
+    author = {},
+    title = {},
+    date = {},
+    OPTcrossref = {},
+    OPTkey = {},
+    OPTbooktitle = {},
+    OPTeditor = {},
+    OPTsubtitle = {},
+    OPTlanguage = {},
+    OPToriglanguage = {},
+    OPTvolume = {},
+    OPTpart = {},
+    OPTedition = {},
+    OPTvolumes = {},
+    OPTseries = {},
+    OPTnumber = {},
+    OPTnote = {},
+    OPTpublisher = {},
+    OPTlocation = {},
+    OPTisbn = {},
+    OPTeid = {},
+    OPTchapter = {},
+    OPTpages = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{En un artículo en una conferencia}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@InProceedings{key,
+    author = {},
+    title = {},
+    date = {},
+    OPTcrossref = {},
+    OPTkey = {},
+    OPTbooktitle = {},
+    OPTeditor = {},
+    OPTsubtitle = {},
+    OPTeventtitle = {},
+    OPTeventdate = {},
+    OPTvenue = {},
+    OPTlanguage = {},
+    OPTvolume = {},
+    OPTpart = {},
+    OPTvolumes = {},
+    OPTseries = {},
+    OPTnumber = {},
+    OPTnote = {},
+    OPTorganization = {},
+    OPTpublisher = {},
+    OPTlocation = {},
+    OPTchapter = {},
+    OPTpages = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Manuales o Documentación Técnica}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Manual{key,
+    ALTauthor = {},
+    ALTeditor = {},
+    title = {},
+    date = {},
+    OPTkey = {},
+    OPTsubtitle = {},
+    OPTlanguage = {},
+    OPTedition = {},
+    OPTtype = {},
+    OPTseries = {},
+    OPTnumber = {},
+    OPTversion = {},
+    OPTnote = {},
+    OPTorganization = {},
+    OPTpublisher = {},
+    OPTlocation ={},
+    OPTisbn = {},
+    OPTeid = {},
+    OPTchapter = {},
+    OPTpages = {},
+    OPTpagetotal = {},
+    OPTaddendum = {},
+    OPTpubstate = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Tesis de Maestría}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@MastersThesis{key,
+    author = {},
+    title = {},
+    school = {},
+    year = {},
+    OPTkey = {},
+    OPTtype = {},
+    OPTaddress = {},
+    OPTmonth = {},
+    OPTnote = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Tesis de Doctorado}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@PhdThesis{key,
+    author = {},
+    title = {},
+    school = {},
+    year = {},
+    OPTkey = {},
+    OPTtype = {},
+    OPTaddress = {},
+    OPTmonth = {},
+    OPTnote = {},
+    OPTannote = {}
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Misceláneo}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Misc{key,
+    ALTauthor = {},
+    ALTeditor = {},
+    title = {},
+    date = {},
+    OPTkey = {},
+    OPTsubtitle = {},
+    OPTtitleaddon = {},
+    OPTlanguage =  {},
+    OPThowpublished = {},
+    OPTtype = {},
+    OPTversion = {},
+    OPTnote = {},
+    OPTorganization = {},
+    OPTlocation = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Minuta o Acta de una conferencia}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Proceedings{key,
+    title = {},
+    date = {},
+    OPTkey = {},
+    OPTeditor = {},
+    OPTsubtitle = {},
+    OPTeventtitle = {},
+    OPTeventdate = {},
+    OPTvenue = {},
+    OPTlanguage = {},
+    OPTvolume = {},
+    OPTpart = {},
+    OPTvolumes = {},
+    OPTseries = {},
+    OPTnumber = {},
+    OPTnote = {},
+    OPTorganization = {},
+    OPTpublisher = {},
+    OPTlocation = {},
+    OPTisbn = {},
+    OPTeid = {},
+    OPTchapter = {},
+    OPTpages = {},
+    OPTpagetotal = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Reporte Técnico}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@TechReport{key,
+  author = {},
+  title = {},
+  institution = {},
+  year = {},
+  OPTkey = {},
+  OPTtype = {},
+  OPTnumber = {},
+  OPTaddress = {},
+  OPTmonth = {},
+  OPTnote = {},
+  OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{La base de datos}
+\framesubtitle{Sin publicar}
+
+\begin{multicols}{2}
+    \small
+    \begin{minted}{bibtex}
+@Unpublished{key,
+    author = {},
+    title = {},
+    date = {},
+    OPTkey = {},
+    OPTsubtitle = {},
+    OPTtype = {},
+    OPTeventtitle = {},
+    OPTeventtitleaddon = {},
+    OPTeventdate = {},
+    OPTvenue = {},
+    OPTlanguage = {},
+    OPThowpublished = {},
+    OPTnote = {},
+    OPTlocation = {},
+    OPTisbn = {},
+    OPTdoi = {},
+    OPTurl = {},
+    OPTurldate = {},
+    OPTannote = {},
+}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

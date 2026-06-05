@@ -1,0 +1,16 @@
+\documentclass{beamer}
+
+\usepackage{minted}
+
+\begin{document}
+\begin{frame}[fragile]
+\begin{minted}[breaklines]{python}
+import astropy.units as u
+from astropy.coordinates import SkyCoord
+
+# Definir posición de un objeto celeste
+c = SkyCoord(ra=10.6845*u.degree, dec=41.2692*u.degree, frame='icrs')
+print(c.to_string('hmsdms'))
+\end{minted}
+\end{frame}
+\end{document}

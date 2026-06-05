@@ -1,0 +1,816 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{animate}
+\usepackage{multicol}
+\usepackage{multimedia}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\sisetup{
+    uncertainty-mode=separate,
+}
+\pgfplotsset{
+    compat=1.18,
+}
+\pgfplotstableset{
+    col sep=comma,
+}
+
+\newcommand{\beamer}{\textsc{beamer}}
+
+\title{Presentaciones {\lmr\mdseries\beamer}}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+\section{¿Por qué {\lmr\beamer}?}
+
+\begin{frame}
+\frametitle{El reto de comunicar ciencia}
+\begin{itemize}
+    \item Las herramientas tradicionales (PowerPoint/Keynote) suelen fallar en el manejo de tipografía matemática compleja.
+    \item La desvinculación entre el «Artículo» y la «Presentación» genera doble trabajo.
+    \item {\lmr\beamer} permite reusar el código exacto de su tesis o artículo en sus diapositivas.
+\end{itemize}
+\vfill
+\centering
+\textit{«Una presentación científica debe ser tan rigurosa como el manuscrito que sustenta.»}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Ventajas de {\lmr\beamer}}
+\begin{itemize}[<+->]
+    \item Mismas fuentes y calidad que en {\lmr\LaTeX}. (O fuentes personalizadas con \texttt{fontspec} y \texttt{unicode-math})
+    \item Control exacto de la aparición de datos.
+    \item Navegación interactiva inmediata.
+    \item Un PDF que se ve igual en cualquier computadora, sin problemas de fuentes o versiones.
+    \item Animaciones programables desde el código.
+\end{itemize}
+\end{frame}
+
+
+
+\section{Anatomía de un Proyecto {\lmr\beamer}}
+
+\begin{frame}[fragile]
+\frametitle{El preámbulo mínimo}
+Para iniciar, debemos cambiar la clase del documento a {\lmr\beamer}.
+
+\inputminted{latex}{resources/minimum.tex}
+\end{frame}
+
+
+
+
+\begin{frame}
+\centering
+\includegraphics[width=0.7\linewidth]{resources/build/minimum.pdf}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{frame}}
+Cada diapositiva es su propio entorno (\texttt{frame}).
+
+\begin{description}
+    \item[\mintinline{latex}{\frametitle}] Define el encabezado.
+    \item[\mintinline{latex}{\framesubtitle}] Información secundaria.
+\end{description}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{frame}}
+
+\only<1>{\inputminted[firstline=4,lastline=7]{latex}{resources/frame.tex}}
+\only<2>{
+    \centering
+    \includegraphics[width=0.5\linewidth]{resources/build/frame.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\section{Organización de Contenidos}
+
+\begin{frame}[fragile]
+\frametitle{Uso efectivo de Bloques}
+Los bloques agrupan ideas lógicas. {\lmr\beamer} ofrece tres tipos estándar por defecto:
+
+\only<1>{\inputminted[firstline=5,lastline=15]{latex}{resources/blocks.tex}}
+\only<2>{
+    \centering
+    \includegraphics[width=0.5\linewidth]{resources/build/blocks.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Diseño Multicolumna}
+Para comparar datos o poner texto junto a una imagen/ecuación.
+
+\only<1>{\inputminted[firstline=5,lastline=12]{latex}{resources/columns.tex}}
+\only<2>{
+    \centering
+    \includegraphics[width=0.5\linewidth]{resources/build/columns.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\section{Dinámica de Presentación}
+
+\begin{frame}[fragile]
+\frametitle{El comando \texttt{\textbackslash pause}}
+Es la forma más simple de controlar el ritmo de la charla.
+
+\only<1>{\inputminted[firstline=5,lastline=11]{latex}{resources/pause.tex}}
+\only<2>{
+    \centering
+    \includegraphics[page=1,width=0.5\linewidth]{resources/build/pause.pdf}\par
+}
+\only<3>{
+    \centering
+    \includegraphics[page=2,width=0.5\linewidth]{resources/build/pause.pdf}\par
+}
+\only<4>{
+    \centering
+    \includegraphics[page=3,width=0.5\linewidth]{resources/build/pause.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Especificadores \texttt{< >}}
+Permiten un control sofisticado sobre qué aparece y cuándo desaparece.
+
+\only<1>{\inputminted[firstline=5,lastline=10]{latex}{resources/overlays.tex}}
+\only<2>{
+    \centering
+    \includegraphics[page=1,width=0.5\linewidth]{resources/build/overlays.pdf}\par
+}
+\only<3>{
+    \centering
+    \includegraphics[page=2,width=0.5\linewidth]{resources/build/overlays.pdf}\par
+}
+\only<4>{
+    \centering
+    \includegraphics[page=3,width=0.5\linewidth]{resources/build/overlays.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Enfoque Dinámico: \texttt{\textbackslash alert}}
+Podemos resaltar partes del texto según la capa para dirigir la atención.
+
+\only<1>{\inputminted[firstline=5,lastline=9]{latex}{resources/alert.tex}}
+\only<2>{
+    \centering
+    \includegraphics[page=1,width=0.5\linewidth]{resources/build/alert.pdf}\par
+}
+\only<3>{
+    \centering
+    \includegraphics[page=2,width=0.5\linewidth]{resources/build/alert.pdf}\par
+}
+\only<4>{
+    \centering
+    \includegraphics[page=3,width=0.5\linewidth]{resources/build/alert.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\section{Composición Científica}
+
+\begin{frame}
+\frametitle{Matemáticas y Fuentes}
+{\lmr\beamer} usa por defecto fuentes \emph{Sans Serif}.
+
+\only<1>{\inputminted[firstline=5,lastline=7,breaklines]{latex}{resources/equation-ss.tex}}
+\only<2>{
+    \centering
+    \includegraphics[width=0.5\linewidth]{resources/build/equation-ss.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Matemáticas y Fuentes}
+{\lmr\beamer} para usar la fuente \emph{Serif} matemática es necesario utilizar el tema de fuentes profesionales.
+
+\only<1>{\inputminted[firstline=3,lastline=3]{latex}{resources/equation-sf.tex}}
+\only<2>{
+    \centering
+    \includegraphics[width=0.5\linewidth]{resources/build/equation-sf.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\section{Visualización de Código}
+
+\begin{frame}[fragile]
+\frametitle{Visualización de scripts}
+
+\only<1>{\inputminted[firstline=6,lastline=15,breaklines]{latex}{resources/minted-py.tex}}
+\only<2>{
+    \centering
+    \includegraphics[width=0.5\linewidth]{resources/build/minted-py.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Visualización de scripts}
+
+\only<1>{\inputminted[firstline=6,lastline=15,breaklines]{latex}{resources/minted-cpp.tex}}
+\only<2>{
+    \centering
+    \includegraphics[width=0.5\linewidth]{resources/build/minted-cpp.pdf}\par
+}
+\end{frame}
+
+
+
+
+
+\section{Temas y Personalización}
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+
+{\lmr\beamer} incluye temas que cambian drásticamente el look.
+
+\pause
+
+\begin{itemize}
+    \item \textbf{Madrid:} Clásico académico, con mucha información en las barras.
+    \item \textbf{Frankfurt:} Navegación superior por secciones y subsecciones.
+    \item \textbf{Berkeley:} Barra lateral de navegación.
+    \item \textbf{Metropolis:} Minimalista, moderno.
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Default}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-default.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=2,width=\linewidth]{resources/build/theme-default.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Madrid}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-madrid.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=2,width=\linewidth]{resources/build/theme-madrid.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Frankfurt}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-frankfurt.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=2,width=\linewidth]{resources/build/theme-frankfurt.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Berkeley}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-berkeley.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=2,width=\linewidth]{resources/build/theme-berkeley.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Metropolis}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-metropolis.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=3,width=\linewidth]{resources/build/theme-metropolis.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Temas de Color y Fuentes}
+Podemos mezclar componentes para crear una identidad propia.
+\begin{itemize}
+    \item \mintinline{latex}{\usecolortheme{crane}}: Tonos amarillos y naranjas.
+    \item \mintinline{latex}{\usecolortheme{beaver}}: Tonos rojos y grises.
+    \item \mintinline{latex}{\usefonttheme{serif}}: Cambia todo el texto a fuentes \emph{Serif}.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Madrid + Crane}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-madrid-crane.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=2,width=\linewidth]{resources/build/theme-madrid-crane.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Madrid + Beaver}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-madrid-beaver.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=2,width=\linewidth]{resources/build/theme-madrid-beaver.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Temas de Estructura}
+\framesubtitle{Madrid + Serif}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=1,width=\linewidth]{resources/build/theme-madrid-serif.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \includegraphics[page=2,width=\linewidth]{resources/build/theme-madrid-serif.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Logos}
+
+{\lmr\beamer} también nos permite agregar un logo a la presentación de esta manera.
+
+\begin{minted}{latex}
+    \logo{\includegraphics[width=1cm]{logo.png}}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\section{Producción de Material}
+
+\begin{frame}[fragile]
+\frametitle{Modo \texttt{handout}}
+
+Cuando enviamos nuestra presentación por correo, no queremos 100 páginas de \emph{overlays}.
+
+\pause
+
+\begin{minted}{latex}
+\documentclass[handout]{beamer}
+\end{minted}
+
+\begin{itemize}
+    \item Colapsa todas las capas (\emph{overlays}) en una sola página por diapositiva/\emph{frame}.
+    \item Ideal para imprimir o para subir a repositorios de conferencias.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\section{Buenas Prácticas}
+
+\begin{frame}
+\frametitle{Menos es Más}
+\begin{itemize}
+    \item No más de 6-7 líneas de texto por diapositiva.
+    \item Use imágenes de alta resolución (preferiblemente vectoriales .pdf).
+    \item Evite animaciones excesivas que distraigan del contenido técnico.
+    \pause
+    \item Una diapositiva es un apoyo al orador, no un remplazo.
+\end{itemize}
+\end{frame}
+
+
+
+\section{Interactividad}
+
+\begin{frame}[label=backup0_return]
+    \frametitle{Navegación No Lineal}
+    {\lmr\beamer} permite crear botones para saltar a diapositivas de respaldo.
+
+    \vfill
+    \centering
+    \hyperlink{backup0}{\beamerbutton{Ver Datos de Calibración}}
+    \vfill
+
+    Útil durante la ronda de preguntas si alguien pide ver detalles técnicos omitidos.
+\end{frame}
+
+
+
+
+
+\begin{frame}[label=backup1_return]
+\frametitle{Navegación No Lineal}
+No necesariamente tiene que ser un botón, puede ser una gráfica o un dibujo, cualquier caja de {\lmr\LaTeX}
+
+\vfill
+\centering
+\hyperlink{backup1}{
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.75\linewidth,
+            height=0.6\paperheight,
+            xlabel={Resistencia [\unit{\ohm}]},
+            ylabel={Potencia [\unit{\watt}]},
+        ]
+            \addplot [
+                red,
+                mark=*,
+                only marks,
+                error bars,
+                x dir=both,
+                x explicit,
+                y dir=both,
+                y explicit,
+            ] table [
+                x error=ResistanceError,
+                y error=PowerError,
+            ] {resources/battery-title.csv};
+        \end{axis}
+    \end{tikzpicture}
+}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Navegación No Lineal}
+
+Este comportamiento se logra mediante el comando
+
+\begin{minted}[escapeinside=||]{latex}
+\hyperlink{|\textit{etiqueta}|}{|\textit{texto}|}
+\end{minted}
+
+Y uno de los argumentos opcional \texttt{label} del entorno \texttt{frame}, con el que asignamos esa etiqueta.
+\end{frame}
+
+
+
+
+
+\section{Inclusión de Multimedia Avanzada}
+
+\begin{frame}
+\frametitle{Multimedia}
+
+El paquete \textbf{\texttt{multimedia}} es adecuado para incrustar audio y vídeo simple usando comandos como \mintinline{latex}{\sound} y \mintinline{latex}{\movie}.
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Multimedia}
+
+\mintinline[escapeinside=||]{latex}{\movie[|\textit{options}|]{|\textit{poster}|}{|\textit{sample.avi}|}}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Multimedia}
+
+\mintinline[escapeinside=||,breaklines,breakafter=\,\[\]\{\}]{latex}{\movie[autostart,width=0.75\paperwidth,height=0.75\paperheight,loop]{}{sample.avi}}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Multimedia}
+
+\begin{center}
+    \movie[autostart,width=0.75\paperwidth,height=0.75\paperheight,loop]{}{sample.avi}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{El paquete \texttt{media9}}
+El paquete \texttt{media9} permite incrustar:
+
+\begin{itemize}
+    \item Vídeos de alta definición (MP4, FLV) con un reproductor SWF incrustado.
+    \item Modelos 3D interactivos (U3D o PRC) esenciales en documentación científica.
+\end{itemize}
+
+Las funciones avanzadas de \texttt{media9} (3D y vídeo MP4) requieren un visor PDF con soporte para «Rich Media Annotations», como Adobe Reader.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Modelos 3D Interactivos}
+
+Incrustar un modelo 3D permite a la audiencia rotar, hacer zoom y examinar la figura directamente en la diapositiva.
+
+\pause
+
+El archivo \texttt{.u3d} o \texttt{.prc} debe ser generado previamente con software externo (Asymptote, Meshlab, o conversión de CAD).
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Modelos 3D Interactivos}
+
+\begin{minted}[breaklines]{latex}
+\usepackage{media9}
+
+\includemedia[
+    width=0.7\linewidth,
+    height=0.5\linewidth,
+    addresource=molecula.u3d,
+    activate=pageopen,
+    3Dcoo=1 1 1,
+    3Dc2c=1,
+    3Dview=default,
+]{}{molecula.u3d}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Animaciones Cuadro por Cuadro con \texttt{animate}}
+
+\pause
+
+\begin{itemize}[<+->]
+    \item El paquete \texttt{animate} se usa para crear animaciones simples a partir de una secuencia de imágenes (o código \texttt{TikZ}).
+    \item El usuario puede controlar la velocidad de reproducción y pausar la animación dentro del PDF.
+    \item Es perfecto para visualizar la evolución de un proceso o los pasos de un algoritmo.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{El paquete \texttt{animate}}
+
+\begin{minted}[breaklines]{latex}
+\usepackage{animate}
+
+\begin{animateinline}[
+    autoplay,
+    loop,
+    poster=first,
+]{10}
+    \includegraphics{frame1.pdf}\newframe
+    \includegraphics{frame2.pdf}\newframe
+    \includegraphics{frame3.pdf}
+\end{animateinline}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El paquete \texttt{animate}}
+
+\begin{multicols}{2}
+    \scriptsize
+    \begin{minted}[breaklines,breakanywhere]{latex}
+\begin{animateinline}[autoplay,loop,nomouse,poster=first]{24}
+    \multiframe{359}{nAngle=0+1}{
+        \begin{tikzpicture}
+            \draw[thick,->] (-3,0) -- (3,0) node[right] {$x$};
+            \draw[thick,->] (0,-3) -- (0,3) node[above] {$y$};
+            \draw[red,thick] (0,0) circle (2.5);
+            \draw[ultra thick,cyan] (0,0) -- (0,0 |- \nAngle:2.5) node[midway,left] {$\sin(\alpha)$};
+            \draw[ultra thick,orange] (0,0) -- (\nAngle:2.5 |- 0,0) node[midway,below] {$\cos(\alpha)$};
+            \draw[densely dotted,orange] (\nAngle:2.5) -- (\nAngle:2.5 |- 0,0);
+            \draw[densely dotted,cyan] (\nAngle:2.5) -- (0,0 |- \nAngle:2.5);
+            \draw[thick,green] (0.5,0) arc (0:\nAngle:0.5);
+            \draw[thick,green,opacity=0] (0.7,0) arc (0:\nAngle:0.7) node[midway,opacity=1] {$\alpha$};
+            \draw[ultra thick,red,->] (0,0) -- (\nAngle:2.5);
+        \end{tikzpicture}
+    }
+\end{animateinline}
+    \end{minted}
+\end{multicols}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El paquete \texttt{animate}}
+
+\begin{center}
+    \begin{animateinline}[autoplay,loop,nomouse,poster=first]{24}
+        \multiframe{359}{nAngle=0+1}{
+            \begin{tikzpicture}
+                \draw[thick,->] (-3,0) -- (3,0) node[right] {$x$};
+                \draw[thick,->] (0,-3) -- (0,3) node[above] {$y$};
+                \draw[red,thick] (0,0) circle (2.5);
+                \draw[ultra thick,cyan] (0,0) -- (0,0 |- \nAngle:2.5) node[midway,left] {$\sin(\alpha)$};
+                \draw[ultra thick,orange] (0,0) -- (\nAngle:2.5 |- 0,0) node[midway,below] {$\cos(\alpha)$};
+                \draw[densely dotted,orange] (\nAngle:2.5) -- (\nAngle:2.5 |- 0,0);
+                \draw[densely dotted,cyan] (\nAngle:2.5) -- (0,0 |- \nAngle:2.5);
+                \draw[thick,green] (0.5,0) arc (0:\nAngle:0.5);
+                \draw[thick,green,opacity=0] (0.7,0) arc (0:\nAngle:0.7) node[midway,opacity=1] {$\alpha$};
+                \draw[ultra thick,red,->] (0,0) -- (\nAngle:2.5);
+            \end{tikzpicture}
+        }
+    \end{animateinline}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+
+
+\begin{frame}[label=backup0]
+    \frametitle{Datos de Calibración}
+    Esta diapositiva está oculta en el flujo normal, pero es accesible vía el botón anterior.
+    \begin{itemize}
+        \item Detector: Criogénico HPGe.
+        \item Tiempo de integración: 48 horas.
+        \item Resolución: 1.8 keV a 1.33 MeV.
+    \end{itemize}
+    \vfill\hfill
+    \hyperlink{backup0_return}{\beamerreturnbutton{Volver a la presentación}}
+\end{frame}
+
+
+\begin{frame}[label=backup1]
+    \frametitle{Datos de la Gráfica}
+    \begin{center}
+        \tiny
+        \begin{tabular}{S[table-format=2.1(1)] S[table-format=0.6(1)]}
+            \toprule
+            {Resistencia [\unit{\ohm}]} & {Potencia [\unit{\watt}]} \\
+            \midrule
+            50.0 +- 2.5 & 0.036990 +- 0.007039 \\
+            47.0 +- 2.5 & 0.036990 +- 0.007039 \\
+            44.0 +- 2.5 & 0.038360 +- 0.007053 \\
+            41.0 +- 2.5 & 0.042160 +- 0.007050 \\
+            38.0 +- 2.5 & 0.043200 +- 0.007018 \\
+            35.0 +- 2.5 & 0.046900 +- 0.007021 \\
+            32.0 +- 2.5 & 0.048840 +- 0.006963 \\
+            29.0 +- 2.5 & 0.052000 +- 0.006929 \\
+            26.0 +- 2.5 & 0.055470 +- 0.006947 \\
+            23.0 +- 2.5 & 0.060000 +- 0.006882 \\
+            20.0 +- 2.5 & 0.064660 +- 0.006879 \\
+            17.0 +- 2.5 & 0.069600 +- 0.006936 \\
+            14.0 +- 2.5 & 0.079800 +- 0.007080 \\
+            11.0 +- 2.5 & 0.086920 +- 0.007232 \\
+            8.0 +- 2.5 & 0.085500 +- 0.007262 \\
+            5.0 +- 2.5 & 0.101260 +- 0.008415 \\
+            2.0 +- 2.5 & 0.091000 +- 0.011203 \\
+            0.0 +- 2.5 & 0.081480 +- 0.011828 \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \vfill\hfill
+    \hyperlink{backup1_return}{\beamerreturnbutton{Volver a la presentación}}
+\end{frame}
+\end{document}

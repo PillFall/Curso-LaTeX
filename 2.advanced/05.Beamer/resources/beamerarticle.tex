@@ -1,0 +1,56 @@
+\ifx\classname\undefined
+    \def\classname{article}
+\fi
+
+\def\beamername{beamer}
+
+\documentclass{\classname}
+
+\ifx\classname\beamername\else
+    \usepackage{beamerarticle}
+\fi
+\usepackage{fontspec}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+
+\mode<presentation>{
+    \usetheme{metropolis}
+}
+\mode<article>{
+    \usepackage[margin=1in]{geometry}
+    \linespread{1.2}\selectfont
+}
+
+\title{Simulación de Redes de Transporte en Micelios Ideales}
+\author{Sección de Investigación}
+\date{Hoy}
+
+\begin{document}
+
+\mode<article>{\maketitle}
+
+\section{Introducción}
+
+\mode<article>{
+El estudio de los sistemas de transporte óptimo en la naturaleza ha cobrado relevancia debido a su eficiencia intrínseca. En particular, las redes formadas por micelios fúngicos demuestran una capacidad adaptativa notable para minimizar la distancia de transporte de nutrientes mientras optimizan la resiliencia ante cortes estructurales.
+
+Este trabajo presenta un modelo computacional basado en agentes para simular el crecimiento de estas redes en un entorno bidimensional isótropo. El propósito principal es evaluar si las heurísticas locales de los agentes pueden replicar la eficiencia global observada en sistemas biológicos reales bajo condiciones de estrés de recursos.
+}
+
+\begin{frame}
+\frametitle{Introducción al Modelo de Redes}
+
+\begin{block}{Objetivo General}
+    Evaluar la eficiencia adaptativa de un modelo basado en agentes para la optimización de redes de transporte bidimensionales.
+\end{block}
+
+\begin{block}{Metodología de Control}
+    \begin{itemize}
+        \item \textbf{Muestra estructural:} Crecimiento confinado a un espacio discreto con $N = 100$ nodos de recursos.
+        \item \textbf{Dinámica:} Algoritmo de optimización local por gradiente de concentración de nutrientes ($C_0$).
+        \item \textbf{Métrica:} Factor de robustez frente a la eliminación aleatoria de enlaces estructurales.
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\end{document}

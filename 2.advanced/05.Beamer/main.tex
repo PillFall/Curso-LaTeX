@@ -760,6 +760,121 @@ El archivo \texttt{.u3d} o \texttt{.prc} debe ser generado previamente con softw
 
 
 
+\section{Integración Artículo-Presentación}
+
+\begin{frame}
+\frametitle{Reutilización de Contenido Científico}
+\framesubtitle{Los Modos \texttt{article} y \texttt{presentation}}
+
+\begin{itemize}[<+->]
+    \item Las herramientas tradicionales (PowerPoint/Keynote) imponen una separación rígida entre el manuscrito de investigación y las diapositivas.
+    \item En {\lmr\LaTeX}, existen dos clases principales de documentos:
+    \begin{itemize}
+        \item El modo \textbf{Artículo/Reporte} (\texttt{article}, \texttt{report}): Ideal para la redacción técnica, texto denso, bibliografía y numeración continua.
+        \item El modo \textbf{Presentación} (\texttt{beamer}): Organiza el contenido en diapositivas (\texttt{frame}), con foco en visualización y aparición secuencial de elementos (\emph{overlays}).
+    \end{itemize}
+    \item El paquete \texttt{beamerarticle} resuelve esta duplicación al permitir que \textbf{un único archivo} se compile en cualquiera de los dos modos.
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El Paquete \texttt{beamerarticle}}
+\framesubtitle{Un código, doble propósito}
+
+Al utilizar \mintinline{latex}{\usepackage{beamerarticle}}, {\lmr\LaTeX} introduce comandos condicionales que leen la misma fuente, pero aplican diferentes reglas de estilo.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El Paquete \texttt{beamerarticle}}
+\framesubtitle{Un código, doble propósito}
+
+\begin{multicols}{2}
+    \scriptsize
+    \inputminted[breaklines]{latex}{resources/beamerarticle-sample.tex}
+\end{multicols}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El Paquete \texttt{beamerarticle}}
+\framesubtitle{Un código, doble propósito}
+
+\begin{center}
+    \includegraphics[page=2,width=0.55\linewidth]{resources/build/beamerarticle-beamer.pdf}
+\end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El Paquete \texttt{beamerarticle}}
+\framesubtitle{Un código, doble propósito}
+
+\begin{center}
+    \begin{tikzpicture}
+        \node [inner sep=0,fill=white] {\includegraphics[width=0.4\linewidth]{resources/build/beamerarticle-article.pdf}};
+    \end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Compilación y Modos Condicionales}
+\framesubtitle{Alternando entre modos}
+
+El control total se logra mediante la definición explícita del modo de compilación en el comando \mintinline{latex}{\documentclass}.
+
+\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \textbf{\Large Modo Artículo}
+        \bigskip
+        \begin{minted}{latex}
+\documentclass{article}
+\usepackage{beamerarticle}
+        \end{minted}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \textbf{\Large Modo Presentación}
+        \bigskip
+        \begin{minted}{latex}
+        \documentclass{beamer}
+        \end{minted}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Compilación y Modos Condicionales}
+\framesubtitle{Modos Condicionales}
+
+
+El comando \mintinline[escapeinside=||]{latex}{\mode<|\textit{modo}|>{|\textit{código}|}} para que un bloque se ejecute solo en el salida deseada.
+
+Este modificador funciona con todos los comandos a los que se les puede aplicar un \emph{overlay}.
+\end{frame}
+
+
+
+
 
 \begin{frame}[allowframebreaks]
 \frametitle{Referencias}

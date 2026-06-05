@@ -4,16 +4,16 @@
     \def\themename{default}
 \fi
 
-\ifx\colorname\undefined
+\ifx\colorthemename\undefined
     \def\colorname{default}
 \fi
 
-\ifx\fontname\undefined
+\ifx\fontthemename\undefined
     \def\fontname{default}
 \fi
 
 \usetheme{\themename}
-\usecolortheme{\colorname}
-\usefonttheme{\fontname}
+\usecolortheme{\colorthemename}
+\usefonttheme{\fontthemename}
 
 \input{template}

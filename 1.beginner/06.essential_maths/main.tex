@@ -1,0 +1,1537 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{calc}
+\usetikzlibrary{arrows.meta}
+\usepackage{hologo}
+
+\title{Matemáticas}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+
+
+
+
+\newlength{\mathspacetest}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Matemáticas en {\lmr\LaTeX}}
+
+{\lmr\LaTeX} es muy reconocido por su increíble y sencillo manejo de escritura matemática.
+
+\pause\bigskip
+
+\begin{alertblock}{IMPORTANTE}
+    Todos los entornos o comandos de matemáticos de {\lmr\LaTeX} hacen que este entre en modo matemático.
+\end{alertblock}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Matemáticas en {\lmr\LaTeX}}
+
+El modo matemático hace que {\lmr\LaTeX} utilice la fuente configurada en ese momento como matemática.
+
+\pause
+
+Este modo se comporta de manera similar que el modo ID. Con la excepción de que se eliminan todos los espacios en blanco del entorno.
+
+\pause\bigskip
+
+\begingroup
+\scriptsize
+\makebox[\linewidth][l]{\(\displaystyle\int\frac{1}{x^n + 1}\,dx = - \frac{1}{n} \sum_{k=1}^n \left\{ \frac{1}{2} \cos \left( \frac{2 \pi k - \pi}{n} \right) \ln \left[ x^2 - 2 \cos \left( \frac{2 \pi k - \pi}{n} \right) x + 1 \right] - \sin \left( \frac{2 \pi k - \pi}{n} \right) \arctan \left[ \frac{ x - \cos \left( \frac{2 \pi k - \pi}{n} \right)}{\sin \left( \frac{2 \pi k - \pi}{n} \right)} \right] \right\} + C\)}
+\endgroup
+\end{frame}
+
+
+
+
+
+\section{Primitivas de {\lmr\TeX}}
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de {\lmr\TeX}}
+
+{\lmr\TeX} ofrece dos primitivas o comandos para escribir ecuaciones.
+
+\pause\medskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+$a^2 + b^2 = c^2$
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        $a^2 + b^2 = c^2$
+    \end{column}
+\end{columns}
+
+\pause\medskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+$$a^2 + b^2 = c^2$$
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        $$a^2 + b^2 = c^2$$
+    \end{column}
+\end{columns}
+
+\pause\bigskip
+
+\begin{alertblock}{IMPORTANTE}
+    Son primitivas de {\lmr\TeX}.
+
+    No deberían usarse en un documento de {\lmr\LaTeX}.
+\end{alertblock}
+\end{frame}
+
+
+
+
+
+\section{Primitivas de {\lmr\LaTeX}}
+
+\begin{frame}[fragile]
+\frametitle{Primitivas de {\lmr\LaTeX}}
+
+Los comandos más básicos que ofrece {\lmr\LaTeX} son igualmente dos.
+
+\pause\medskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\(a^2 + b^2 = c^2\)
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \(a^2 + b^2 = c^2\)
+    \end{column}
+\end{columns}
+
+\pause\medskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[a^2 + b^2 = c^2\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[a^2 + b^2 = c^2\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Diferencia entre \texttt{inline} y \texttt{display}}
+
+\pause\medskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \mintinline{latex}{\(\frac{1}{2}\)}\par\bigskip
+        \(\frac{1}{2}\)\par
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \mintinline{latex}{\[\frac{1}{2}\]}\par\bigskip
+        \(\displaystyle\frac{1}{2}\)\par
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos matemáticos}
+
+{\lmr\LaTeX} nos ofrece dos entornos matemáticos, ambos con el estilo \texttt{display}, en su propia línea.
+
+\pause\medskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{equation}
+    a^2 + b^2 = c^2
+\end{equation}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr\strut\hfill\(\displaystyle a^2 + b^2 = c^2\)\hfill\makebox[0pt][r]{(1)}
+    \end{column}
+\end{columns}
+
+\pause\medskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{displaymath}
+    a^2 + b^2 = c^2
+\end{displaymath}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \begin{displaymath}
+            a^2 + b^2 = c^2
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos matemáticos}
+
+La primitiva \mintinline{latex}{\[\]} en una abreviatura del entorno \texttt{displaymath}.
+
+Por lo que con ambos se obtendrá siempre el mismo resultado.\pause\alert{*}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Entornos matemáticos}
+
+El entorno \texttt{equation} nos permite numerar las ecuaciones.
+Que podemos etiquetar y referenciar luego con las órdenes \mintinline{latex}{\label} y \mintinline{latex}{\ref}.
+
+\pause\bigskip
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{equation}
+    a^2 + b^2 = c^2
+    \label{eq:pitagoras}
+\end{equation}
+
+Como podemos ver en
+la ecuación \ref{eq:pitagoras}.
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \strut\hfill\(\displaystyle a^2 + b^2 = c^2\)\hfill\makebox[0pt][r]{(1)}\par\medskip
+
+        Como podemos ver en la ecuación 1.
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\section{Algunos comandos matemáticos}
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\frac{up}{down}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\frac{up}{down}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\frac{\frac{1}{2} + 2}{3}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\frac{\frac{1}{2} + 2}{3}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\left(  \right)\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\left(  \right)\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\left( \frac{1}{2} \right)\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\left( \frac{1}{2} \right)\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\left[ \frac{1}{2} \right\}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\left[ \frac{1}{2} \right\}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\left] \frac{1}{2} \right.\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\left] \frac{1}{2} \right.\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begingroup
+\small
+\centering
+\begin{tabular}{lc}
+    \toprule
+    Símbolo & Visualización \\
+    \midrule
+    \mintinline{latex}{()} & \(\displaystyle\left(\rule{0pt}{1em}\right)\) \\[1em]
+    \mintinline{latex}{[]} o \mintinline{latex}{\lbrack\rbrack} & \(\displaystyle\left[\rule{0pt}{1em}\right]\) \\[1em]
+    \mintinline{latex}{\{\}} o \mintinline{latex}{\lbrace\rbrace} & \(\displaystyle\left\{\rule{0pt}{1em}\right\}\) \\[1em]
+    \mintinline{latex}{\lfloor\rfloor} & \(\displaystyle\left\lfloor\rule{0pt}{1em}\right\rfloor\) \\[1em]
+    \mintinline{latex}{\lceil\rceil} & \(\displaystyle\left\lceil\rule{0pt}{1em}\right\rceil\) \\[1em]
+    \mintinline{latex}{\langle\rangle} & \(\displaystyle\left\langle\rule{0pt}{1em}\right\rangle\) \\[1em]
+    \mintinline{latex}{\lgroup\rgroup} & \(\displaystyle\left\lgroup\rule{0pt}{1em}\right\rgroup\) \\
+    \bottomrule
+\end{tabular}
+\par
+\endgroup
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \small
+        \centering
+        \begin{tabular}{lc}
+            \toprule
+            Símbolo & Visualización \\
+            \midrule
+            \mintinline{latex}{/} & \(\displaystyle\left/\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{\backslash} & \(\displaystyle\left\backslash\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{|} o \mintinline{latex}{\vert} & \(\displaystyle\left|\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{\|} o \mintinline{latex}{\Vert} & \(\displaystyle\left\|\rule{0pt}{1em}\right.\) \\
+            \bottomrule
+        \end{tabular}
+        \par
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \small
+        \centering
+        \begin{tabular}{lc}
+            \toprule
+            Símbolo & Visualización \\
+            \midrule
+            \mintinline{latex}{\uparrow} & \(\displaystyle\left\uparrow\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{\Uparrow} & \(\displaystyle\left\Uparrow\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{\downarrow} & \(\displaystyle\left\downarrow\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{\Downarrow} & \(\displaystyle\left\Downarrow\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{\updownarrow} & \(\displaystyle\left\updownarrow\rule{0pt}{1em}\right.\) \\[1em]
+            \mintinline{latex}{\Updownarrow} & \(\displaystyle\left\Updownarrow\rule{0pt}{1em}\right.\) \\
+            \bottomrule
+        \end{tabular}
+        \par
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2^2\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2^2\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2^{algo}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2^{algo}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2^{2^2}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2^{2^2}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2^2^2\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2^2{}^2\]
+    \end{column}
+\end{columns}
+
+\pause
+
+\begin{minted}{text}
+! Double superscript.
+l.14     2^2^
+           2
+I treat `x^1^2' essentially like `x^1{}^2'.
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2_2\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2_2\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2_{algo}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2_{algo}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2_{2_2}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2_{2_2}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2_2_2\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2_2{}_2\]
+    \end{column}
+\end{columns}
+
+\pause
+
+\begin{minted}{text}
+! Double subscript.
+l.14     2_2_
+           2
+I treat `x_1_2' essentially like `x_1{}_2'.
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[2 \sp 2 \sb 2\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[2 \sp 2 \sb 2\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sqrt{x}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sqrt{x}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sqrt{\frac{1}{2}}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sqrt{\frac{1}{2}}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sqrt{\frac{1}{2} + 2}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sqrt{\frac{1}{2} + 2}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sqrt[6]{\frac{1}{2} + 2}\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sqrt[6]{\frac{1}{2} + 2}\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sum i\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sum i\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sum_{i=1}^{n} i\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sum_{i=1}^{n} i\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\prod_{i=1}^{n} i\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\prod_{i=1}^{n} i\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\int_{a}^{b} x \, dx\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\int_{a}^{b} x \, dx\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\iint_{a}^{b} x \, dx\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\iint_{a}^{b} x \, dx\]
+        \pause
+        \[\int\int_{a}^b x \, dx\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\iiint_{a}^{b} x \, dx\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\iiint_{a}^{b} x \, dx\]
+        \pause
+        \[\int\int\int_{a}^b x \, dx\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Algunos comando matemáticos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\oint_{a}^{b} x \, dx\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\oint_{a}^{b} x \, dx\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Espacio Horizontal}
+
+\begingroup
+\small
+\centering
+\begin{tabular}{lcc}
+    \toprule
+    Símbolo & Tamaño & Visualización \\
+    \midrule
+    && \(HH\) \\
+    \mintinline{latex}{\,} & \settowidth{\mathspacetest}{\(\,\)}\tikz[baseline]{\draw [{|[right,width=2pt]}-{|[left,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\,H\) \\
+    \mintinline{latex}{\>} o \mintinline{latex}{\:} & \settowidth{\mathspacetest}{\(\>\)}\tikz[baseline]{\draw [{|[right,width=2pt]}-{|[left,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\>H\) \\
+    \mintinline{latex}{\;} & \settowidth{\mathspacetest}{\(\;\)}\tikz[baseline]{\draw [{|[right,width=2pt]}-{|[left,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\;H\) \\
+    \mintinline[escapeinside=||,showspaces]{latex}{\ |\strut|} & \settowidth{\mathspacetest}{\(\ \)}\tikz[baseline]{\draw [{|[right,width=2pt]}-{|[left,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\ H\) \\
+    \mintinline{latex}{\quad} & \settowidth{\mathspacetest}{\(\quad\)}\tikz[baseline]{\draw [{|[right,width=2pt]}-{|[left,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\quad H\) \\
+    \mintinline{latex}{\qquad} & \settowidth{\mathspacetest}{\(\qquad\)}\tikz[baseline]{\draw [{|[right,width=2pt]}-{|[left,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\qquad H\) \\
+    \mintinline{latex}{\!} & \settowidth{\mathspacetest}{\(\!\)}\tikz[baseline]{\draw [{|[left,width=2pt]}-{|[right,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\!H\) \\
+    \bottomrule
+\end{tabular}
+\par
+\endgroup
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Espacio Horizontal}
+
+\begingroup
+\small
+\centering
+\begin{tabular}{lcc}
+    \toprule
+    Símbolo & Tamaño & Visualización \\
+    \midrule
+    && \(HH\) \\
+    \mintinline{latex}{\hspace{2em}} & \settowidth{\mathspacetest}{\(\hspace{2em}\)}\tikz[baseline]{\draw [{|[right,width=2pt]}-{|[left,width=2pt]}] (0,0) -- (\mathspacetest,0);} & \(H\hspace{2em}H\) \\
+    \bottomrule
+\end{tabular}
+\par
+\endgroup
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Operadores}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sin x\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sin x\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Operadores}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\cos x\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\cos x\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Operadores}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\exp x\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\exp x\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Símbolos Griegos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\[\sin \phi\]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \[\sin \phi\]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Símbolos Griegos}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{tabular}{cl}
+            \toprule
+            \(\alpha A\) & \mintinline{latex}{\alpha A} \\
+            \(\beta B\) & \mintinline{latex}{\beta B} \\
+            \(\gamma \Gamma\) & \mintinline{latex}{\gamma \Gamma} \\
+            \(\delta \Delta\) & \mintinline{latex}{\delta \Delta} \\
+            \(\epsilon \varepsilon E\) & \mintinline{latex}{\epsilon \varepsilon E} \\
+            \(\zeta Z\) & \mintinline{latex}{\zeta Z} \\
+            \(\eta H\) & \mintinline{latex}{\eta H} \\
+            \(\theta \vartheta \Theta\) & \mintinline{latex}{\theta \vartheta \Theta} \\
+            \(\iota I\) & \mintinline{latex}{\iota I} \\
+            \(\kappa K\) & \mintinline{latex}{\kappa K} \\
+            \(\lambda \Lambda\) & \mintinline{latex}{\lambda \Lambda} \\
+            \(\mu M\) & \mintinline{latex}{\mu M} \\
+            \bottomrule
+        \end{tabular}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{tabular}{cl}
+            \toprule
+             \(\nu N\) & \mintinline{latex}{\nu N} \\
+             \(\xi \Xi\) & \mintinline{latex}{\xi \Xi} \\
+             \(o O\) & \mintinline{latex}{o O} \\
+             \(\pi \Pi\) & \mintinline{latex}{\pi \Pi} \\
+             \(\rho \varrho P\) & \mintinline{latex}{\rho \varrho P} \\
+             \(\sigma \Sigma\) & \mintinline{latex}{\sigma \Sigma} \\
+             \(\tau T\) & \mintinline{latex}{\tau T} \\
+             \(\upsilon \Upsilon\) & \mintinline{latex}{\upsilon \Upsilon} \\
+             \(\phi \varphi \Phi\) & \mintinline{latex}{\phi \varphi \Phi} \\
+             \(\chi X\) & \mintinline{latex}{\chi X} \\
+             \(\psi \Psi\) & \mintinline{latex}{\psi \Psi} \\
+             \(\omega \Omega\) & \mintinline{latex}{\omega \Omega} \\
+            \bottomrule
+        \end{tabular}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Fuentes matemáticas}
+
+\begingroup
+\centering
+\begin{tabular}{lcl}
+    \toprule
+    Tipo & Visualización & Comando \\
+    \midrule
+    Normal & \(\mathnormal{ABC}\) & \mintinline{latex}{\mathnormal{ABC}} \\
+    Roman & \(\mathrm{ABC}\) & \mintinline{latex}{\mathrm{ABC}} \\
+    Bold & \(\mathbf{ABC}\) & \mintinline{latex}{\mathbf{ABC}} \\
+    Calligraphic & \(\mathcal{ABC}\) & \mintinline{latex}{\mathcal{ABC}} \\
+    Sans Serif & \(\mathsf{ABC}\) & \mintinline{latex}{\mathsf{ABC}} \\
+    Italic & \(\mathit{ABC}\) & \mintinline{latex}{\mathit{ABC}} \\
+    Typewritter & \(\mathtt{ABC}\) & \mintinline{latex}{\mathtt{ABC}} \\
+    \bottomrule
+\end{tabular}
+\par
+\endgroup
+\end{frame}
+
+
+
+
+
+\section{El estándar de la \hologo{AmS}}
+
+\begin{frame}
+\frametitle{¿Por qué no basta con el modo básico?}
+La \textit{American Mathematical Society} (\hologo{AmS}) desarrolló una serie de paquetes para resolver problemas que {\lmr\TeX} no manejaba de forma nativa:
+
+\bigskip\pause
+
+\begin{itemize}[<+->]
+    \item \textbf{Alineación:} Ecuaciones que ocupan varias líneas.
+    \item \textbf{Numeración:} Control fino sobre qué se numera y cómo.
+    \item \textbf{Símbolos:} Hay símbolos matemáticos que no existen (\(\mathbb{R}\)).
+    \item \textbf{Estructura:} Entornos específicos para teoremas, lemas y pruebas.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{¿Por qué no basta con el modo básico?}
+\begin{minted}{latex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{¿Por qué no basta con el modo básico?}
+
+Cuando el paquete \texttt{amsmath} es incluido, la definición de \mintinline{latex}{\[\]} cambia para ser un alias del entorno \texttt{equation*}.
+
+El entorno \texttt{equation*} es similar a \texttt{displaymath}, pero es mucho más personalizable.
+\end{frame}
+
+
+
+
+
+\section{Alineación de Ecuaciones}
+
+
+\subsection{\texttt{align}}
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{align}}
+
+Permite alinear en columnas usando el símbolo \emph{et} (\texttt{\&}).
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{align}
+  (a+b)^2 &= a^2 + 2ab + b^2 \\
+  (a-b)^2 &= a^2 - 2ab + b^2
+\end{align}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \begin{displaymath}
+            \begin{aligned}
+                (a+b)^2 &= a^2 + 2ab + b^2 \quad \text{(1)} \\
+                (a-b)^2 &= a^2 - 2ab + b^2 \quad \text{(2)}
+            \end{aligned}
+        \end{displaymath}
+    \end{column}
+\end{columns}
+
+\bigskip
+
+\small \textit{Nota: El símbolo \texttt{\&} define el punto de anclaje (usualmente el igual).}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{align}}
+Permite alinear en columnas usando el símbolo \emph{et} (\texttt{\&}).
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{align*}
+  \int \frac{2x}{x^2} \, dx
+    &= \int \frac{1}{u} \, du
+    & u &= x^2 \\
+  &= \ln(u) + C \\
+  &= \ln(x^2) + C
+\end{align*}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \begin{displaymath}
+            \begin{aligned}
+                \int \frac{2x}{x^2} \, dx
+                    &= \int \frac{1}{u} \, du
+                    & u &= x^2 \\
+                &= \ln(u) + C \\
+                &= \ln(x^2) + C
+            \end{aligned}
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{\texttt{gather}}
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{gather}}
+Centra varias ecuaciones sin alinearlas entre sí.
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{gather}
+  a^2 \pm 2ab + b^2
+    = (a \pm b)^2 \\
+  a^2 - b^2 = (a + b)(a - b)
+\end{gather}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \begin{displaymath}
+            \begin{gathered}
+                a^2 \pm 2ab + b^2 = (a \pm b)^2 \quad \text{(1)} \\
+                a^2 - b^2 = (a + b)(a - b) \quad \text{(2)}
+            \end{gathered}
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{gather}}
+Centra varias ecuaciones sin alinearlas entre sí.
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{gather*}
+  \int \frac{2x}{x^2} \, dx
+    = \int \frac{1}{u} \, du \\
+  u = x^2 \\
+  = \ln(u) + C \\
+  = \ln(x^2) + C
+\end{gather*}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \begin{displaymath}
+            \begin{gathered}
+                \int \frac{2x}{x^2} \, dx
+                    = \int \frac{1}{u} \, du \\
+                u = x^2 \\
+                = \ln(u) + C \\
+                = \ln(x^2) + C
+            \end{gathered}
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{\texttt{multline}}
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{multline}}
+Para una sola ecuación que es demasiado larga para una línea.
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{multline}
+  A = a + b + c + d + e \\
+  + f + g + h + i + j + k \\
+  + l + m + n + o + p
+\end{multline}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \lmr
+        \begin{multline*}
+            A = a + b + c + d + e \\
+            + f + g + h + i + j + k \\
+            + l + m + n + o + p \quad \text{(1)}
+        \end{multline*}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El entorno \texttt{multline}}
+Para una sola ecuación que es demasiado larga para una línea.
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{multline*}
+  A = a + b + c + d + e \\
+  + f + g + h + i + j + k \\
+  + l + m + n + o + p
+\end{multline*}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \begin{multline*}
+            A = a + b + c + d + e \\
+            + f + g + h + i + j + k \\
+            + l + m + n + o + p
+        \end{multline*}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{\texttt{aligned}, \texttt{gathered}, \texttt{split}}
+
+\begin{frame}[fragile]
+\frametitle{Ecuaciones numeradas como bloque}
+
+A veces queremos una sola numeración para varias líneas de desarrollo.
+
+La \hologo{AmS} nos ofrece los entornos:
+
+\begin{itemize}
+    \item \texttt{aligned} \uncover<2->{\(\rightarrow\) \texttt{align}}
+    \item \texttt{gathered} \uncover<2->{\(\rightarrow\) \texttt{gather}}
+    \item \texttt{split} \uncover<2->{\(\rightarrow\) \texttt{align}\alert{*}}
+\end{itemize}
+
+\pause
+
+Que funcionan igual que su contraparte, pero solamente se pueden utilizar dentro de otro entorno.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ecuaciones numeradas como bloque}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{equation}
+  \begin{aligned}
+    a + b &= 7 \\
+    ab &= 10
+  \end{aligned}
+\end{equation}
+        \end{minted}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+        \begin{displaymath}
+            \begin{aligned}
+                a + b &= 7 \\
+                ab &= 10
+            \end{aligned}
+            \quad (1)
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\section{Matrices y Arreglos}
+
+\begin{frame}
+\frametitle{Matrices de la \hologo{AmS}}
+
+Los paquetes de la \hologo{AmS} facilitan la creación de matrices con diferentes delimitadores:
+\begin{itemize}
+    \item \texttt{matrix}: sin nada
+    \item \texttt{pmatrix}: paréntesis
+    \item \texttt{bmatrix}: corchetes
+    \item ...
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Matrices de la \hologo{AmS}}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{pmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1
+\end{pmatrix}
+        \end{minted}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+        \begin{displaymath}
+            \begin{pmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                0 & 0 & 1
+            \end{pmatrix}
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Matrices de la \hologo{AmS}}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\begin{bmatrix}
+  1 & 0 \\
+  0 & 1 \\
+  0 & 0
+\end{bmatrix}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \begin{displaymath}
+            \begin{bmatrix}
+                1 & 0 \\
+                0 & 1 \\
+                0 & 0
+            \end{bmatrix}
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{Fuentes}
+
+\begin{frame}[fragile]
+\frametitle{Fuentes de la \hologo{AmS}}
+
+\begingroup
+\centering
+\begin{tabular}{lcl}
+    \toprule
+    Tipo & Visualización & Comando \\
+    \midrule
+    Blackboard Bold & \(\mathbb{ABC}\) & \mintinline{latex}{\mathbb{ABC}} \\
+    Gothic & \(\mathfrak{ABC}\) & \mintinline{latex}{\mathfrak{ABC}} \\
+    \bottomrule
+\end{tabular}
+\par
+\endgroup
+\end{frame}
+
+
+
+
+
+\section{Definiciones por casos}
+\begin{frame}[fragile]
+\frametitle{Definiciones por casos}
+Fundamental para funciones definidas a trozos.
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+f(x) = \begin{cases}
+  1 & \text{si } x \in \mathbb{Q} \\
+  0 & \text{si \(x \notin \mathbb{Q}\)}
+\end{cases}
+        \end{minted}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+        \begin{displaymath}
+            f(x) = \begin{cases}
+                1 & \text{si } x \in \mathbb{Q} \\
+                0 & \text{si  \(x \notin \mathbb{Q}\)}
+            \end{cases}
+        \end{displaymath}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Trucos y Datos Curiosos}
+
+Existen calculadoras y programas que son capaces de recibir o recibir matemáticas escritas en el formato de {\lmr\LaTeX}.
+
+\begin{itemize}[<+->]
+    \item \alert<1>{\bf Macsyma} o \alert<1>{\bf Maxima}: Es un CAS muy potente, que es capaz de entregar las operaciones en el formato de {\lmr\LaTeX}.
+    \item \alert<2-3>{\bf Emacs}, un editor de código de GNU con el que podemos editar un documento de {\lmr\LaTeX} (\emph{\lmr AUC\TeX}). Además es capaz de leer y operar sobre ecuaciones escritas en el mismo, mediante \alert<3>{\bf Calc Mode}, que es un CAS.
+\end{itemize}
+
+\pause
+
+Por lo que podemos realizar cálculos complejos en una calculadora (que entiende álgebra), y obtener la representación en {\lmr\LaTeX} de lo que estamos calculando.
+\end{frame}
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

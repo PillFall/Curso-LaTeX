@@ -1,0 +1,1051 @@
+\documentclass[12pt,aspectratio=169,ignorenonframetext]{ltxbeamer}
+
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{hologo}
+
+\title{Grandes Documentos y Programación}
+\subtitle{Curso de {\lmr\LaTeX}}
+\author{Joar Buitrago\texorpdfstring{\thanks{jebuitragoc@unal.edu.co}}{ <jebuitragoc@unal.edu.co>}}
+\date{}
+
+\addbibresource{bibliography.bib}
+
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+
+
+\section{Documentos Grandes}
+
+\begin{frame}
+\frametitle{El problema de un documento gigante}
+
+Al trabajar en documentos grandes, como por ejemplos tesis o libros, solemos tener una gran cantidad de problemas para llevar un orden dentro del documento.
+
+{\lmr\LaTeX} incluye dos comandos para hacer el manejo de documentos grandes mucho más ameno.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El problema de un documento gigante}
+
+\begin{itemize}
+    \item \mintinline{latex}{\include}
+    \item \mintinline{latex}{\input}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El problema de un documento gigante}
+
+\begin{minted}[escapeinside=||]{latex}
+    \include{|\textit{archivo}|}
+\end{minted}
+
+\pause
+
+El comando \mintinline{latex}{\include} hace 3 cosas.
+
+\begin{enumerate}
+    \item Realiza una llamada al comando \mintinline{latex}{\clearpage}.
+    \item Inserta el código contenido dentro \texttt{\textit{archivo}}.
+    \item Realiza una llamada al comando \mintinline{latex}{\clearpage}.
+\end{enumerate}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El problema de un documento gigante}
+
+El comando \mintinline{latex}{\include} puede ser controlado y manipulado exigiendo que incluya solamente algunos de los elementos escritos.
+
+Esto se logra con el comando \mintinline{latex}{\includeonly}, el cual debe ir en el preámbulo.
+
+\pause
+
+\begin{minted}{latex}
+\includeonly{preamble,chapters/chap1}
+
+\include{preamble}
+\include{chapters/chap1}
+\include{chapters/chap2}
+\include{attachments}
+\end{minted}
+
+{\lmr\LaTeX} solamente incluirá los archivos \texttt{preamble} y \texttt{chapters/chap1}.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El problema de un documento gigante}
+
+\begin{minted}[escapeinside=||]{latex}
+    \input{|\textit{archivo}|}
+\end{minted}
+
+\pause
+
+El comando \mintinline{latex}{\input} hace una sola cosa.
+
+\begin{enumerate}
+    \item Inserta el código contenido dentro \texttt{\textit{archivo}}.
+\end{enumerate}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{El problema de un documento gigante}
+
+Podemos controlar hasta qué lugar del archivo {\lmr\LaTeX} debe incluir, colocando dentro del archivo el comando \mintinline{latex}{\endinput}
+
+\pause
+
+\begin{minted}[breaklines]{latex}
+\chapter{Preámbulo}
+
+En este capitulo exploraremos diversos elementos...
+
+\endinput
+
+Esto ya no se incluirá en el documento final.
+\end{minted}
+\end{frame}
+
+
+
+
+
+\section{\lmr{\LaTeX} como un lenguaje de programación}
+
+\begin{frame}
+\frametitle{{\lmr\LaTeX} como un lenguaje de programación}
+
+{\lmr\TeX} fue diseñado para ser un lenguaje de marcado.
+Pero debido a diversas limitantes y complicaciones técnicas que tuvo Donald Knuth durante la creación de este sistema no tuvo más remedio que crear un lenguaje Turing completo.
+
+Esto quiere decir, que {\lmr\TeX} (y por ende {\lmr\LaTeX}) es un lenguaje de programación (no muy eficiente).
+\end{frame}
+
+
+
+
+
+\subsection{{\lmr\TeX}}
+
+\begin{frame}[fragile]
+\frametitle{Los comandos \mintinline{latex}{\def} y \mintinline{latex}{\let}}
+
+Estas primitivas de {\lmr\TeX} son bastante útiles para crear comandos sencillos personalizados.
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Los comandos \mintinline{latex}{\def} y \mintinline{latex}{\let}}
+
+El comando \mintinline{latex}{\def} define un nuevo comando.
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\def\gnuplot{gnuplot}
+\def\test{\gnuplot}
+
+\test
+
+\def\gnuplot{not gnuplot}
+
+\test
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \def\gnuplot{gnuplot}
+        \def\test{\gnuplot}
+
+        \test
+
+        \def\gnuplot{not gnuplot}
+
+        \test
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Los comandos \mintinline{latex}{\def} y \mintinline{latex}{\let}}
+
+El comando \mintinline{latex}{\let} asigna una definición.
+
+\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\def\gnuplot{gnuplot}
+\let\test=\gnuplot
+
+\test
+
+\def\gnuplot{not gnuplot}
+
+\test
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \def\gnuplot{gnuplot}
+        \let\test=\gnuplot
+
+        \test
+
+        \def\gnuplot{not gnuplot}
+
+        \test
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Los comandos \mintinline{latex}{\def} y \mintinline{latex}{\let}}
+
+\begin{alertblock}{IMPORTANTE}
+    Estas primitivas de {\lmr\TeX} no tienen en cuenta si ya existía definición previa, por lo que pueden generar errores si se redefinen comandos propios de {\lmr\TeX} o {\lmr\LaTeX}.
+\end{alertblock}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Comando}
+
+\begin{itemize}
+    \item \mintinline{latex}{\newcommand}
+    \item \mintinline{latex}{\renewcommand}
+    \item \mintinline{latex}{\providecommand}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\subsection{{\lmr\LaTeXe}}
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Comando}
+
+\begin{minted}[escapeinside=||]{latex}
+\newcommand
+    *
+    {\|\textit{comando}|}
+    [|\textit{núm. argumentos}|]
+    [|\textit{valor por defecto}|]
+    {|\textit{definición}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Comando}
+
+\begin{itemize}
+    \item \mintinline{latex}{\newcommand}: Genera un error si el comando ya existe.
+    \item \mintinline{latex}{\renewcommand}: Arroja un error si el comando no existía.
+    \item \mintinline{latex}{\providecommand}: No redefine el comando si este ya existe.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Comando}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\newcommand
+    {\test}
+    [1]
+    [Mundo]
+    {Hola #1}
+
+\test
+
+\test[German]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \newcommand{\test}[1][Mundo]{Hola #1}
+
+        \test
+
+        \test[German]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Entorno}
+
+\begin{itemize}
+    \item \mintinline{latex}{\newenvironment}\only<2->{: Genera un error si el entorno ya existe.}
+    \item \mintinline{latex}{\renewenvironment}\only<2->{: Arroja un error si el entorno no existía.}
+    \item \mintinline{latex}{\provideenvironment}\only<2->{: No redefine el entorno si este ya existe.}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Entorno}
+
+\begin{minted}[escapeinside=||]{latex}
+\newenvironment
+    *
+    {|\textit{entorno}|}
+    [|\textit{núm. argumentos}|]
+    [|\textit{valor por defecto}|]
+    {|\textit{principio}|}
+    {|\textit{final}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Entorno}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\newenvironment
+    {test}
+    {Hola}
+    {y Adios}
+
+\begin{test}
+    Mundo
+\end{test}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \newenvironment
+            {test}
+            {Hola}
+            {y Adios}
+
+        \begin{test}
+            Mundo
+        \end{test}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Contador}
+
+\begin{itemize}
+    \item \mintinline{latex}{\newcounter}
+    \item \mintinline{latex}{\stepcounter}
+    \item \mintinline{latex}{\setcounter}
+    \item \mintinline{latex}{\addtocounter}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Contador}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\newcounter{mycounter}
+\arabic{mycounter}\par
+\setcounter{mycounter}{16}
+\alph{mycounter}\par
+\addtocounter{mycounter}{5}
+\roman{mycounter}\par
+\addtocounter{mycounter}{-3}
+\Alph{mycounter}\par
+\addtocounter{mycounter}
+    {\value{mycounter}}
+\Roman{mycounter}\par
+\stepcounter{mycounter}
+\arabic{mycounter}\par
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \newcounter{mycounter}
+        \arabic{mycounter}\par
+        \setcounter{mycounter}{16}
+        \alph{mycounter}\par
+        \addtocounter{mycounter}{5}
+        \roman{mycounter}\par
+        \addtocounter{mycounter}{-3}
+        \Alph{mycounter}\par
+        \addtocounter{mycounter}{\value{mycounter}}
+        \Roman{mycounter}\par
+        \stepcounter{mycounter}
+        \arabic{mycounter}\par
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Contador}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\newcounter{parentcounter}
+\newcounter{childcounter}
+    [parentcounter]
+\stepcounter{parentcounter}
+\stepcounter{childcounter}
+\arabic{parentcounter}-
+    \arabic{childcounter}\par
+\stepcounter{childcounter}
+\stepcounter{childcounter}
+\arabic{parentcounter}-
+    \arabic{childcounter}\par
+\stepcounter{parentcounter}
+\stepcounter{childcounter}
+\arabic{parentcounter}-
+    \arabic{childcounter}\par
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}%
+        \lmr%
+        \newcounter{parentcounter}%
+        \newcounter{childcounter}[parentcounter]%
+        \stepcounter{parentcounter}%
+        \stepcounter{childcounter}%
+        \arabic{parentcounter}-\arabic{childcounter}\par
+        \stepcounter{childcounter}%
+        \stepcounter{childcounter}%
+        \arabic{parentcounter}-\arabic{childcounter}\par
+        \stepcounter{parentcounter}%
+        \stepcounter{childcounter}%
+        \arabic{parentcounter}-\arabic{childcounter}\par
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Longitud}
+
+\begin{itemize}
+    \item \mintinline{latex}{\newlength}
+    \item \mintinline{latex}{\setlength}
+    \item \mintinline{latex}{\addtolength}
+    \item \mintinline{latex}{\settodepth}
+    \item \mintinline{latex}{\settoheight}
+    \item \mintinline{latex}{\settowidth}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Longitud}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\newlength{\mylength}
+\the\mylength\par
+\setlength{\mylength}{1em}
+\the\mylength\par
+\addtolength{\mylength}{10ex}
+\the\mylength\par
+\addtolength{\mylength}{-5mm}
+\the\mylength\par
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr%
+        \newlength{\mylength}%
+        \the\mylength\par
+        \setlength{\mylength}{1em}%
+        \the\mylength\par
+        \addtolength{\mylength}{10ex}%
+        \the\mylength\par
+        \addtolength{\mylength}{-5mm}%
+        \the\mylength\par
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Longitud}
+
+\begingroup
+\centering
+\begin{tikzpicture}
+    \node [inner sep=0pt] (O) {\fontsize{56}{60}\lmr Murcielago};
+    \draw [|<->|] ([shift={(0,0.5)}]O.north west) -- ([shift={(0,0.5)}]O.north east) node [midway, above] {\mintinline{latex}{\width}};
+    \draw [|<->|] ([shift={(-0.5,0)}]O.north west) -- ([shift={(-0.5,0)}]O.south west) node [midway, left] {\mintinline{latex}{\totalheight}};
+    \draw [|<->|] ([shift={(0.5,0)}]O.north east) -- ([shift={(0.5,0)}]O.north east |- O.base) node [midway, right] {\mintinline{latex}{\height}};
+    \draw [|<->|] ([shift={(0.5,0)}]O.north east |- O.base) -- ([shift={(0.5,0)}]O.south east) node [midway, right] {\mintinline{latex}{\depth}};
+\end{tikzpicture}
+\par
+\endgroup
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Booleanos}
+
+\mintinline{latex}{\newif}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\LaTeXe}}
+\framesubtitle{Longitud}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\newif\ifworks
+\workstrue
+\ifworks
+    Es verdad
+\else
+    Es falso
+\fi
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr%
+        \newif\ifworks
+        \workstrue
+        \ifworks
+            Es verdad
+        \else
+            Es falso
+        \fi
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\subsection{{\lmr\hologo{LaTeX3}}}
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Comando}
+
+\begin{itemize}
+    \item \mintinline{latex}{\NewDocumentCommand}: Genera un error si el comando ya existe.
+    \item \mintinline{latex}{\RenewDocumentCommand}: Arroja un error si el comando no existía.
+    \item \mintinline{latex}{\ProvideDocumentCommand}: No redefine el comando si este ya existe.
+    \item \mintinline{latex}{\DeclareDocumentCommand}: Redefine siempre el comando.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Comando}
+
+\begin{minted}[escapeinside=||]{latex}
+\NewDocumentCommand
+    {\|\textit{comando}|}
+    {|\textit{especificador de argumentos}|}
+    {|\textit{definición}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Comando}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\NewDocumentCommand
+    {\salutation}
+    { O{Mundo} }
+    {Hola #1}
+
+\salutation
+
+\salutation[German]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \NewDocumentCommand
+            {\salutation}
+            { O{Mundo} }
+            {Hola #1}
+
+        \salutation
+
+        \salutation[German]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Comando}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\NewDocumentCommand
+    {\salutation}
+    { O{Hola} O{Mundo} }
+    {#1 #2}
+
+\salutation
+
+\salutation[Saluton]
+
+\salutation[Saluton][German]
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \NewDocumentCommand
+            {\salutation}
+            { O{Hola} O{Mundo} }
+            {#1 #2}
+
+        \salutation
+
+        \salutation[Saluton]
+
+        \salutation[Saluton][German]
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Entorno}
+
+\begin{itemize}
+    \item \mintinline{latex}{\NewDocumentEnvironment}: Genera un error si el entorno ya existe.
+    \item \mintinline{latex}{\RenewDocumentEnvironment}: Arroja un error si el entorno no existía.
+    \item \mintinline{latex}{\ProvideDocumentEnvironment}: No redefine el entorno si este ya existe.
+    \item \mintinline{latex}{\DeclareDocumentEnvironment}: Redefine siempre el entorno.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Entorno}
+
+\begin{minted}[escapeinside=||]{latex}
+\NewDocumentEnvironment
+    {|\textit{entorno}|}
+    {|\textit{especificador de argumentos}|}
+    {|\textit{principio}|}
+    {|\textit{final}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Entorno}
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}{latex}
+\NewDocumentEnvironment
+    {welcome}
+    {}
+    {Hola}
+    {y Adios}
+
+\begin{welcome}
+    Mundo
+\end{welcome}
+        \end{minted}
+    \end{column}
+    {\color{gray} \vline}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \NewDocumentEnvironment
+            {welcome}
+            {}
+            {Hola}
+            {y Adios}
+
+        \begin{welcome}
+            Mundo
+        \end{welcome}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Especificadores obligatorios}
+
+\setbeamersize{description width={0.4\textwidth}}
+\begin{description}
+    \item[\texttt{m}] Un argumento \emph{mandatorio}.
+    \item[\texttt{r \textit{tokenA} \textit{tokenB}}] Un argumento \emph{requerido}, rodeado por \texttt{\textit{tokenA}} y \texttt{\textit{tokenB}}.
+    \item[\texttt{R \textit{tokenA} \textit{tokenB} \{\textit{default}\}}] Un argumento \emph{requerido}, rodeado por \texttt{\textit{tokenA}} y \texttt{\textit{tokenB}}.
+    \item[\texttt{v}] Un argumento \emph{verbatim} o literal, no será procesado por {\lmr\LaTeX} como código.
+    \item[\texttt{b}] En un entorno, los contenidos del entorno.
+    \item[\texttt{c}] En un entorno, los contenidos literales del entorno.
+\end{description}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Especificadores opcionales}
+
+\setbeamersize{description width={0.4\textwidth}}
+\begin{description}
+    \item[\texttt{o}] Un argumento \emph{opcional}.
+    \item[\texttt{d \textit{tokenA} \textit{tokenB}}] Un argumento \emph{opcional}, rodeado por \texttt{\textit{tokenA}} y \texttt{\textit{tokenB}}.
+    \item[\texttt{O \{\textit{default}\}}] Un argumento \emph{opcional} con valor por defecto.
+    \item[\texttt{D \textit{tokenA} \textit{tokenB} \{\textit{default}\}}] Un argumento opcional, rodeado por \texttt{\textit{tokenA}} y \texttt{\textit{tokenB}}, con valor por defecto.
+    \item[\texttt{s}] Un comando con posibilidad de ser estrellado.
+    \item[\texttt{t \textit{token}}] Un comando con posibilidad de ser \emph{token}izado.
+\end{description}
+\end{frame}
+
+
+
+
+
+\section{Clases y Paquetes}
+
+\begin{frame}
+\frametitle{Clases y Paquetes}
+
+Las clases y los paquetes de {\lmr\LaTeX} se definen en archivos \texttt{.cls} y \texttt{.sty}.
+
+\pause
+
+Estos archivos {\lmr\LaTeX} los busca en:
+
+\begin{itemize}
+    \item El directorio de instalación de la distribución y subdirectorios.
+    \item El directorio actual.
+    \item Los directorios definidos en la variable de entorno \texttt{TEXINPUTS}.
+\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Estructura de una clase}
+
+\begin{minted}{latex}
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesClass{article}[1806-08-20 Article class by OAN]
+
+Código de la clase
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Estructura de un paquete}
+
+\begin{minted}{latex}
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{gnuplot}[1806-08-20 gnuplot support]
+
+Código de la clase
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones}
+
+\begin{minted}[escapeinside=||]{latex}
+\DeclareOption
+    {|\textit{opcion}|}
+    {|\textit{código}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones}
+
+\begin{minted}[escapeinside=||]{latex}
+\DeclareOption*
+    {|\textit{código}|}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones}
+
+\begin{minted}[escapeinside=||]{latex}
+\DeclareOption{color}{\colortrue}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones}
+
+\begin{minted}[escapeinside=||]{latex}
+\ProcessOptions\relax
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones}
+
+\begin{minted}[escapeinside=||]{latex}
+\LoadClass{article}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Opciones}
+
+\begin{minted}[escapeinside=||]{latex}
+\RequirePackage{geometry}
+\end{minted}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{{\lmr\hologo{LaTeX3}}}
+\framesubtitle{Entorno}
+
+\begin{columns}
+    \begin{column}{0.5\linewidth}
+        \lmr
+        \newif\ifprime \newif\ifunknown %
+        \newcount\n \newcount\p \newcount\d \newcount\a %
+        \def\primes#1{2,~3%
+            \n=#1 \advance\n by-2 %
+            \p=5 %
+            \loop\ifnum\n>0 \printifprime\advance\p by2 \repeat} %
+        \def\printp{, %
+            \ifnum\n=1 y\ \fi %
+            \number\p \advance\n by -1 }
+            \def\printifprime{\testprimality \ifprime\printp\fi} %
+        \def\testprimality{{\d=3 \global\primetrue
+            \loop\trialdivision \ifunknown\advance\d by2 \repeat}} %
+        \def\trialdivision{\a=\p \divide\a by\d
+            \ifnum\a>\d \unknowntrue\else\unknownfalse\fi %
+            \multiply\a by\d %
+            \ifnum\a=\p \global\primefalse\unknownfalse\fi} %
+
+        Los primeros 30 primos son \primes{30}.
+    \end{column}
+    \pause
+    {\color{gray} \vline}
+    \begin{column}{0.5\textwidth}
+        \tiny
+        \begin{minted}[breaklines]{latex}
+\newif\ifprime \newif\ifunknown %
+\newcount\n \newcount\p \newcount\d \newcount\a %
+\def\primes#1{2,~3%
+    \n=#1 \advance\n by-2 %
+    \p=5 %
+    \loop\ifnum\n>0 \printifprime\advance\p by2 \repeat}
+\def\printp{, %
+    \ifnum\n=1 y\ \fi %
+    \number\p \advance\n by -1 }
+    \def\printifprime{\testprimality \ifprime\printp\fi}
+\def\testprimality{{\d=3 \global\primetrue
+    \loop\trialdivision \ifunknown\advance\d by2 \repeat}}
+\def\trialdivision{\a=\p \divide\a by\d
+    \ifnum\a>\d \unknowntrue\else\unknownfalse\fi
+    \multiply\a by\d
+    \ifnum\a=\p \global\primefalse\unknownfalse\fi}
+
+Los primeros 30 primos son \primes{30}.
+        \end{minted}
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{Referencias}
+\nocite{*}
+\printbibliography
+\end{frame}
+\end{document}

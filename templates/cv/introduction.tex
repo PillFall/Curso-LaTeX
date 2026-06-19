@@ -1,0 +1,61 @@
+\part{Introducción}
+
+Este documento está orientado a guiarte en el proceso de generar una hoja de vida profesional en {\lmr\LaTeX}.
+Esta plantilla ha sido diseñada bajo el formato \texttt{.dtx} ({\lmr Documented \LaTeX}), lo que significa que el código fuente de la plantilla y este manual de usuario coexisten en un único archivo modular e independiente.
+Si compilas este documento se obtiene esta guía de uso y estilo.
+
+El objetivo principal de utilizar esta clase es separar por completo el contenido de la forma.
+Mientras te concentras en redactar tus logros y experiencia de manera clara y precisa, {\lmr\LaTeX} se encarga de gestionar la consistencia visual, la jerarquía tipográfica y la optimización del espacio.
+Esto garantiza un documento elegante para un evaluador humano y perfectamente legible para los sistemas automatizados de selección de personal (ATS).
+
+
+
+\section{Estructura del proyecto y flujo de trabajo}
+
+Esta plantilla se compone estrictamente de dos archivos fundamentales que trabajan en conjunto:
+
+\begin{itemize}
+    \item \textbf{Archivo de instalación (\texttt{.ins}):} Es el encargado de generar el motor de diseño. Al compilarlo, se extrae automáticamente el archivo de clase (\texttt{.cls}), el cual contiene toda la lógica, macros y herramientas de formato de la plantilla.
+    \item \textbf{Archivo documentado (\texttt{.dtx}):} Es el archivo que estás leyendo en este momento. Su función es doble: por un lado, contiene el código fuente de la plantilla y, por el otro, genera este manual de usuario para explicarte cómo utilizar cada comando.
+\end{itemize}
+
+
+
+\section{Instrucciones para Empezar}
+
+Para comenzar a construir tu hoja de vida, debes seguir este orden cronológico en tu entorno de desarrollo o terminal:
+
+\begin{enumerate}
+    \item \textbf{Generar la documentación:} Para generar el manual de documentación de la clase debes ejecutar el comando:
+    \begin{verbatim}
+lualatex cv.dtx
+    \end{verbatim}
+
+    \item \textbf{Generar la clase:} Compila el archivo \texttt{.ins} utilizando:
+    \begin{verbatim}
+lualatex cv.ins
+    \end{verbatim}
+    Esto crea el archivo \texttt{cv.cls} en tu directorio de trabajo.
+
+    \item \textbf{Escribir la Hoja de Vida:} Crea un archivo nuevo con extensión \texttt{.tex} (por ejemplo, \texttt{cv.tex}) en la misma carpeta donde se encuentra el archivo \texttt{cv.cls} generado. En la primera línea del documento, invoca la clase utilizando:
+    \begin{verbatim}
+\documentclass{cv}
+    \end{verbatim}
+\end{enumerate}
+
+A partir de este punto, puedes utilizar las siguientes partes de este manual para conocer los comandos específicos que esta plantilla te ofrece para dar formato a tus datos personales, educación, experiencia laboral y habilidades.
+
+
+
+\section{Cómo leer esta guía}
+
+Este manual está organizado de forma secuencial, siguiendo el mismo orden lógico en el que construyes una hoja de vida.
+Comenzando por la configuración global, el encabezado con tus datos personales, y avanzando hacia las secciones.
+
+A lo largo de las secciones, encontrarás bloques técnicos donde se definen los nuevos comandos utilizando la nomenclatura estándar de la documentación de {\lmr\LaTeX}:
+\begin{itemize}
+    \item Los comandos nuevos aparecen resaltados en el margen izquierdo para su rápida localización.
+    \item La sintaxis te indicará los argumentos requeridos entre llaves \marg{argumento} y los opcionales (si los hay) entre corchetes \oarg{argumento}.
+\end{itemize}
+
+Te recomiendo mantener este manual abierto como referencia mientras redactas tu documento principal \texttt{.tex}, avanzando sección por sección.

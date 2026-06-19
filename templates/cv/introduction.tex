@@ -37,6 +37,12 @@ lualatex cv.ins
     \end{verbatim}
     Esto crea el archivo \texttt{cv.cls} en tu directorio de trabajo.
 
+    \item \textbf{Descargar las fuentes:} Antes de poder compilar el documento, es necesario descargar las fuentes que se utilizan:
+    \begin{itemize}
+        \item En Windows, ejecute el archivo \texttt{fonts.ps1}. Muy probablemente Windows te pida permisos para ejecutarlo.
+        \item En Linux o MacOS, ejecute el archivo \texttt{fonts.sh}, para poder ejecutarlo necesitará \texttt{curl} y \texttt{jq}.
+    \end{itemize}
+
     \item \textbf{Escribir la Hoja de Vida:} Crea un archivo nuevo con extensión \texttt{.tex} (por ejemplo, \texttt{cv.tex}) en la misma carpeta donde se encuentra el archivo \texttt{cv.cls} generado. En la primera línea del documento, invoca la clase utilizando:
     \begin{verbatim}
 \documentclass{cv}

@@ -1,0 +1,494 @@
+% \begin{comment}
+%<*driver>
+\documentclass{pildoc}
+
+\usepackage[spanish, es-nodecimaldot]{babel}
+
+\title{Curriculum Vitae}
+\author{Joar Buitrago\thanks{jebuitragoc@unal.edu.co}}
+
+\begin{document}
+\maketitle
+\include{introduction}
+\DocInput{cv.dtx}
+\end{document}
+%</driver>
+% \end{comment}
+%
+%
+%
+%
+% \begin{comment}
+%<*class>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{cv}[Curriculum Vitae LaTeX document class]
+
+
+
+\newif\if@noicons
+\DeclareOption{noicons}{\@noiconstrue}
+\DeclareOption{titlepage}{\ClassError{cv}{%
+   The option `titlepage' is disabled for this document class.
+}{%
+    You must delete it immediately from the options in your document.
+}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions\relax
+\LoadClass{article}
+
+
+
+\RequirePackage{hyperref}
+\RequirePackage{hyperxmp}
+\hypersetup{
+    pdfusetitle,
+    hidelinks,
+    unicode,
+}
+
+
+
+\RequirePackage{geometry}
+\geometry{margin=0.5in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+
+
+\RequirePackage[no-math]{fontspec}
+\setmainfont{NotoSans}[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+\newfontfamily{\tablerfamily}{TablerIcons}[
+    Renderer = HarfBuzz,
+    UprightFont = *-Outlined,
+    BoldFont = *-Filled,
+    Path = fonts/,
+    Extension = .ttf,
+]
+
+
+
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+
+
+
+\RequirePackage{enumitem}
+\newlength{\leftcolumnwidth}
+\setlength{\leftcolumnwidth}{12em}
+\setlist[itemize]{
+    nosep,
+    noitemsep,
+    left=\leftcolumnwidth,
+}
+
+
+
+\RequirePackage{tabularx}
+%</class>
+% \end{comment}
+%
+%
+%
+% \part{Creación del documento}
+%
+% El objetivo de esta sección es introducir la interfaz de usuario de la clase. En lugar de lidiar con entornos complejos, espaciados manuales o diseños de tablas engorrosos, esta plantilla abstrae la complejidad en comandos intuitivos y semánticos diseñados específicamente para una hoja de vida.
+%
+%
+%
+% \section{Opciones de clase}
+%
+% Esta plantilla o clase está basada en la clase \texttt{article} estándar de {\lmr\LaTeX}, por lo que todas las opciones habilitadas para la clase \texttt{article} estarán disponibles también en esta.
+%
+% Las opciones disponibles para la clase, y que te pueden ser más útiles son:
+% \begin{description}
+%     \item[\texttt{@pt}] Configura el tamaño de la fuente por defecto en {\lmr\LaTeX}. Los valores válidos para \texttt{@} son \texttt{10}, \texttt{11} y \texttt{12}. Por defecto está configurado en \texttt{10pt}.
+%
+%     \item[\texttt{@paper}] Configura el tamaño de la hoja. Los valores válidos para \texttt{@} son
+%     \begin{description}
+%         \item[\texttt{a4}] Alto: \qty{297}{\milli\metre} -- Ancho: \qty{210}{\milli\metre}
+%         \item[\texttt{a5}] Alto: \qty{210}{\milli\metre} -- Ancho:\qty{148}{\milli\metre}
+%         \item[\texttt{b5}] Alto: \qty{250}{\milli\metre} -- Ancho: \qty{176}{\milli\metre}
+%         \item[\texttt{letter}] Alto: \qty{11}{\inch} -- Ancho: \qty{8.5}{\inch}
+%         \item[\texttt{legal}] Alto: \qty{14}{\inch} -- Ancho: \qty{8.5}{\inch}
+%         \item[\texttt{executive}] Alto: \qty{10.5}{\inch} -- Ancho: \qty{7.25}{\inch}
+%     \end{description}
+%     Por defecto suele estar configurado en \texttt{letterpaper}, depende de la configuración de tu distribución de {\lmr\LaTeX}.
+%
+%     \item[\texttt{landscape}] Configura la orientación de la hoja como horizontal.
+%
+%     \item[\texttt{draft}] Configura el documento en modo borrador. Muy útil para previsualizaciones rápidas.
+%
+%     \item[\texttt{noicons}] Deshabilita el uso de iconos en el documento.
+% \end{description}
+%
+%
+%
+% \section{Título}
+%
+% \begin{macro}{\name}
+% Empezaremos registrando tu nombre, para eso utiliza el comando \cmd\name\marg{nombre}\marg{apellido}.
+% Este registra tu nombre en el documento y lo almacena para su uso futuro.
+% Se recibe tu nombre y apellido como dos argumentos distintos para darles formato a cada uno de manera independiente.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\name}{ m m }{%
+    \DeclareExpandableDocumentCommand{\@givenname}{}{#1}%
+    \DeclareExpandableDocumentCommand{\@surname}{}{#2}%
+}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\photo}
+% Para añadir una foto junto al nombre, solamente debes llamar el comando \cmd\photo\marg{ruta}, cuyo único argumento, es la ruta de la imagen.
+% La foto se incluirá utilizando el paquete \texttt{graphicx}, por lo que solo los formatos recibidos por este paquete podrán ser utilizados.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\photo}{ m }{\DeclareExpandableDocumentCommand{\@photo}{}{#1}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\tagline}
+% Para incluir el cargo al que aspiras, o una etiqueta, puedes utilizar el comando \cmd\tagline\marg{texto}.
+% Idealmente, este debe ser un texto corto de no más de 30 caracteres.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\tagline}{ m }{\DeclareExpandableDocumentCommand{\@tagline}{}{#1}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{comment}
+%<*class>
+\let\@personalinfo\@empty
+\newif\if@firstpersonalinfo \@firstpersonalinfotrue
+\NewDocumentCommand{\@infosep}{}{\if@firstpersonalinfo\@firstpersonalinfofalse\else\qquad\fi}
+%</class>
+% \end{comment}
+%
+%
+%
+% \begin{macro}{\mail}
+% Luego de esto, muy probablemente desees incluir tu correo, esto se hace con el comando \cmd\mail\marg{correo}. Este comando añade un icono, a menos de que se defina \texttt{noicons} en las opciones de la clase. Además, el contenido será interactivo, y al hacer clic sobre él, automáticamente abre el gestor de correos para enviar un mensaje a tu dirección.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\mail}{ m }{\DeclareExpandableDocumentCommand{\@mail}{}{#1}\personalinfo{\symbol{"EAE5}}{\href{mailto:#1}{#1}}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\address}
+% También es posible que desees incluir tu dirección o domicilio, esto lo puedes lograr mediante el comando \cmd\address\marg{dirección}. Este comando añade un icono, que de igual forma, si se define \texttt{noicons} en las opciones de la clase, desaparecerá.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\address}{ m }{\personalinfo{\symbol{"EAE8}}{#1}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\phone}
+% De igual forma, puedes incluir tu número telefónico con el comando \cmd\phone\marg{teléfono}. Este comando añade un icono, que nuevamente será omitido si se define \texttt{noicons} en las opciones de la clase. Además, el contenido será interactivo, y al hacer clic sobre él, automáticamente inicia el aplicativo de teléfono.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\phone}{ m }{\personalinfo{\symbol{"EB09}}{\href{tel:#1}{#1}}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \DescribeMacro{\homepage}
+% \DescribeMacro{\linkedin}
+% \DescribeMacro{\github}
+% \DescribeMacro{\gitlab}
+% Existen muchísimos más comandos destinados a la inclusión de información personal, todos tienen la misma sintaxis, y todos incluyen un icono personalizado.
+% Por ejemplo, el comando \cmd\homepage\marg{url} se utiliza para generar una entrada con tu dirección web para mostrar tu portafolio en línea, o un blog, o cualquier otro elemento que se pueda encontrar en internet.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\homepage}{ m }{\personalinfo{\symbol{"F38F}}{\href{https://#1}{#1}}}
+\NewDocumentCommand{\linkedin}{ m }{\personalinfo{\symbol{"EC8C}}{\href{https://linkedin.com/in/#1}{#1}}}
+\NewDocumentCommand{\github}{ m }{\personalinfo{\symbol{"EC1C}}{\href{https://github.com/#1}{#1}}}
+\NewDocumentCommand{\gitlab}{ m }{\personalinfo{\symbol{"EC1D}}{\href{https://gitlab.com/#1}{#1}}}
+%</class>
+% \end{comment}
+%
+%
+%
+% \begin{macro}{\profileinfo}
+% Pero, «¿y que hago si lo que quiero añadir no existe como comando?» En este caso, he incluido un comando especial, el comando \cmd\profileinfo\marg{icono}\marg{texto}, que te permite escoger el \textit{icono} que quieres que acompañe al \textit{texto}.
+% Este comando, al igual que los demás, omite el icono en caso de que la opción de clase \texttt{noicons} haya sido utilizada en el documento.
+%
+% En este momento, los iconos deben escribirse como un \href{https://unicode.org/glossary/#code_point}{\emph{code point de Unicode}}, esto se logra mediante el comando \cmd\symbol\marg{code point}, en donde \meta{code point} debe escribirse en mayúsculas iniciando con comillas dobles (\texttt{"} -- hex: \texttt{22}), de manera que para escribir, por ejemplo, un \texttt{*} debes utilizar |\symbol{"2A}|.
+% La fuente de iconos que utilizo en esta plantilla se llama \emph{Tabler}, que posee una colección de más de 6000 iconos distintos para que utilices en cualquier parte de tu documento, para más información revisa la sección \ref{sec:icons}.
+% Puedes consultar cuáles son los iconos disponibles, así como sus \emph{code points} en la \href{https://tabler.io/icons}{\emph{página de la fuente}}.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\personalinfo}{ m m }{\appto\@personalinfo{\@infosep\mbox{\tableroutlined{#1}\space#2}}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\profile}
+% Finalmente, puedes incluir una descripción de tu perfil, el comando \cmd\profile\marg{texto} nos permite crear esta descripción.
+% Este es un comando largo, eso quiere decir que su argumento recibir párrafos o saltos de línea.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\profile}{ +m }{\DeclareExpandableDocumentCommand{\@profile}{}{#1}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\prompt}
+% Hoy en día, la mayoría de ATS utilizan LLM para la generación automática de un perfil, que muchas veces no es leído por un humano.
+% Teniendo en cuenta esta práctica común, el comando \cmd\prompt\marg{texto} de manera oculta en el documento, de manera que sea visible para los LLM pero no para los humanos.
+% El contenido de este prompt es lo primero que lee el LLM.
+% \meta{texto} es un argumento \emph{verbatim} o literal, esto quiere decir que {\lmr\LaTeX} no interpreta absolutamente nada del argumento como comando, incluyendo comentarios de {\lmr\LaTeX}.
+% No recomiendo el uso de esta herramienta, ya que si alguien revisa tu documento y selecciona todo el texto, será muy notable.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\prompt}{ +v }{\DeclareExpandableDocumentCommand{\@prompt}{}{#1}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\maketitle}
+% El siguiente paso en el proceso de creación de la hoja de vida debe ser colocar el título. Al igual que en otras clases estándar de {\lmr\LaTeX} colocaremos el título por medio del comando {\cmd\maketitle}, este comando no recibe ningún argumento, y debería ser el primer comando que aparezca en tu entorno \texttt{document}.
+% Este comando espera que hayas definido tu nombre. Si no lo haz definido, arrojara un error. Tomando toda la información que suministraste con los otros comandos de esta sección.
+%
+% Podrás notar también, al momento de utilizar este comando, que toda tu información personal aparecerá en el orden que tú hayas especificado con los demás comandos vistos en esta sección.
+% \begin{comment}
+%<*class>
+\newlength{\beforetaglineskip}
+\setlength{\beforetaglineskip}{0\baselineskip\@plus0.5\baselineskip}
+\newlength{\beforepersonalinfoskip}
+\setlength{\beforepersonalinfoskip}{1\baselineskip\@plus1\baselineskip}
+\newlength{\beforeprofileskip}
+\setlength{\beforeprofileskip}{0.5\baselineskip\@plus0.5\baselineskip\@minus0.5\baselineskip}
+\newlength{\titleskip}
+\setlength{\titleskip}{2\baselineskip\@plus0.5\baselineskip\@minus0.5\baselineskip}
+\newlength{\photowidth}
+\setlength{\photowidth}{1in}
+\newlength{\@infowidth}
+\RenewDocumentCommand{\maketitle}{}{%
+    \ifx\@givenname\@undefined\ClassError{cv}{Given Name is undefined}{Use the \name command to define it on your document}\fi%
+    \ifx\@surname\@undefined\ClassError{cv}{Surname is undefined}{Use the \name command to define it on your document}\fi%
+    \setlength{\@infowidth}{\linewidth}%
+    \ifx\@prompt\@undefined\else%
+        \begin{tikzpicture}[remember picture,overlay]%
+            \node at (current page.north) [anchor=north,inner sep=0pt,minimum width=\paperwidth] {%
+                \parbox{\linewidth}{%
+                    \color{white}\fontsize{0.1pt}{0.12pt}\selectfont\@prompt%
+                }};%
+        \end{tikzpicture}%
+    \fi%
+    \ifx\@photo\@undefined\else\addtolength{\@infowidth}{-\photowidth}\fi%
+    \hypersetup{
+        pdftitle = {Curriculum Vitae},%
+        pdfauthor = {\@givenname\space\@surname\ifx\@mail\@undefined\else\space<\@mail>\fi},%
+        pdfsubject = {\@givenname\space\@surname},%
+        pdfkeywords = {Curriculum Vitae,\@givenname\space\@surname},%
+        pdfcreator = {\@givenname\space\@surname\space with LaTeX},%
+    }%
+    \begingroup%
+    \begin{minipage}{\@infowidth}%
+        {\fontsize{30}{36}\selectfont\@givenname\space\bfseries\@surname\par}%
+        \ifx\@tagline\@undefined\else{\vspace{\beforetaglineskip}\Large\@tagline\par}\fi%
+        \ifx\@personalinfo\@empty\else{\vspace{\beforepersonalinfoskip}\raggedright\@personalinfo\par}\fi%
+    \end{minipage}%
+    \ifx\@photo\@undefined\else\hfill%
+    \begin{minipage}{\photowidth}%
+        \raggedleft%
+        \begin{tikzpicture}%
+            \clip circle (0.5\linewidth);
+            \node {\includegraphics[width=\linewidth]{\@photo}};%
+        \end{tikzpicture}%
+    \end{minipage}%
+    \fi%
+    \ifx\@profile\@undefined\else{\par\vspace{\beforeprofileskip}\small\@profile}\fi%
+    \endgroup%
+    \par\vspace{\titleskip}%
+}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \section{Secciones}
+%
+% Ahora vamos a trabajar sobre las secciones de tu hoja de vida. Todas las demás partes de la hoja de vida se dividirán en secciones, por ejemplo: «Experiencia Laboral», «Educación», «Premios», etc. Y eventos.
+%
+% \begin{macro}{\section}
+% Es relativamente sencillo este proceso, cada sección nueva de tu hoja de vida se escribe con el comando \cmd\section\marg{título}, con la excepción de que este comando no incluye un argumento opcional (pues en una hoja de vida no hay índice).
+% \begin{comment}
+%<*class>
+\newlength{\beforesectionskip}
+\setlength{\beforesectionskip}{1.5\baselineskip\@plus1\baselineskip\@minus1\baselineskip}
+\newlength{\sectiontitleskip}
+\setlength{\sectiontitleskip}{1\baselineskip\@plus0.5\baselineskip\@minus0.2\baselineskip}
+\newlength{\sectionrulewidth}
+\setlength{\sectionrulewidth}{2pt}
+\newif\if@firstsection
+\@firstsectiontrue
+\RenewDocumentCommand{\section}{ m }{%
+    \@firsteventtrue%
+    \@firstskilltrue%
+    \if@firstsection\@firstsectionfalse\else\par\vspace{\beforesectionskip}\fi%
+    \refstepcounter{section}%
+    \currentpdfbookmark{#1}{\thesection}%
+    \setlength{\leftskip}{0pt}%
+    {\LARGE\bfseries\strut\makebox[0pt][l]{\color{gray}\rule[-0.25ex]{\linewidth}{\sectionrulewidth}}#1}\par\vspace{\sectiontitleskip}%
+    \setlength{\leftskip}{\leftcolumnwidth}%
+}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\event}
+% Luego de esto, el siguiente paso sería colocar todos y cada uno de los eventos de esa sección, en caso de que estemos hablando de algo como tu «Experiencia Laboral».
+% Para esto simplemente utiliza el comando \cmd\event\marg{nombre}\marg{organización}\marg{ubicación}\marg{fecha}, el cual genera un título con la información que has suministrado.
+%
+% Luego de esto, si quieres incluir viñetas o \emph{bullet points} mostrando tus logros o actos memorables durante este evento, simplemente utiliza el entorno \texttt{itemize} genérico de {\lmr\LaTeX}.
+% Este entorno fue modificado para ser más compacto, y mantener el mismo aspecto visual del resto del contenido.
+% \begin{comment}
+%<*class>
+\newlength{\beforeeventskip}
+\setlength{\beforeeventskip}{1\baselineskip\@plus0.5\baselineskip\@minus0.5\baselineskip}
+\newlength{\eventtitleskip}
+\setlength{\eventtitleskip}{0.5\baselineskip}
+\newif\if@firstevent
+\NewDocumentCommand{\event}{ m m m m }{%
+    \if@firstevent\@firsteventfalse\else\divider[\beforeeventskip]\fi%
+    \setlength{\leftskip}{0pt}%
+    \begin{tabularx}{\linewidth}{@{}Xp{\dimexpr \linewidth - \leftcolumnwidth}@{}}
+        #4\hfill\tableroutlined{\symbol{"EA3A}} &%
+        {\large\bfseries#1}%
+        \IfBlankF{#2}{, \textcolor{gray}{\bfseries#2}}%
+        \IfBlankF{#3}{, \textcolor{gray}{#3}} \\%
+    \end{tabularx}%
+    \par\vspace{\eventtitleskip}%
+    \setlength{\leftskip}{\leftcolumnwidth}
+}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\skill}
+% En caso de que lo que necesites sea registrar tu proficiencia en alguna habilidad o idioma, el comando \cmd\skill\marg{nombre}\marg{cantidad}\oarg{comentario} te puede servir.
+% Este comando coloca \meta{nombre} en lo más a la izquierda posible y 5 círculos grises lo más a la derecha posible.
+% Esos círculos se cubrirán por otros \meta{cantidad} círculos totalmente negros; este número deber ser un número decimal, si queremos 4 círculos debemos escribir \texttt{4.0} u obtendremos un error.
+% El único argumento opcional de este comando nos colocará \meta{comentario} justo debajo de los círculos.
+% \begin{comment}
+%<*class>
+\newlength{\skillheight}
+\setlength{\skillheight}{1em}
+\newlength{\skillsep}
+\setlength{\skillsep}{0.2em}
+\newlength{\beforeskillskip}
+\setlength{\beforeskillskip}{0.5\baselineskip}
+\newif\if@firstskill
+\NewDocumentCommand{\skill}{ m m o }{%
+    \if@firstskill\@firstskillfalse\else\par\vspace{\skillskip}\fi%
+    #1%
+    \hfill%
+    \begin{tikzpicture}
+        \useasboundingbox (-0.5\skillheight,-0.5\skillheight) rectangle (4.5*\skillheight+4*\skillsep,0.5\skillheight);
+        \foreach \x in {0,...,4} {
+            \fill[black!10] (\skillheight*\x+\skillsep*\x,0) circle (0.5\skillheight);
+        }
+        \clip (-0.5\skillheight,-0.5\skillheight) rectangle
+            (#2*\skillheight+floor{#2}*\skillsep-0.5\skillheight,0.5\skillheight);
+        \foreach \x in {0,...,4} {
+            \fill (\skillheight*\x+\skillsep*\x,0) circle (0.5\skillheight);
+        }
+    \end{tikzpicture}%
+    \IfValueT{#3}{\par\hfill#3}%
+}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \part{Herramientas adicionales}
+%
+%
+%
+% \section{Iconos \label{sec:icons}}
+%
+% \begin{macro}{\tabler}
+% Si quieres incluir un icono, puedes acceder a la fuente de iconos de una manera muy sencilla mediante el comando \cmd\tabler\marg{clase}\marg{icono}.
+% En esta clase, por defecto se utilizan los iconos de \href{https://tabler.io/icons}{Tabler}, que posee una colección de más de 6000 iconos distintos para que utilices en cualquier parte de tu documento.
+% Estos fueron
+%
+% Pero no estás restringido solamente a estos, existen muchos otros iconos, tanto gratuitos como pagos, que puedes utilizar.
+% Uno de los paquetes más conocidos y populares es \href{https://fontawesome.com}{\emph{FontAwesome}}, este paquete tiene una versión gratuita y otra de pago.
+% Sus iconos son bastante bonitos, pero son una fuente pesada (con mucho espacio negro), por lo que su uso es un tanto complicado.
+%
+% También puedes incluir tus iconos como imágenes, preferiblemente vectoriales.
+% Generalmente, los iconos se pueden descargar en formato SVG vectorial, recuerda que el paquete \texttt{graphicx} no recibe gráficos en este formato.
+% Puedes utilizar \href{https://inkscape.org}{Inkscape}, \href{https://affinity.studio}{Affinity} (Windows y MacOS), \href{https://vectorpea.com}{Vectorpea} u otro programa de edición vectorial para transformar el formato a PDF (1.5) o EPS.
+%
+% Puedes utilizar el que prefieras, pero recuerda cambiar de manera adecuada el código de la clase y los \emph{code points} de todos los iconos.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\tablerfilled}{ m }{\if@noicons\else\begingroup\tablerfamily\bfseries#1\endgroup\fi}
+\NewDocumentCommand{\tableroutlined}{ m }{\if@noicons\else\begingroup\tablerfamily\upshape#1\endgroup\fi}
+\NewDocumentCommand{\tabler}{ m m }{\csname tabler#1\endcsname{#2}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \section{Divisor}
+%
+% \begin{macro}{\divider}
+% El comando \cmd\divider\oarg{espacio v.} es la definición de la separación entre diferentes eventos.
+% Por defecto, el valor de \meta{espacio v.} está definido como |\medskipamount|, que es un espacio bastante considerable.
+% Puedes utilizar este comando en caso de que necesites un separador entre diferentes partes de tu hoja de vida, aunque su uso es más interno.
+% \begin{comment}
+%<*class>
+\NewDocumentCommand{\divider}{ O{\medskipamount} }{\par\vspace{#1}}
+%</class>
+% \end{comment}
+% \end{macro}
+%
+%
+%
+% \begin{comment}
+%<*class>
+\AtBeginDocument{%
+    \pagestyle{empty}%
+    \raggedright%
+}
+%</class>
+% \end{comment}
